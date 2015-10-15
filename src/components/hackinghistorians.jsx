@@ -1,6 +1,6 @@
-import React from "react";
-import LeafletContainer from "./LeafletContainer.jsx";
-import InterfaceContainer from "./InterfaceContainer.jsx";
+import React from 'react';
+import LeafletContainer from './LeafletContainer.jsx';
+import InterfaceContainer from './InterfaceContainer.jsx';
 
 class HackingHistorians extends React.Component{
     render() {
