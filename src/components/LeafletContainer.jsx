@@ -2,8 +2,6 @@ import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import request from 'superagent';
 
-const position = [52.366, 4.90];
-
 class LeafletContainer extends React.Component{
 	constructor(props){
 		super(props);
