@@ -1,8 +1,9 @@
 import React from "react";
+import LeafletContainer from "./LeafletContainer.jsx";
 
 class HackingHistorians extends React.Component{
     render() {
-        return <p>Bye</p>;
+        return <LeafletContainer />;
     }
 }
 

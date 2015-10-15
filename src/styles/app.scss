@@ -1,5 +1,6 @@
-// @import 'functions.scss';
+@import '../../node_modules/leaflet/dist/leaflet.css';
 
-body {
-	background: red;
+.map-container {
+	width: 100%;
+	height: 100%;
 }
