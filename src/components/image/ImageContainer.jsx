@@ -8,17 +8,6 @@ class ImageContainer extends React.Component{
 			imgClickPosition: null
 		}
 	}
-	imageClicker(event) {
-		event.persist();
-		console.log(event);
-		console.log("x", event.pageX - event.target.parentNode.offsetLeft);
-		console.log("y", event.pageY - event.target.parentNode.offsetTop);
-		this.setState(
-			{'imgClickPosition': {
-				x: event.pageX - event.target.parentNode.offsetLeft,
-				y: event.pageY - event.target.parentNode.offsetTop
-		}})
-	}
 
     render() {
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record;
@@ -33,13 +22,10 @@ class ImageContainer extends React.Component{
 			};
 		}
 
-		console.log(divStyle);
-
         return (
-
-        	<div className="image-container" onClick={this.imageClicker.bind(this)}>
+        	<div className="image-container" onClick={this.props.imageClicker.bind(this)}>
         		<div className="circle" style={divStyle}></div>
-        		<img src={image}  />
+        		<img src={image} />
   			</div>
   		);
     }

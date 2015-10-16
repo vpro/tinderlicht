@@ -4,7 +4,6 @@ import request from 'superagent';
 class Iconclass extends React.Component{
     render() {
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record
-    	var iconclass = records[1].srw$recordData.srw_dc$dc.dc$subject[0].$t;
     	var iconclassArray = records[1].srw$recordData.srw_dc$dc.dc$subject;
 		
 		return (
