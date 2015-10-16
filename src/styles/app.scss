@@ -48,8 +48,13 @@ body {
 .image-container {
 	position: relative;
 	width: 60%;
+	cursor: url("../icons/circle2geel.svg"), auto;
+	background: black;
 	img {
 		width: 100%;
+	}
+	img:hover {
+		opacity: .6;
 	}
 }
 
@@ -57,12 +62,14 @@ body {
 	position: absolute;
 	width: 100px;
 	height: 100px;
-	background: red;
-	border-radius: 50%;
+	background-image: url("../icons/circle.svg");
+/*	background: red;
+*/	border-radius: 50%;
 	opacity: 0.5;
 }
 
 .iconclass-container {
+	padding-top: 30px;
 	background-color: white;
 	color: black;
 }
