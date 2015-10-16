@@ -13,7 +13,6 @@ class ImageContainer extends React.Component{
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record;
     	var thumbnail = records[1].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
     	var image = records[1].srw$recordData.srw_dc$dc.dc$identifier.$t;
-    	
     	var imageClickPosition = this.props.appState.imageClickPosition;
 
     	var divStyle;
