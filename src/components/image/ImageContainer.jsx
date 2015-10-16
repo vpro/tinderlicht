@@ -1,8 +1,7 @@
 import React from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import request from 'superagent';
 
-class LeafletContainer extends React.Component{
+class ImageContainer extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -20,18 +19,10 @@ class LeafletContainer extends React.Component{
 	    	.end(callback);
 	}
     render() {
-    	if (this.state.lodData){
-			var position = [ this.state.lodData.lat, this.state.lodData.long]
-		}
         return (
-	        <Map className="map-container" center={position} zoom={12}>
-	    		<TileLayer
-	      			url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-	    		/>
-	    		<Marker position={position} />
-	  		</Map>
+        	<div>Images</div>
   		);
     }
 }
 
-export default LeafletContainer;
+export default ImageContainer;

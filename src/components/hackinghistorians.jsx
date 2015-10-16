@@ -1,13 +1,13 @@
 import React from 'react';
-import LeafletContainer from './LeafletContainer.jsx';
-import InterfaceContainer from './InterfaceContainer.jsx';
+import ImageContainer from './image/ImageContainer.jsx';
+import Iconclass from './iconclass/Iconclass.jsx';
 
 class HackingHistorians extends React.Component{
     render() {
         return (
         	<div className="app-container">
-        		<InterfaceContainer />
-        		<LeafletContainer />
+        		<ImageContainer />
+        		<Iconclass />
         	</div>);
     }
 }
