@@ -37,6 +37,13 @@ body {
 	@include make-md-column(10);
 }
 
+.waaris-kop {
+	font-family: GothamMedium;
+	text-transform: none;
+	font-size: 16px;
+	color: #dadada;
+}
+
 .image-container {
 	position: relative;
 	width: 60%;
@@ -64,6 +71,8 @@ body {
 
 /* Sidebar */
 .sidebar-container {
+	@include make-xs-column(4);
+	@include make-sm-column(3);
 	@include make-md-column(2);
 	background-color: $sidebar-background;
 	height: 100%;
@@ -74,4 +83,17 @@ h3 {
 	font-size: 14px;
 	text-transform: uppercase;
 	color: $sidebar-textcolor;
+	padding-bottom: 10px;
+}
+.prev-image {
+	clip: rect(0, 1000, 90px, 0px);
+	position: absolute;
+	width: 68%;
+}
+.goed {
+    width: 40px;
+    z-index: 100;
+    position: absolute;
+    margin-left: 55%;
+    margin-top: 29%;
 }

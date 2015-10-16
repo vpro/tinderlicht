@@ -8,7 +8,7 @@ class Iconclass extends React.Component{
 		
 		return (
 			<div className="iconclass-container">
-				<h3>Iconclass numbers:</h3>
+				<h3 className="waaris-kop">Waar is?</h3>
 				{iconclassArray.map((value, index) => {
 					return (
 			       	 	<p key={index} className="iconclass">{value.$t}</p>

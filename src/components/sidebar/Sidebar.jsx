@@ -6,9 +6,7 @@ class SideBar extends React.Component{
     render() {
 		return (
 			<div className="sidebar-container">
-				<h3>Laatste antwoorden</h3>
-				<SidebarItem />
-				<SidebarItem />
+				<h3>Laatste antwoord</h3>
 				<SidebarItem />
 			</div>
 		)
