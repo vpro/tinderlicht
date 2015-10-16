@@ -93,9 +93,9 @@ class HackingHistorians extends React.Component{
     		);
     	}
         return (
-        	<div className="app-container row">
+        	<div className="app-container">
         		<Sidebar />
-        		<div className="game-container col-md-10">
+        		<div className="game-container">
         			<Iconclass state={this.state.verluchtingen}/>
 	        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
 	        	</div>

@@ -30,6 +30,11 @@ body {
 }
 
 .app-container {
+	@include make-row();
+}
+
+.game-container {
+	@include make-md-column(10);
 }
 
 .image-container {
@@ -59,6 +64,7 @@ body {
 
 /* Sidebar */
 .sidebar-container {
+	@include make-md-column(2);
 	background-color: $sidebar-background;
 	height: 100%;
 	padding: 20px 40px 20px;
