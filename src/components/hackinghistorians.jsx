@@ -1,4 +1,6 @@
 import React from 'react';
+import Firebase from 'firebase';
+
 import ImageContainer from './image/ImageContainer.jsx';
 import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
@@ -12,8 +14,63 @@ class HackingHistorians extends React.Component{
 			verluchtingen: data,
 			appState: {
 				user: null,
-				imageClickPosition: null
+				imageClickPosition: null,
+				view: 'auth'
 			}
+		}
+	}
+
+	componentWillMount(){
+		this.firebaseRef = new Firebase('https://hackalod.firebaseio.com/');
+	}
+
+	authWithFirebase(provider){
+		var provider = provider;
+		this.firebaseRef.authWithOAuthPopup(provider, function(error, authData){
+		  	if (error) {
+		    	console.log('Login Failed!', error);
+		  	} else {
+		  		this.getDataFromFirebase(authData, provider);
+		  	}
+		}.bind(this));
+	}
+
+	getDataFromFirebase(authData, provider){
+		var authData = authData;
+		var uidGenerated = authData[provider].id + '-' + provider;
+		this.firebaseRef.child(uidGenerated).on('value', function(data){
+				if (data.val() == null){
+					let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
+					console.log('creating new account');
+					this.setState({userData: newAccount}, this.updateFirebase);
+					this.setView('profile');
+				} else {
+					this.setState({userData: data.val()} );
+					this.setView(()=> {
+						if (this.state.view == 'auth') {
+							return 'waypoint';
+						} else {
+							return this.state.view;
+						}
+					}());
+				}
+
+			}.bind(this)
+		);
+	}
+
+	updateFirebase(){
+		// Update firebase.
+		// To save connections and data only one update at a time.
+		var userData = this.state.userData;
+		if (this.state.timeout == 0){
+			this.setState({timeout: 1});
+			console.log('submitting');
+			this.firebaseRef.update({[userData.id]: userData}, function(){
+					console.log('database updated');
+					this.setState({timeout: 0});
+				}.bind(this)
+			);
 		}
 	}
 
@@ -30,6 +87,11 @@ class HackingHistorians extends React.Component{
 
     render() {
     	console.log(this.state);
+    	if (this.state.appState.view = 'auth'){
+    		return (
+    			<div>You need to log in here please!!!</div>
+    		);
+    	}
         return (
         	<div className="app-container row">
         		<Sidebar />
