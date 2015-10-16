@@ -109,3 +109,27 @@ h3 {
     bottom: -20px;
     right:-20px;
 }
+
+/* Navigation */
+ul {
+	font-family: GothamMedium;
+	font-size: 12px;
+	text-transform: Uppercase;
+	color: #8e8e8e;
+	right: 30px;
+	top: 20px;
+	position: absolute;
+	z-index: 10;
+}
+
+ul li {
+	float: left;
+	padding-left: 20px;
+}
+
+ul li a {
+	color: #8e8e8e;
+	&:visited {
+	color: #8e8e8e;
+	};
+}

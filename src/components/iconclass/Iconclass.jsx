@@ -14,6 +14,7 @@ class Iconclass extends React.Component{
 			return (
 				<div className="iconclass-container">
 					<h3 className="waaris-kop">Waar is?</h3>
+					<span>Of niet?</span>
 		       	 	<p className="iconclass">{iconClass[iconclassArray.$t]}</p>
 				</div>
 			)
