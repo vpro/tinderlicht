@@ -88,7 +88,7 @@ class HackingHistorians extends React.Component{
 
     render() {
     	console.log(this.state);
-    	if (this.state.appState.view = 'auth'){
+    	if (this.state.appState.view == 'auth'){
     		return (
     			<div>You need to log in here please!!!</div>
     		);
