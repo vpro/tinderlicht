@@ -12,7 +12,7 @@ class HackingHistorians extends React.Component{
 	}
     render() {
         return (
-        	<div className="app-container">
+        	<div className="app-container">   	
         		<ImageContainer state={this.state.verluchtingen}/>
         		<Iconclass state={this.state.verluchtingen}/>
         	</div>);
