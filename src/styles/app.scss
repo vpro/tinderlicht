@@ -35,6 +35,7 @@ body {
 
 .game-container {
 	@include make-md-column(10);
+	padding-left: 100px;
 }
 
 .waaris-kop {
@@ -47,7 +48,6 @@ body {
 .image-container {
 	position: relative;
 	width: 60%;
-	margin: 0 auto;
 	img {
 		width: 100%;
 	}
@@ -63,8 +63,6 @@ body {
 }
 
 .iconclass-container {
-	width: 25%;
-	margin: 0 auto;
 	background-color: white;
 	color: black;
 }
