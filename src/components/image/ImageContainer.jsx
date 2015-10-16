@@ -13,17 +13,19 @@ class ImageContainer extends React.Component{
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record;
     	var thumbnail = records[1].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
     	var image = records[1].srw$recordData.srw_dc$dc.dc$identifier.$t;
-    	var divStyle = null;
+    	
+    	var imageClickPosition = this.props.appState.imageClickPosition;
 
-    	if(this.state.imgClickPosition){
-	    	var divStyle = {
-				left: (this.state.imgClickPosition.x - 50),
-				top: (this.state.imgClickPosition.y - 50)
+    	var divStyle;
+    	if(imageClickPosition){
+	    	divStyle = {
+				left: (imageClickPosition.x - 50),
+				top: (imageClickPosition.y - 50)
 			};
 		}
 
         return (
-        	<div className="image-container" onClick={this.props.imageClicker.bind(this)}>
+        	<div className="image-container" onClick={this.props.imageClicker}>
         		<div className="circle" style={divStyle}></div>
         		<img src={image} />
   			</div>

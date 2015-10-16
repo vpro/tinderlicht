@@ -10,24 +10,27 @@ class HackingHistorians extends React.Component{
 			verluchtingen: data,
 			appState: {
 				user: null,
-				clickedState: null
+				imageClickPosition: null
 			}
 		}
 	}
 
 	imageClicker(event) {
 		event.persist();
-		this.setState(
-			{'imgClickPosition': {
+		this.setState(function(state){
+			var newState = state.appState.imageClickPosition =  {
 				x: event.pageX - event.target.parentNode.offsetLeft,
 				y: event.pageY - event.target.parentNode.offsetTop
-		}})
+			};
+			return state;
+		});
 	}
 
     render() {
+    	console.log(this.state);
         return (
         	<div className="app-container">   	
-        		<ImageContainer state={this.state.verluchtingen} imageClicker={this.imageClicker}/>
+        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
         		<Iconclass state={this.state.verluchtingen}/>
         	</div>);
     }
