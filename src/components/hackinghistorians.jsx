@@ -92,8 +92,10 @@ class HackingHistorians extends React.Component{
 				x: event.pageX - event.target.parentNode.offsetLeft,
 				y: event.pageY - event.target.parentNode.offsetTop
 			};
+			state.userData.gameData.history[state.userData.gameData.position] = state.appState.imageClickPosition; 
+			state.userData.gameData.position++;
 			return state;
-		});
+		}, this.updateFirebase);
 	}
 
     render() {
@@ -107,12 +109,13 @@ class HackingHistorians extends React.Component{
     			</div>
     		);
     	} else if (this.state.view == 'game'){
+    		var userData = this.state.userData; 
 	        return (
 	        	<div className="app-container">
 	        		<Sidebar />
 	        		<div className="game-container">
 	        			<Iconclass state={this.state.verluchtingen}/>
-		        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
+		        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
 		        	</div>
 	        	</div>
 	        );

@@ -9,6 +9,8 @@ class User {
 class Game {
   constructor(id, name){
     this.position = 0;
+    this.score = 0;
+    this.history = [""];
   };
 };
 

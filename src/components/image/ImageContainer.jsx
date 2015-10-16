@@ -9,9 +9,10 @@ class ImageContainer extends React.Component{
 	}
 
     render() {
+        var userData = this.props.userData;
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record;
-    	var thumbnail = records[1].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
-    	var image = records[1].srw$recordData.srw_dc$dc.dc$identifier.$t;
+    	// var thumbnail = records[1].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
+    	var image = records[userData.gameData.position].srw$recordData.srw_dc$dc.dc$identifier.$t;
     	var imageClickPosition = this.props.appState.imageClickPosition;
 
     	var divStyle;
