@@ -31,10 +31,12 @@ class HackingHistorians extends React.Component{
     render() {
     	console.log(this.state);
         return (
-        	<div className="app-container">
-        		<Sidebar /> 	
-        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
-        		<Iconclass state={this.state.verluchtingen}/>
+        	<div className="app-container row">
+        		<Sidebar />
+        		<div className="game-container col-md-10">
+        			<Iconclass state={this.state.verluchtingen}/>
+	        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
+	        	</div>
         	</div>);
     }
 }

@@ -9,8 +9,17 @@
        url('../fonts/gotham-bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
+@font-face {
+  font-family: 'GothamMedium';
+  src: url('../fonts/gotham-medium-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/gotham-medium-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/gotham-medium-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/gotham-medium-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
 /* Kleurenschema */
-$main-background: 			#ffffff;
+$main-background: 			#fff;
 $sidebar-background: 		#dadada;
 $sidebar-textcolor: 		#878786;
 $sidebar-goodcirclecolor:	#36ab69;
@@ -18,18 +27,14 @@ $sidebar-goodcirclecolor:	#36ab69;
 
 body {
 	background: $main-background;
-	color: white;
 }
 
 .app-container {
-	padding-top: 100px;
-	width: 60%;
-	margin: 0 auto;
 }
 
 .image-container {
 	position: relative;
-	width: 80%;
+	width: 60%;
 	margin: 0 auto;
 	img {
 		width: 100%;
@@ -53,7 +58,14 @@ body {
 }
 
 /* Sidebar */
+.sidebar-container {
+	background-color: $sidebar-background;
+	height: 100%;
+	padding: 20px 40px 20px;
+}
 h3 {
 	font-family: GothamBold;
+	font-size: 14px;
+	text-transform: uppercase;
 	color: $sidebar-textcolor;
 }
