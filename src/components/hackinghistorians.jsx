@@ -3,7 +3,6 @@ import ImageContainer from './image/ImageContainer.jsx';
 import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 
-
 import data from '../data/handschriften.json';
 
 class HackingHistorians extends React.Component{

@@ -1,5 +1,4 @@
 import React from 'react';
-import request from 'superagent';
 
 import SidebarItem from './Sidebar-item.jsx';
 

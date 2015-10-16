@@ -1,5 +1,4 @@
 import React from 'react';
-import request from 'superagent';
 
 class SidebarItem extends React.Component{
     render() {

@@ -1,5 +1,4 @@
 import React from 'react';
-import request from 'superagent';
 
 class ImageContainer extends React.Component{
 	constructor(props){
