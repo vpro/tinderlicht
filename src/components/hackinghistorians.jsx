@@ -6,6 +6,7 @@ import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 
 import data from '../data/handschriften.json';
+import Model from '../data/model.jsx';
 
 class HackingHistorians extends React.Component{
 	constructor(props){
@@ -13,11 +14,11 @@ class HackingHistorians extends React.Component{
 		this.state = {
 			verluchtingen: data,
 			appState: {
-				imageClickPosition: null,
-				view: 'game'
+				imageClickPosition: null
 			},
+			view: 'auth',
 			userData: null,
-			timeOut: 0
+			timeout: 0
 		}
 	}
 
@@ -41,15 +42,20 @@ class HackingHistorians extends React.Component{
 		var uidGenerated = authData[provider].id + '-' + provider;
 		this.firebaseRef.child(uidGenerated).on('value', function(data){
 				if (data.val() == null){
-					let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
 					console.log('creating new account');
-					this.setState({userData: newAccount}, this.updateFirebase);
+					let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
+					console.log(newAccount);
+					this.setState(
+						function(state){
+							state.userData = newAccount;
+							return state;
+						}, this.updateFirebase);
 					this.setView('profile');
 				} else {
 					this.setState({userData: data.val()} );
 					this.setView(()=> {
 						if (this.state.view == 'auth') {
-							return 'waypoint';
+							return 'game';
 						} else {
 							return this.state.view;
 						}
@@ -75,10 +81,14 @@ class HackingHistorians extends React.Component{
 		}
 	}
 
+	setView(view){
+		this.setState({view: view});
+	}
+
 	imageClicker(event) {
 		event.persist();
 		this.setState(function(state){
-			var newState = state.appState.imageClickPosition =  {
+			state.appState.imageClickPosition =  {
 				x: event.pageX - event.target.parentNode.offsetLeft,
 				y: event.pageY - event.target.parentNode.offsetTop
 			};
@@ -87,21 +97,27 @@ class HackingHistorians extends React.Component{
 	}
 
     render() {
-    	console.log(this.state);
-    	if (this.state.appState.view == 'auth'){
+    	if (this.state.view == 'auth'){
     		return (
-    			<div>You need to log in here please!!!</div>
+    			<div className="app-container">
+    				<div className="auth-container">
+	    				<h1> You need to log in here please!!!</h1>
+		  				<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>facebook</button>
+    				</div>
+    			</div>
     		);
-    	}
-        return (
-        	<div className="app-container">
-        		<Sidebar />
-        		<div className="game-container">
-        			<Iconclass state={this.state.verluchtingen}/>
-	        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
+    	} else if (this.state.view == 'game'){
+	        return (
+	        	<div className="app-container">
+	        		<Sidebar />
+	        		<div className="game-container">
+	        			<Iconclass state={this.state.verluchtingen}/>
+		        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} imageClicker={this.imageClicker.bind(this)}/>
+		        	</div>
 	        	</div>
-        	</div>);
-    }
+	        );
+	    }
+	}
 }
 
 export default HackingHistorians;
