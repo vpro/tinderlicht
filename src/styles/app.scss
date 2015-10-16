@@ -1,5 +1,14 @@
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 
+@font-face {
+  font-family: 'GothamBold';
+  src: url('../fonts/gotham-bold-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/gotham-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/gotham-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/gotham-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/gotham-bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
 /* Kleurenschema */
 $main-background: 			#ffffff;
 $sidebar-background: 		#dadada;
@@ -41,4 +50,10 @@ body {
 	margin: 0 auto;
 	background-color: white;
 	color: black;
+}
+
+/* Sidebar */
+h3 {
+	font-family: GothamBold;
+	color: $sidebar-textcolor;
 }
