@@ -1,7 +1,11 @@
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 
 /* Kleurenschema */
-$main-background: #fff;
+$main-background: 			#ffffff;
+$sidebar-background: 		#dadada;
+$sidebar-textcolor: 		#878786;
+$sidebar-goodcirclecolor:	#36ab69;
+
 
 body {
 	background: $main-background;
