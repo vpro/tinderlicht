@@ -5,22 +5,42 @@ class ImageContainer extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			lodData: null
+			imgClickPosition: null
 		}
 	}
-	componentDidMount() {
-    	var lodURL = 'http://lod.kb.nl/rce/A30FCAFC-A206-4F2B-84CB-9CB2232E8B85?output=application/ld+json';
-    	var callback = function(err, res){
-    		var parsedRes = JSON.parse(res.text);
-    		this.setState({lodData: parsedRes})
-    	}.bind(this);
-    	request
-    		.get(lodURL)
-	    	.end(callback);
+	imageClicker(event) {
+		event.persist();
+		console.log(event);
+		console.log("x", event.pageX - event.target.parentNode.offsetLeft);
+		console.log("y", event.pageY - event.target.parentNode.offsetTop);
+		this.setState(
+			{'imgClickPosition': {
+				x: event.pageX - event.target.parentNode.offsetLeft,
+				y: event.pageY - event.target.parentNode.offsetTop
+		}})
 	}
+
     render() {
+    	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record;
+    	var thumbnail = records[1].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
+    	var image = records[1].srw$recordData.srw_dc$dc.dc$identifier.$t;
+    	var divStyle = null;
+
+    	if(this.state.imgClickPosition){
+	    	var divStyle = {
+				left: (this.state.imgClickPosition.x - 50),
+				top: (this.state.imgClickPosition.y - 50)
+			};
+		}
+
+		console.log(divStyle);
+
         return (
-        	<div>Images</div>
+
+        	<div className="image-container" onClick={this.imageClicker.bind(this)}>
+        		<div className="circle" style={divStyle}></div>
+        		<img src={image}  />
+  			</div>
   		);
     }
 }
