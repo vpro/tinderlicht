@@ -13,10 +13,11 @@ class HackingHistorians extends React.Component{
 		this.state = {
 			verluchtingen: data,
 			appState: {
-				user: null,
 				imageClickPosition: null,
-				view: 'auth'
-			}
+				view: 'game'
+			},
+			userData: null,
+			timeOut: 0
 		}
 	}
 
