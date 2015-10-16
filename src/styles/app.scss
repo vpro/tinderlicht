@@ -1,7 +1,10 @@
 /*@import '../../node_modules/leaflet/dist/leaflet.css';*/
 
+/* Kleurenschema */
+$main-background: #fff;
+
 body {
-	background: black;
+	background: $main-background;
 	color: white;
 }
 
