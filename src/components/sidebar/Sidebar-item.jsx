@@ -3,14 +3,18 @@ import goodIcon from '../../icons/good.svg';
 
 class SidebarItem extends React.Component{
     render() {
-    	console.log(this.props);
     	var userData = this.props.userData;
     	var records = this.props.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
-    	var thumbnail = records[userData.gameData.position].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
+    	var thumbnail = records[(userData.gameData.position - this.props.number)].srw$recordData.srw_dc$dc.dcx$thumbnail.$t;
+		
+		var divStyle = {
+			background: "url(" + (thumbnail)+ ")"
+		}
+
 		return (
-		<div>	
-			<img className="prev-image" src={thumbnail}/>
-			<img className="goed" src={goodIcon}/>
+		<div className="prev-container">	
+			<div className="prev-image" style={divStyle}/>
+			<img className="positive-score" src={goodIcon}/>
 		</div>
 		)
     }
