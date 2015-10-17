@@ -92,7 +92,7 @@ h4 {
 
 .game-container {
 	@include make-md-column(10);
-	padding-left: 100px;
+	padding-top: 20px;
 }
 
 .waaris-kop {
@@ -117,6 +117,14 @@ h4 {
 	color: white;
 }
 
+.iconclass-container {
+	padding-top: 30px;
+	background-color: white;
+	color: black;
+	width: 60%;
+	margin: 0 auto
+}
+
 .iconclass {
 	font-family: GothamMedium;
 	color: #9d9d9c;
@@ -125,9 +133,13 @@ h4 {
 
 .image-container {
 	position: relative;
+	margin: 0 auto;
 	width: 60%;
 	img {
-		width: 100%;
+		max-width: 100%;
+		max-height: 60vh;
+		z-index: 100;
+		cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
 	}
 	img:hover {
 		transition:.5s;
@@ -140,15 +152,8 @@ h4 {
 	width: 100px;
 	height: 100px;
 	background-image: url("../icons/circle.svg");
-/*	background: red;
-*/	border-radius: 50%;
+	border-radius: 50%;
 	opacity: 0.5;
-}
-
-.iconclass-container {
-	padding-top: 30px;
-	background-color: white;
-	color: black;
 }
 
 /* Sidebar */
@@ -207,12 +212,4 @@ ul li a {
 	color: #8e8e8e;
 	&:visited {
 	color: #8e8e8e;
-	};
-}
-
-/* Verluchting */
-.verluchting {
-	max-width: 60%;
-	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
-	z-index: 100;
-}
+};
