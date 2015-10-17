@@ -2,8 +2,13 @@ import React from 'react';
 
 class Iconclass extends React.Component{
     render() {
-    	console.log(this.props);
-    	var text = "hi";
+
+    	if (this.props.appState.currentIconclass.text){
+    		var text = this.props.appState.currentIconclass.text;
+    	} else {
+    		var text = "Sorry, this classification isn't human readable: " + this.props.appState.currentIconclass.$t;
+    	}
+
     	return (
 			<div className="iconclass-container">
 				<h3 className="waaris-kop">Staat de kop in het plaatje?</h3>

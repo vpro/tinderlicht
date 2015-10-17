@@ -20,7 +20,7 @@ class HackingHistorians extends React.Component{
 			appState: {
 				imageClickPosition: null,
 				currentIconclass: "45353",
-				fakeIconclass: "56435",
+				betrayed: 0,
 				score: 0
 			},
 			view: 'auth',
@@ -56,16 +56,10 @@ class HackingHistorians extends React.Component{
 							state.userData = newAccount;
 							return state;
 						}, this.updateFirebase);
-					this.setView('profile');
+					this.setView('game');
 				} else {
 					this.setState({userData: data.val()} );
-					this.setView(()=> {
-						if (this.state.view == 'auth') {
-							return 'game';
-						} else {
-							return this.state.view;
-						}
-					}());
+					this.setView('game');
 					this.determineIconclass();
 				}
 			}.bind(this)
@@ -77,7 +71,6 @@ class HackingHistorians extends React.Component{
 		// To save connections and data only one update at a time.
 		var userData = this.state.userData;
 
-		console.log('submitting');
 		this.firebaseRef.update({[userData.id]: userData}, function(){
 			console.log('database updated');
 		}.bind(this)
@@ -93,19 +86,23 @@ class HackingHistorians extends React.Component{
     	var records = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
     	var iconclassArray = records[this.state.userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
     	var currentIconclass;
+    	var betray = Math.round(Math.random());
 
-    	if (iconclassArray && !Array.isArray(iconclassArray)){
-    		currentIconclass = iconclassArray;
+    	if (betray) {
+    		currentIconclass = {"$t": "57AA6142"};
     	} else {
-    		currentIconclass = iconclassArray[0];
-    	}
-
-		// var trowDice = Math.round(Math.random());
-		// console.log(trowDice);
+    		if (iconclassArray && !Array.isArray(iconclassArray)){
+    			currentIconclass = iconclassArray;
+	    	} else {
+	    		var selectedIconclass = Math.round(Math.random() * iconclassArray.length);
+	    		currentIconclass = iconclassArray[selectedIconclass];
+	    	}
+	    }
+    	console.log(currentIconclass, iconClass[currentIconclass.$t]);
+		currentIconclass.text = iconClass[currentIconclass.$t];
 
     	this.setState(function(state){
     		state.appState.currentIconclass = currentIconclass;
-    		state.appState.currentIconclass.text = iconClass[iconclassArray.$t];
     	});
 	}
 
@@ -154,6 +151,8 @@ class HackingHistorians extends React.Component{
 		        	</div>
 	        	</div>
 	        );
+	    } else {
+	    	return (<p> Loading!!! </p>);
 	    }
 	}
 }
