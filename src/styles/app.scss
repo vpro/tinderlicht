@@ -191,6 +191,22 @@ h3 {
     right:-20px;
 }
 
+/* Score */
+.Score {
+	position: absolute;
+	bottom: 10px;
+}
+.Score h3 {
+	margin-bottom: -2px;
+	padding-bottom: 0 !important;
+}
+
+.Score span {
+	font-family: GothamBold;
+	font-size: 30px;
+	color: $sidebar-textcolor;
+
+}
 /* Navigation */
 ul {
 	font-family: GothamMedium;
@@ -217,5 +233,14 @@ ul li a {
 
 /* Metadata */
 .metadata {
-	width: 240px;
+	width: 800px;
+	position: fixed;
+	bottom: 10;
+	right: 0;
+	text-align: right;
+}
+.metadata li {
+}
+.metadescription {
+	color: #c1c1c1;
 }

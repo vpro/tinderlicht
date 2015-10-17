@@ -27,10 +27,8 @@ class ImageContainer extends React.Component{
         		<div className="circle" style={divStyle}></div>
         		<img className="verluchting" src={image} />
 
-        		<ul className="metadata">
-	        		<li className="metatitle">TITLE</li>
+        		<ul className="metadata hidden-md">
 	        		<li className="metadescription">Three ravens dropping a roof tile in front of the feet of Tiberius Gracchus, seen as a bad omen</li>
-	        		<li className="metatitle">COUNTRY</li>
 	        		<li className="metadescription">France</li>
         		</ul>
   			</div>

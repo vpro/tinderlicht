@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SidebarItem from './Sidebar-item.jsx';
+import Score from './Score.jsx';
 
 class SideBar extends React.Component{
     render() {
@@ -10,6 +11,7 @@ class SideBar extends React.Component{
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="1"/>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="2"/>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="3"/>
+				<Score />
 			</div>
 		)
     }
