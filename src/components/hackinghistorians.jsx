@@ -87,7 +87,6 @@ class HackingHistorians extends React.Component{
     	var iconclassArray = records[this.state.userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
     	var currentIconclass;
     	var betray = Math.round((Math.random()/1.50));
-    	console.log(betray);
 
     	if (betray) {
     		currentIconclass = {"$t": "57AA6142"};
@@ -110,19 +109,25 @@ class HackingHistorians extends React.Component{
 
 	imageClicker(event) {
 		event.persist();
-		console.log(this.state.appState.currentIconclass.$t);
 		this.setState(function(state){
 			state.appState.historyItem =  {
 				x: event.pageX - event.target.parentNode.offsetLeft,
 				y: event.pageY - event.target.parentNode.offsetTop,
 				betrayed: state.appState.betrayed,
 				iconclass: state.appState.currentIconclass.$t,
-				userAction: 0,
+				userAction: 1,
 			};
+
 			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
-			state.userData.gameData.score += 10;
+			
+			if (state.appState.betrayed) {
+				state.userData.gameData.score -= 10;
+			} else {
+				state.userData.gameData.score += 10;
+			}
 			state.userData.gameData.position++;
 			return state;
+
 		}, this.updateFirebase);
 	}
 
