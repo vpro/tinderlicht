@@ -102,7 +102,7 @@ h4 {
 .image-container {
 	position: relative;
 	width: 60%;
-	cursor: url("../icons/circle2geel.svg"), auto;
+	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
 	background: black;
 	img {
 		width: 100%;
@@ -186,4 +186,9 @@ ul li a {
 	&:visited {
 	color: #8e8e8e;
 	};
+}
+
+/* Verluchting */
+.verluchting {
+	max-width: 60%;
 }
