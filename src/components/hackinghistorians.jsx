@@ -173,6 +173,7 @@ class HackingHistorians extends React.Component{
     		return (
     			<div className="app-container">
     				<div className="auth-container">
+    					<h5>TEAM HACKING HISTORIANS</h5>
     					<img className="logoIntro" src={ logoIntro } />
     					<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>Start (Facebook)</button>
 	    				<h4>Instructies</h4>
