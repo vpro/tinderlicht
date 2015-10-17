@@ -25,7 +25,7 @@ class ImageContainer extends React.Component{
         return (
         	<div className="image-container" onClick={this.props.imageClicker}>
         		<div className="circle" style={divStyle}></div>
-        		<img src={image} />
+        		<img className="verluchting" src={image} />
   			</div>
   		);
     }
