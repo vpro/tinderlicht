@@ -14,7 +14,9 @@ class HackingHistorians extends React.Component{
 		this.state = {
 			verluchtingen: data,
 			appState: {
-				imageClickPosition: null
+				imageClickPosition: null,
+				score: 0,
+				fooledWith: "56435"
 			},
 			view: 'auth',
 			userData: null,
@@ -70,15 +72,12 @@ class HackingHistorians extends React.Component{
 		// Update firebase.
 		// To save connections and data only one update at a time.
 		var userData = this.state.userData;
-		if (this.state.timeout == 0){
-			this.setState({timeout: 1});
-			console.log('submitting');
-			this.firebaseRef.update({[userData.id]: userData}, function(){
-					console.log('database updated');
-					this.setState({timeout: 0});
-				}.bind(this)
-			);
-		}
+
+		console.log('submitting');
+		this.firebaseRef.update({[userData.id]: userData}, function(){
+			console.log('database updated');
+		}.bind(this)
+		);
 	}
 
 	setView(view){
@@ -88,12 +87,18 @@ class HackingHistorians extends React.Component{
 	imageClicker(event) {
 		event.persist();
 		this.setState(function(state){
-			state.appState.imageClickPosition =  {
+			state.appState.historyItem =  {
 				x: event.pageX - event.target.parentNode.offsetLeft,
-				y: event.pageY - event.target.parentNode.offsetTop
+				y: event.pageY - event.target.parentNode.offsetTop,
+				score: 0,
+				fooledWith: "45G34"
 			};
-			state.userData.gameData.history[state.userData.gameData.position] = state.appState.imageClickPosition; 
+			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem; 
 			state.userData.gameData.position++;
+
+			var trowDice = Math.round(Math.random());
+    		console.log(trowDice);
+
 			return state;
 		}, this.updateFirebase);
 	}
