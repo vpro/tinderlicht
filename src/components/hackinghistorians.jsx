@@ -130,8 +130,8 @@ class HackingHistorians extends React.Component{
 	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
 	        		<Navigation />
 	        		<div className="game-container">
-	        			<Iconclass state={this.state.verluchtingen} userData={userData}/>
-		        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
+	        			<Iconclass verluchtingen={this.state.verluchtingen} userData={userData}/>
+		        		<ImageContainer verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
 		        	</div>
 	        	</div>
 	        );
