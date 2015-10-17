@@ -4,7 +4,7 @@ import iconClass from '../../data/iconclass/datakeys2.json';
 class Iconclass extends React.Component{
     render() {
         var userData = this.props.userData;
-    	var records = this.props.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record
+    	var records = this.props.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
     	var iconclassArray = records[userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
 
 		if (iconclassArray && !Array.isArray(iconclassArray)){
