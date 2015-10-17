@@ -60,7 +60,12 @@ class HackingHistorians extends React.Component{
 					this.setView('game');
 				} else {
 					this.setState({userData: data.val()} );
-					this.setView('game');
+					var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
+					if ((totalItems-1) <= this.state.userData.gameData.position){
+						this.setView('endGame');
+					} else {
+						this.setView('game');
+					}
 					this.determineIconclass();
 				}
 			}.bind(this)
@@ -88,9 +93,7 @@ class HackingHistorians extends React.Component{
     	var iconclassArray = records[this.state.userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
     	var currentIconclass = {$t: 0};
     	var betray = Math.round((Math.random()/1.50));
-    	console.log("current", currentIconclass);
 
-    	console.log(iconclassArray);
     	if (betray) {
     		currentIconclass = {"$t": "57AA6142"};
     	} else {
@@ -103,12 +106,8 @@ class HackingHistorians extends React.Component{
 	    	} else if (Array.isArray(iconclassArray)){
 	    		var selectedIconclass = Math.round(Math.random() * (iconclassArray.length - 1));
 	    		currentIconclass = iconclassArray[selectedIconclass];
-	    	} else {
-	    		alert('weird border case');
 	    	}
 	    }
-	    console.log("random select", selectedIconclass);
-    	console.log("current-After", currentIconclass);
 
 	    if (currentIconclass.$t != 0){
 			currentIconclass.text = iconClass[currentIconclass.$t];
@@ -141,8 +140,12 @@ class HackingHistorians extends React.Component{
 				state.userData.gameData.score += 10;
 			}
 
-			console.log(this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length)
-			console.log(state.userData.gameData.position);
+			var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
+
+			if ((totalItems-1) <= state.userData.gameData.position){
+				this.setView('endGame');
+			}
+
 			state.userData.gameData.position++;
 			
 			return state;
@@ -185,7 +188,7 @@ class HackingHistorians extends React.Component{
 	        	</div>
 	        );
 	    } else if (this.state.view == 'endGame'){
-	    	return (<h1 style={{margin: "100px auto"}}> The end!</h1>);
+	    	return (<h1 style={{margin: "100px auto"}}> Je hebt het spel gehaald!</h1>);
 	    }
 	}
 }
