@@ -120,7 +120,6 @@ h4 {
 
 .iconclass-container {
 	padding-top: 30px;
-	background-color: white;
 	color: black;
 	width: 60%;
 	margin: 0 auto
@@ -214,4 +213,9 @@ ul li a {
 	&:visited {
 	color: #8e8e8e;
 	}
+}
+
+/* Metadata */
+.metadata {
+	width: 240px;
 }
