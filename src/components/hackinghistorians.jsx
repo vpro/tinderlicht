@@ -3,6 +3,8 @@ import Firebase from 'firebase';
 
 import ImageContainer from './image/ImageContainer.jsx';
 import ImageMetadata from './image/ImageMetadata.jsx';
+import ImageTagging from './image/ImageTagging.jsx';
+
 import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
@@ -199,6 +201,7 @@ class HackingHistorians extends React.Component{
 		        		</div>
 		        		<div className="metadata-container">
 		        			<ImageMetadata />
+		        			// <ImageTagging />
 		        		</div>
 		        	</div>
 	        	</div>
