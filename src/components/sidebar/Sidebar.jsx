@@ -6,7 +6,7 @@ import Score from './Score.jsx';
 class SideBar extends React.Component{
     render() {
 		return (
-			<div className="sidebar-container">
+			<div className="sidebar-container hidden-sm">
 				<h3>Laatste antwoord</h3>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="1"/>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="2"/>

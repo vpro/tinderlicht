@@ -2,6 +2,7 @@ import React from 'react';
 import Firebase from 'firebase';
 
 import ImageContainer from './image/ImageContainer.jsx';
+import ImageMetadata from './image/ImageMetadata.jsx';
 import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
@@ -155,8 +156,13 @@ class HackingHistorians extends React.Component{
 	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
 	        		<Navigation />
 	        		<div className="game-container">
-	        			<Iconclass verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData}/>
-		        		<ImageContainer verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
+	        			<div className="interaction-container">
+	        				<Iconclass verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData}/>
+		        			<ImageContainer verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
+		        		</div>
+		        		<div className="metadata-container">
+		        			<ImageMetadata />
+		        		</div>
 		        	</div>
 	        	</div>
 	        );

@@ -26,11 +26,6 @@ class ImageContainer extends React.Component{
         	<div className="image-container" onClick={this.props.imageClicker}>
         		<div className="circle" style={divStyle}></div>
         		<img className="verluchting" src={image} />
-
-        		<ul className="metadata hidden-md">
-	        		<li className="metadescription">Three ravens dropping a roof tile in front of the feet of Tiberius Gracchus, seen as a bad omen</li>
-	        		<li className="metadescription">France</li>
-        		</ul>
   			</div>
   		);
     }
