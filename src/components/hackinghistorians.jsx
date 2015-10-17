@@ -9,6 +9,7 @@ import Navigation from './navigation/Navigation.jsx';
 import logoIntro from '../icons/logo.png';
 
 import data from '../data/handschriften.json';
+import iconClass from '../data/iconclass/datakeys2.json';
 import Model from '../data/model.jsx';
 
 class HackingHistorians extends React.Component{
@@ -18,12 +19,12 @@ class HackingHistorians extends React.Component{
 			verluchtingen: data,
 			appState: {
 				imageClickPosition: null,
-				score: 0,
-				fooledWith: "56435"
+				currentIconclass: "45353",
+				fakeIconclass: "56435",
+				score: 0
 			},
 			view: 'auth',
-			userData: null,
-			timeout: 0
+			userData: null
 		}
 	}
 
@@ -65,8 +66,8 @@ class HackingHistorians extends React.Component{
 							return this.state.view;
 						}
 					}());
+					this.determineIconclass();
 				}
-
 			}.bind(this)
 		);
 	}
@@ -87,6 +88,27 @@ class HackingHistorians extends React.Component{
 		this.setState({view: view});
 	}
 
+	determineIconclass() {
+		var userData = this.state.userData;
+    	var records = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
+    	var iconclassArray = records[this.state.userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
+    	var currentIconclass;
+
+    	if (iconclassArray && !Array.isArray(iconclassArray)){
+    		currentIconclass = iconclassArray;
+    	} else {
+    		currentIconclass = iconclassArray[0];
+    	}
+
+    	this.setState(function(state){
+    		state.appState.currentIconclass = currentIconclass;
+    		state.appState.currentIconclass.text = iconClass[iconclassArray.$t];
+    	}, console.log(this.state));
+
+		// var trowDice = Math.round(Math.random());
+		// console.log(trowDice);
+	}
+
 	imageClicker(event) {
 		event.persist();
 		this.setState(function(state){
@@ -98,9 +120,6 @@ class HackingHistorians extends React.Component{
 			};
 			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem; 
 			state.userData.gameData.position++;
-
-			var trowDice = Math.round(Math.random());
-    		console.log(trowDice);
 
 			return state;
 		}, this.updateFirebase);
@@ -130,7 +149,7 @@ class HackingHistorians extends React.Component{
 	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
 	        		<Navigation />
 	        		<div className="game-container">
-	        			<Iconclass verluchtingen={this.state.verluchtingen} userData={userData}/>
+	        			<Iconclass verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData}/>
 		        		<ImageContainer verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
 		        	</div>
 	        	</div>

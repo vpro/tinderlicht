@@ -1,34 +1,16 @@
 import React from 'react';
-import iconClass from '../../data/iconclass/datakeys2.json';
 
 class Iconclass extends React.Component{
     render() {
-        var userData = this.props.userData;
-    	var records = this.props.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
-    	var iconclassArray = records[userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
-
-		if (iconclassArray && !Array.isArray(iconclassArray)){
-			return (
-				<div className="iconclass-container">
-					<h3 className="waaris-kop">Waar is?</h3>
-		       	 	<p className="iconclass">{iconClass[iconclassArray.$t]}</p>
-				</div>
-			)
-		} else {
-
-			return (
-				<div className="iconclass-container">
-					<h3 className="waaris-kop">Staat de kop in het plaatje?</h3>
-					<button className="geenhit-button">Of niet?</button>
-					{ iconclassArray.map((value, index) => {
-						return (
-				       	 	<p key={index} className="iconclass">{iconClass[value.$t]}</p>
-						)})
-					}
-				</div>
-			)
-		}
-    }
+    	var text = "hi";
+    	return (
+			<div className="iconclass-container">
+				<h3 className="waaris-kop">Staat de kop in het plaatje?</h3>
+				<button className="geenhit-button">Of niet?</button>
+		   	 	<p className="iconclass">{text}</p>
+			</div>
+		);
+	}
 }
 
 export default Iconclass;
