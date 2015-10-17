@@ -22,7 +22,7 @@ class HackingHistorians extends React.Component{
 				imageClickPosition: null,
 				currentIconclass: "45353",
 				betrayed: 0,
-				score: 0
+				userAction: 1
 			},
 			view: 'auth',
 			userData: null
@@ -86,21 +86,35 @@ class HackingHistorians extends React.Component{
 		var userData = this.state.userData;
     	var records = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
     	var iconclassArray = records[this.state.userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
-    	var currentIconclass;
+    	var currentIconclass = {$t: 0};
     	var betray = Math.round((Math.random()/1.50));
+    	console.log("current", currentIconclass);
 
+    	console.log(iconclassArray);
     	if (betray) {
     		currentIconclass = {"$t": "57AA6142"};
     	} else {
-    		if (iconclassArray && !Array.isArray(iconclassArray)){
-    			currentIconclass = iconclassArray;
-	    	} else {
-	    		var selectedIconclass = Math.round(Math.random() * iconclassArray.length);
+    		if (!Array.isArray(iconclassArray)){
+    			if (iconclassArray.$t){
+    				currentIconclass = iconclassArray;
+    			} else {
+    				currentIconclass = {"$t": "51AA4"};
+    			}
+	    	} else if (Array.isArray(iconclassArray)){
+	    		var selectedIconclass = Math.round(Math.random() * (iconclassArray.length - 1));
 	    		currentIconclass = iconclassArray[selectedIconclass];
+	    	} else {
+	    		alert('weird border case');
 	    	}
 	    }
+	    console.log("random select", selectedIconclass);
+    	console.log("current-After", currentIconclass);
 
-		currentIconclass.text = iconClass[currentIconclass.$t];
+	    if (currentIconclass.$t != 0){
+			currentIconclass.text = iconClass[currentIconclass.$t];
+	    } else {
+	    	alert('no match!');
+	    }
 
     	this.setState(function(state){
     		state.appState.currentIconclass = currentIconclass;
@@ -121,12 +135,16 @@ class HackingHistorians extends React.Component{
 
 			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
 			
-			if (state.appState.betrayed) {
+			if (state.appState.betrayed == state.appState.userAction) {
 				state.userData.gameData.score -= 10;
 			} else {
 				state.userData.gameData.score += 10;
 			}
+
+			console.log(this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length)
+			console.log(state.userData.gameData.position);
 			state.userData.gameData.position++;
+			
 			return state;
 
 		}, this.updateFirebase);
@@ -166,8 +184,8 @@ class HackingHistorians extends React.Component{
 		        	</div>
 	        	</div>
 	        );
-	    } else {
-	    	return (<p> Loading!!! </p>);
+	    } else if (this.state.view == 'endGame'){
+	    	return (<h1 style={{margin: "100px auto"}}> The end!</h1>);
 	    }
 	}
 }

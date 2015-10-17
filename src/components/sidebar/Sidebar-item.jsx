@@ -17,9 +17,9 @@ class SidebarItem extends React.Component{
 			var currentHistory = userData.gameData.history[historyPlace];
 
 			if (currentHistory.betrayed == currentHistory.userAction) {
-				var displayedIcon = goodIcon;
-			} else {
 				var displayedIcon = falseIcon;
+			} else {
+				var displayedIcon = goodIcon;
 			}
 
 			return (
@@ -29,7 +29,7 @@ class SidebarItem extends React.Component{
 				</div>
 			)
 		} else {
-			return <p>No item</p>;
+			return <p>.</p>;
 		}
     }
 }

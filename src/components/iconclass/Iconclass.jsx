@@ -2,7 +2,6 @@ import React from 'react';
 
 class Iconclass extends React.Component{
     render() {
-
     	if (this.props.appState.currentIconclass.text){
     		var text = this.props.appState.currentIconclass.text;
     	} else {
