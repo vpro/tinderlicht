@@ -2,6 +2,7 @@ import React from 'react';
 
 class Iconclass extends React.Component{
     render() {
+    	console.log(this.props);
     	var text = "hi";
     	return (
 			<div className="iconclass-container">

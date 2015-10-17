@@ -100,13 +100,13 @@ class HackingHistorians extends React.Component{
     		currentIconclass = iconclassArray[0];
     	}
 
+		// var trowDice = Math.round(Math.random());
+		// console.log(trowDice);
+
     	this.setState(function(state){
     		state.appState.currentIconclass = currentIconclass;
     		state.appState.currentIconclass.text = iconClass[iconclassArray.$t];
-    	}, console.log(this.state));
-
-		// var trowDice = Math.round(Math.random());
-		// console.log(trowDice);
+    	});
 	}
 
 	imageClicker(event) {
