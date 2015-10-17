@@ -7,6 +7,15 @@ class Iconclass extends React.Component{
     	var records = this.props.state.srw$searchRetrieveResponse.srw$records.srw$record
     	var iconclassArray = records[userData.gameData.position].srw$recordData.srw_dc$dc.dc$subject;
 		
+		if (iconclassArray && !Array.isArray(iconclassArray)){
+			return (
+				<div className="iconclass-container">
+					<h3 className="waaris-kop">Waar is?</h3>
+		       	 	<p className="iconclass">{iconClass[iconclassArray.$t]}</p>
+				</div>
+			)
+		}
+
 		return (
 			<div className="iconclass-container">
 				<h3 className="waaris-kop">Waar is?</h3>

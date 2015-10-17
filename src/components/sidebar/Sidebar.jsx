@@ -7,7 +7,7 @@ class SideBar extends React.Component{
 		return (
 			<div className="sidebar-container">
 				<h3>Laatste antwoord</h3>
-				<SidebarItem />
+				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData}/>
 			</div>
 		)
     }

@@ -112,7 +112,7 @@ class HackingHistorians extends React.Component{
     		var userData = this.state.userData; 
 	        return (
 	        	<div className="app-container">
-	        		<Sidebar />
+	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
 	        		<div className="game-container">
 	        			<Iconclass state={this.state.verluchtingen} userData={userData}/>
 		        		<ImageContainer state={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
