@@ -6,6 +6,7 @@ import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
 
+import logoIntro from '../icons/logo.png';
 
 import data from '../data/handschriften.json';
 import Model from '../data/model.jsx';
@@ -110,8 +111,14 @@ class HackingHistorians extends React.Component{
     		return (
     			<div className="app-container">
     				<div className="auth-container">
-	    				<h1> You need to log in here please!!!</h1>
-		  				<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>facebook</button>
+    					<img className="logoIntro" src={ logoIntro } />
+    					<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>Start (Facebook)</button>
+	    				<h4>Instructions</h4>
+	    				<ul className="instructies">
+	 						<li>Bla</li>
+	 						<li>Bla</li>
+	 						<li>Bla</li>
+	 					</ul>
     				</div>
     			</div>
     		);

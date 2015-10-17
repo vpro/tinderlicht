@@ -24,10 +24,53 @@ $sidebar-background: 		#dadada;
 $sidebar-textcolor: 		#878786;
 $sidebar-goodcirclecolor:	#36ab69;
 
+$startbutton-groen:			#40a83d;
+$start-instructies-grijs:	#626262;
 
 body {
 	background: $main-background;
 }
+
+.auth-container {
+	height: 100%;
+	width: 100%;
+	background-color: $sidebar-background;
+	padding-top: 200px;
+	text-align: center;
+}
+
+.logoIntro {
+	width: 402px;
+	height: 168px;
+	margin: 0 auto;
+}
+
+input, button, submit { border:none; } 
+
+.auth-button {
+	font-family: GothamMedium;
+	font-size: 18px;
+	color: white;
+	background: $startbutton-groen;
+	border-radius: 10px;
+	text-transform: uppercase;
+	padding: 10px 40px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.instructies li {
+	float: none !important;
+}
+
+h4 {
+	font-family: GothamMedium;
+	color: $start-instructies-grijs;
+	font-size: 14px;
+}
+
+/* 805 386 */
 
 .app-container {
 	@include make-row();
