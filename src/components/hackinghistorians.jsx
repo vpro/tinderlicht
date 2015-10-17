@@ -6,7 +6,7 @@ import Iconclass from './iconclass/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
 
-import logoIntro from '../icons/logo.png';
+import logoIntro from '../icons/logoblauwrood.png';
 
 import data from '../data/handschriften.json';
 import iconClass from '../data/iconclass/datakeys2.json';
