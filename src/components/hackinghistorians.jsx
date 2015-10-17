@@ -113,11 +113,12 @@ class HackingHistorians extends React.Component{
     				<div className="auth-container">
     					<img className="logoIntro" src={ logoIntro } />
     					<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>Start (Facebook)</button>
-	    				<h4>Instructions</h4>
+	    				<h4>Instructies</h4>
 	    				<ul className="instructies">
-	 						<li>Bla</li>
-	 						<li>Bla</li>
-	 						<li>Bla</li>
+	 						<li>1) Klopt de Iconclass notatie met het plaatje?</li>
+	 						<li>2) Zo ja; klik op de kop</li>
+	 						<li>3) Nee? Druk op 'Staat er niet op'</li>
+							<li>4) Scoor punten</li>
 	 					</ul>
     				</div>
     			</div>

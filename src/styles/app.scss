@@ -66,6 +66,9 @@ input, button, submit { border:none; }
 	margin: 0 auto;
 	margin-top: 20px;
 }
+.instructies {
+	position: relative !important;
+}
 
 .instructies li {
 	float: none !important;
@@ -75,6 +78,7 @@ h4 {
 	font-family: GothamMedium;
 	color: $start-instructies-grijs;
 	font-size: 14px;
+	margin-top: 20px;
 }
 
 /* 805 386 */
