@@ -23,12 +23,15 @@ $main-background: 			#fff;
 $sidebar-background: 		#dadada;
 $sidebar-textcolor: 		#878786;
 $sidebar-goodcirclecolor:	#36ab69;
+$staatkop-color: 			#f2f2f2;
 
 $startbutton-groen:			#40a83d;
 $start-instructies-grijs:	#626262;
 
+
 body {
 	background: $main-background;
+	overflow: hidden;
 }
 
 .auth-container {
@@ -95,21 +98,42 @@ h4 {
 .waaris-kop {
 	font-family: GothamMedium;
 	text-transform: none;
-	font-size: 16px;
+	font-size: 18px;
 	color: #dadada;
+	background-color: $staatkop-color;
+	display: inline-block;
+	padding: 8px 12px !important;
+	border-radius: 6px;
+}
+
+.geenhit-button {
+	font-family: GothamMedium;
+	font-size: 16px;
+	text-decoration: underline;
+	padding: 7px 12px;
+	margin-left: 10px;
+	border-radius: 6px;
+	background: #ea697c;
+	color: white;
+}
+
+.iconclass {
+	font-family: GothamMedium;
+	color: #9d9d9c;
+	font-size: 18px;
 }
 
 .image-container {
 	position: relative;
 	width: 60%;
-	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
-/*	background: black;
+/*	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
+*//*	background: black;
 */	img {
 		width: 100%;
 	}
 	img:hover {
 		transition:.5s;
-		opacity: .6;
+		opacity: 1;
 	}
 }
 
