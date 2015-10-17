@@ -7,11 +7,12 @@ class Iconclass extends React.Component{
     	} else {
     		var text = "Sorry, this classification isn't human readable: " + this.props.appState.currentIconclass.$t;
     	}
+    	console.log(this.props);
 
     	return (
 			<div className="iconclass-container">
 				<h3 className="waaris-kop">Staat de kop in het plaatje?</h3>
-				<button className="geenhit-button">Of niet?</button>
+				<button className="geenhit-button" onClick={this.props.buttonClicker}>Of niet?</button>
 		   	 	<p className="iconclass">{text}</p>
 			</div>
 		);

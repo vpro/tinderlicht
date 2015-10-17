@@ -29,7 +29,7 @@ class SidebarItem extends React.Component{
 				</div>
 			)
 		} else {
-			return <p>.</p>;
+			return <p></p>;
 		}
     }
 }

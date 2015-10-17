@@ -121,17 +121,33 @@ class HackingHistorians extends React.Component{
     	});
 	}
 
+	buttonClicker(event) {
+		event.persist();
+		event.preventDefault();
+		console.log('button clickec');
+		this.setState(function(state){
+			state.appState.historyItem = {};
+			state.appState.historyItem.userAction = 0;
+			return state;
+		}, this.clickProcessor);
+	}
+
 	imageClicker(event) {
 		event.persist();
 		this.setState(function(state){
-			state.appState.historyItem =  {
-				x: event.pageX - event.target.parentNode.offsetLeft,
-				y: event.pageY - event.target.parentNode.offsetTop,
-				betrayed: state.appState.betrayed,
-				iconclass: state.appState.currentIconclass.$t,
-				userAction: 1,
-			};
+			state.appState.historyItem = {};
+			state.appState.historyItem.x = event.pageX - event.target.parentNode.offsetLeft;
+			state.appState.historyItem.y = event.pageY - event.target.parentNode.offsetTop;
+			state.appState.historyItem.userAction = 1;
+			return state;
+		}, this.clickProcessor);
+	}
 
+	clickProcessor(){
+		this.setState(function(state){
+			state.appState.historyItem.betrayed = state.appState.betrayed;
+			state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
+			
 			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
 			
 			if (state.appState.betrayed == state.appState.userAction) {
@@ -147,9 +163,8 @@ class HackingHistorians extends React.Component{
 			}
 
 			state.userData.gameData.position++;
-			
-			return state;
 
+			return state;
 		}, this.updateFirebase);
 	}
 
@@ -178,7 +193,7 @@ class HackingHistorians extends React.Component{
 	        		<Navigation />
 	        		<div className="game-container">
 	        			<div className="interaction-container">
-	        				<Iconclass verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData}/>
+	        				<Iconclass verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} buttonClicker={this.buttonClicker.bind(this)}/>
 		        			<ImageContainer verluchtingen={this.state.verluchtingen} appState={this.state.appState} userData={userData} imageClicker={this.imageClicker.bind(this)}/>
 		        		</div>
 		        		<div className="metadata-container">
