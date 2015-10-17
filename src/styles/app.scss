@@ -126,7 +126,6 @@ h4 {
 .image-container {
 	position: relative;
 	width: 60%;
-	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
 	img {
 		width: 100%;
 	}
@@ -214,5 +213,6 @@ ul li a {
 /* Verluchting */
 .verluchting {
 	max-width: 60%;
+	cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
 	z-index: 100;
 }
