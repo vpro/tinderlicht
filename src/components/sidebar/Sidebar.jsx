@@ -11,7 +11,7 @@ class SideBar extends React.Component{
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="1"/>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="2"/>
 				<SidebarItem verluchtingen={this.props.verluchtingen} userData={this.props.userData} number="3"/>
-				<Score />
+				<Score userData={this.props.userData}/>
 			</div>
 		)
     }
