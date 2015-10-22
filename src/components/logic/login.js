@@ -35,7 +35,7 @@ function login(provider) {
 				return this.state.userData.val();
 			}
 		}.bind(this)))
-		// Update the state with the new user
+		// Update the state with the new user or the same user
 		.then((userData)=>{
 			return this.setState((state)=>{
 				state.userData = userData;
