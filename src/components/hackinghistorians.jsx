@@ -5,6 +5,8 @@ import ImageContainer from './game/ImageContainer.jsx';
 import ImageMetadata from './game/ImageMetadata.jsx';
 import ImageTagging from './game/ImageTagging.jsx';
 
+import FirebaseMethods from './logic/FirebaseMethods.js';
+
 import Iconclass from './game/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
@@ -12,12 +14,13 @@ import Navigation from './navigation/Navigation.jsx';
 import logoIntro from '../assets/icons/logoblauwrood.png';
 
 import data from '../assets/data/handschriften.json';
-import iconClass from '../assets/data/iconclass/datakeys2.json';
+import iconClass from '../assets/data/iconclass/iconclassDump.json';
 import Model from '../assets/data/model.jsx';
 
 class HackingHistorians extends React.Component{
 	constructor(props){
 		super(props);
+		this.firebaseMethods = new FirebaseMethods();
 		this.state = {
 			verluchtingen: data,
 			appState: {
@@ -27,62 +30,13 @@ class HackingHistorians extends React.Component{
 				userAction: 1
 			},
 			view: 'auth',
+			authData: null,
 			userData: null
 		}
 	}
 
 	componentWillMount(){
-		this.firebaseRef = new Firebase('https://hackalod.firebaseio.com/');
-	}
-
-	authWithFirebase(provider){
-		var provider = provider;
-		this.firebaseRef.authWithOAuthPopup(provider, function(error, authData){
-		  	if (error) {
-		    	console.log('Login Failed!', error);
-		  	} else {
-		  		this.getDataFromFirebase(authData, provider);
-		  	}
-		}.bind(this));
-	}
-
-	getDataFromFirebase(authData, provider){
-		var authData = authData;
-		var uidGenerated = authData[provider].id + '-' + provider;
-		this.firebaseRef.child(uidGenerated).on('value', function(data){
-				if (data.val() == null){
-					console.log('creating new account');
-					let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
-					console.log(newAccount);
-					this.setState(
-						function(state){
-							state.userData = newAccount;
-							return state;
-						}, this.updateFirebase);
-					this.setView('game');
-				} else {
-					this.setState({userData: data.val()} );
-					var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
-					if ((totalItems-1) <= this.state.userData.gameData.position){
-						this.setView('endGame');
-					} else {
-						this.setView('game');
-					}
-					this.determineIconclass();
-				}
-			}.bind(this)
-		);
-	}
-
-	updateFirebase(){
-		// Update firebase.
-		// To save connections and data only one update at a time.
-		var userData = this.state.userData;
-
-		this.firebaseRef.update({[userData.id]: userData}, function(){
-			console.log('database updated');
-		}.bind(this)
-		);
+		this.firebaseMethods.initiatizeDatabase();
 	}
 
 	setView(view){
@@ -150,7 +104,7 @@ class HackingHistorians extends React.Component{
 			state.appState.historyItem.betrayed = state.appState.betrayed;
 			state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
 			
-			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
+			state.userData.gameData.history[sstate.userData.gameData.position] = state.appState.historyItem;
 			
 			if (state.appState.betrayed == state.appState.userAction) {
 				state.userData.gameData.score -= 10;
@@ -170,6 +124,44 @@ class HackingHistorians extends React.Component{
 		}, this.updateFirebase);
 	}
 
+
+
+
+
+	login(error, authData) {
+		this.setState({authData: authData}, console.log('login',this.state))
+		this.firebaseMethods.getData(authData, this.userCheck.bind(this));
+	}
+
+	userCheck(userData) {
+		// If new user:
+		if (userData.val() == null){
+			console.log('creating new account');
+			let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
+			console.log(newAccount);
+			this.setState(
+				function(state){
+					state.userData = newAccount;
+					return state;
+				}, this.updateFirebase);
+			this.setView('game');
+		} else {
+			this.setState({userData: userData.val()} );
+			var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
+			if ((totalItems-1) <= this.state.userData.gameData.position){
+				this.setView('endGame');
+			} else {
+				this.setView('game');
+			}
+			this.determineIconclass();
+		}
+	}
+
+
+
+
+
+
     render() {
     	if (this.state.view == 'auth'){
     		return (
@@ -178,7 +170,7 @@ class HackingHistorians extends React.Component{
     					<img className="logoIntro" src={ logoIntro } />
     					<span className="auth-button facebook"> 
     						<span>Start</span>
-    						<button className="auth-sm icon-facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}></button>
+    						<button className="auth-sm icon-facebook" onClick={this.firebaseMethods.auth.bind(this, 'facebook', this.login.bind(this))}></button>
     						<button className="auth-sm icon-twitter"  onClick={this.authWithFirebase.bind(this, 'twitter')}></button>
     						<button className="auth-sm icon-google"  onClick={this.authWithFirebase.bind(this, 'google')}></button>
     					</span>
