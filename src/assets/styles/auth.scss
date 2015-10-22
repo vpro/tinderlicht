@@ -1,0 +1,65 @@
+@import 'variables.scss';
+
+.auth-container {
+	height: 100%;
+	width: 100%;
+	background: #eeeeee; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #eeeeee 0%, #dadada 63%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#eeeeee), color-stop(63%,#dadada)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #eeeeee 0%,#dadada 63%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dadada',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	padding-top: 200px;
+	text-align: center;
+}
+
+h5 {
+	font-family: GothamMedium;
+	font-size: 14px;
+	color: $start-instructies-grijs;
+	margin-top: -17px;
+    padding-bottom: 13px;
+}
+
+.logoIntro {
+	width: 402px;
+	height: 168px;
+	margin: 0 auto;
+}
+
+.auth-button {
+	width: 250px;
+	font-family: GothamMedium;
+	font-size: 18px;
+	color: white;
+	background: $startbutton-groen;
+	border-radius: 10px;
+	text-transform: uppercase;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.auth-sm {
+	background: none;
+	height: 50px;
+	cursor: pointer;
+	border-left: 1px solid rgb(75, 189, 72);
+    margin-left: 10px;
+    padding-left: 15px;
+    padding-right: 5px;
+    &:last-child{
+		padding-right: 0;
+		margin-right: -10px;
+    }
+}
+
+.instructies {
+	position: relative !important;
+}
+
+.instructies li {
+	float: none !important;
+}

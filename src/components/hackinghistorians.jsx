@@ -175,9 +175,13 @@ class HackingHistorians extends React.Component{
     		return (
     			<div className="app-container">
     				<div className="auth-container">
-    					<h5>TEAM HACKING HISTORIANS</h5>
     					<img className="logoIntro" src={ logoIntro } />
-    					<button className="auth-button facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}>Start (Facebook)</button>
+    					<span className="auth-button facebook"> 
+    						<span>Start</span>
+    						<button className="auth-sm icon-facebook" onClick={this.authWithFirebase.bind(this, 'facebook')}></button>
+    						<button className="auth-sm icon-twitter"  onClick={this.authWithFirebase.bind(this, 'twitter')}></button>
+    						<button className="auth-sm icon-google"  onClick={this.authWithFirebase.bind(this, 'google')}></button>
+    					</span>
 	    				<h4>Instructies</h4>
 	    				<ul className="instructies">
 	 						<li>1) Klopt de Iconclass notatie met het plaatje?</li>

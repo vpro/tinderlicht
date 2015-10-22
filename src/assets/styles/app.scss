@@ -1,4 +1,6 @@
 @import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
+@import 'auth.scss';
+@import 'icons.scss';
 
 @font-face {
   font-family: 'GothamBold';
@@ -18,15 +20,7 @@
        url('../fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
-/* Kleurenschema */
-$main-background: 			#fff;
-$sidebar-background: 		#dadada;
-$sidebar-textcolor: 		#878786;
-$sidebar-goodcirclecolor:	#36ab69;
-$staatkop-color: 			#f2f2f2;
 
-$startbutton-groen:			#40a83d;
-$start-instructies-grijs:	#626262;
 
 
 body {
@@ -34,56 +28,10 @@ body {
 	overflow: hidden;
 }
 
-.auth-container {
-	height: 100%;
-	width: 100%;
-	background: #eeeeee; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  #eeeeee 0%, #dadada 63%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#eeeeee), color-stop(63%,#dadada)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  #eeeeee 0%,#dadada 63%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  #eeeeee 0%,#dadada 63%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dadada',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	padding-top: 200px;
-	text-align: center;
-}
-
-h5 {
-	font-family: GothamMedium;
-	font-size: 14px;
-	color: $start-instructies-grijs;
-	margin-top: -17px;
-    padding-bottom: 13px;
-}
-
-.logoIntro {
-	width: 402px;
-	height: 168px;
-	margin: 0 auto;
-}
 
 input, button, submit { border:none; } 
 
-.auth-button {
-	font-family: GothamMedium;
-	font-size: 18px;
-	color: white;
-	background: $startbutton-groen;
-	border-radius: 10px;
-	text-transform: uppercase;
-	padding: 10px 40px;
-	display: block;
-	margin: 0 auto;
-	margin-top: 20px;
-}
-.instructies {
-	position: relative !important;
-}
 
-.instructies li {
-	float: none !important;
-}
 
 h4 {
 	font-family: GothamMedium;

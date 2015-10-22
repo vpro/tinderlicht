@@ -1,6 +1,6 @@
 import React from 'react';
-import goodIcon from '../../icons/good.svg';
-import falseIcon from '../../icons/false.svg';
+import goodIcon from '../../assets/icons/good.svg';
+import falseIcon from '../../assets/icons/false.svg';
 
 class SidebarItem extends React.Component{
     render() {
