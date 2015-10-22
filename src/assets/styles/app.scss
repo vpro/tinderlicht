@@ -27,7 +27,7 @@ body {
 	overflow: hidden;
 }
 
-input, button, submit { border:none; } 
+input, button, submit, button:active { border:none; outline: none; } 
 
 
 

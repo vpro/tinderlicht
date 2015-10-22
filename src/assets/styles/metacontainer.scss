@@ -22,6 +22,7 @@
 	line-height: 20px;
 }
 
+/* Image Tagging */
 .imagetagging {
 	position: initial !important;
 }
@@ -29,4 +30,20 @@
 	float: none;
 	list-style-type: none;
 	color: #c1c1c1;
+}
+.iconclass-tag {
+	margin-left: 20px;
+	width: 190px;
+    display: inline-flex;
+    font-size: 12px;
+}
+.tag {
+    background-color: #dea1d5;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+    padding: 3px 6px;
+}
+.close-icon {
+	width: 7px;
 }
