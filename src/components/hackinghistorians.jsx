@@ -95,7 +95,8 @@ class HackingHistorians extends React.Component{
 	clickProcessor(){
 		this.setState(function(state){
 			state.appState.historyItem.betrayed = state.appState.betrayed;
-			state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
+			// state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
+			state.appState.historyItem.iconclass = "lovely shit";
 			
 			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
 			
@@ -114,7 +115,7 @@ class HackingHistorians extends React.Component{
 			state.userData.gameData.position++;
 
 			return state;
-		}, this.updateFirebase);
+		}, this.updateDB);
 	}
 
 
@@ -149,7 +150,14 @@ class HackingHistorians extends React.Component{
 				});
 			})
 			// Check the user and create new account if needed
-			.then(Promise.method(this.initUser.bind(this)))
+			.then(Promise.method(()=>{
+				console.log(this.state.userData.val() == null, this.state.userData.val());
+				if (this.state.userData.val() == null) {
+					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].displayName || ""));
+				} else {
+					return this.state.userData.val();
+				}
+			}.bind(this)))
 			// Update the state with the new user
 			.then((userData)=>{
 				return this.setState((state)=>{
@@ -160,18 +168,7 @@ class HackingHistorians extends React.Component{
 			// Update Firebase with the current info
 			.then(this.updateDB.bind(this))
 			// Finnaly set the view
-			.then(()=>{console.log(this.state)})
-			.then(this.setView.bind(this, 'game'));
-
-	}
-
-	initUser(){
-		// create new user if needed
-		if (!this.state.userData.val()) {
-			return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].displayName || ""));
-		} else {
-			return this.state.userData.val();
-		}
+			.then(this.setView.bind(this,'game'));
 	}
 
 	updateDB(){
