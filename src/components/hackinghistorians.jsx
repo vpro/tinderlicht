@@ -3,11 +3,11 @@ import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import Promise from 'bluebird';
 
+import login from './logic/login.js';
+
 import ImageContainer from './game/ImageContainer.jsx';
 import ImageMetadata from './game/ImageMetadata.jsx';
 import ImageTagging from './game/ImageTagging.jsx';
-
-import FirebaseMethods from './logic/FirebaseMethods.js';
 
 import Iconclass from './game/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
@@ -22,6 +22,7 @@ import Model from '../assets/data/model.jsx';
 class HackingHistorians extends React.Component{
 	constructor(props){
 		super(props);
+		this.login = login;
 		this.state = {
 			verluchtingen: data,
 			appState: {
@@ -118,59 +119,6 @@ class HackingHistorians extends React.Component{
 		}, this.updateDB);
 	}
 
-
-
-
-
-// -------------------------------
-
-	login(provider) {
-		// Start firebase and Fireproof
-		this.firebase = new Firebase('https://hackalod.firebaseio.com/');
-		Fireproof.bless(Promise);
-		this.fireproof = new Fireproof(this.firebase);
-		this.setState = Promise.promisify(this.setState);
-
-		// Start the login process
-		this.fireproof.authWithOAuthPopup(provider)
-			// Set the authData to the state
-			.then((authData)=>{
-				return this.setState((state)=>{
-					state.authData = authData;
-					return state;
-				});
-			})
-			// Get the userData
-			.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
-			// Set the userData to the state
-			.then((userData)=>{
-				return this.setState((state)=>{
-					state.userData = userData;
-					return state;
-				});
-			})
-			// Check the user and create new account if needed
-			.then(Promise.method(()=>{
-				console.log(this.state.userData.val() == null, this.state.userData.val());
-				if (this.state.userData.val() == null) {
-					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].displayName || ""));
-				} else {
-					return this.state.userData.val();
-				}
-			}.bind(this)))
-			// Update the state with the new user
-			.then((userData)=>{
-				return this.setState((state)=>{
-					state.userData = userData;
-					return state;
-				});
-			})
-			// Update Firebase with the current info
-			.then(this.updateDB.bind(this))
-			// Finnaly set the view
-			.then(this.setView.bind(this,'game'));
-	}
-
 	updateDB(){
 		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
 	}
@@ -178,12 +126,6 @@ class HackingHistorians extends React.Component{
 	setView(view){
 		this.setState({view: view});
 	}
-
-
-// ---------------------------- 
-
-
-
 
     render() {
     	if (this.state.view == 'auth'){
