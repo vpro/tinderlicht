@@ -1,5 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
+import Fireproof from 'fireproof';
+import Promise from 'bluebird';
 
 import ImageContainer from './game/ImageContainer.jsx';
 import ImageMetadata from './game/ImageMetadata.jsx';
@@ -20,7 +22,6 @@ import Model from '../assets/data/model.jsx';
 class HackingHistorians extends React.Component{
 	constructor(props){
 		super(props);
-		this.firebaseMethods = new FirebaseMethods();
 		this.state = {
 			verluchtingen: data,
 			appState: {
@@ -33,14 +34,6 @@ class HackingHistorians extends React.Component{
 			authData: null,
 			userData: null
 		}
-	}
-
-	componentWillMount(){
-		this.firebaseMethods.initiatizeDatabase();
-	}
-
-	setView(view){
-		this.setState({view: view});
 	}
 
 	determineIconclass() {
@@ -104,7 +97,7 @@ class HackingHistorians extends React.Component{
 			state.appState.historyItem.betrayed = state.appState.betrayed;
 			state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
 			
-			state.userData.gameData.history[sstate.userData.gameData.position] = state.appState.historyItem;
+			state.userData.gameData.history[state.userData.gameData.position] = state.appState.historyItem;
 			
 			if (state.appState.betrayed == state.appState.userAction) {
 				state.userData.gameData.score -= 10;
@@ -128,36 +121,69 @@ class HackingHistorians extends React.Component{
 
 
 
-	login(error, authData) {
-		this.setState({authData: authData}, console.log('login',this.state))
-		this.firebaseMethods.getData(authData, this.userCheck.bind(this));
+// -------------------------------
+
+	login(provider) {
+		// Start firebase and Fireproof
+		this.firebase = new Firebase('https://hackalod.firebaseio.com/');
+		Fireproof.bless(Promise);
+		this.fireproof = new Fireproof(this.firebase);
+		this.setState = Promise.promisify(this.setState);
+
+		// Start the login process
+		this.fireproof.authWithOAuthPopup(provider)
+			// Set the authData to the state
+			.then((authData)=>{
+				return this.setState((state)=>{
+					state.authData = authData;
+					return state;
+				});
+			})
+			// Get the userData
+			.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
+			// Set the userData to the state
+			.then((userData)=>{
+				return this.setState((state)=>{
+					state.userData = userData;
+					return state;
+				});
+			})
+			// Check the user and create new account if needed
+			.then(Promise.method(this.initUser.bind(this)))
+			// Update the state with the new user
+			.then((userData)=>{
+				return this.setState((state)=>{
+					state.userData = userData;
+					return state;
+				});
+			})
+			// Update Firebase with the current info
+			.then(this.updateDB.bind(this))
+			// Finnaly set the view
+			.then(()=>{console.log(this.state)})
+			.then(this.setView.bind(this, 'game'));
+
 	}
 
-	userCheck(userData) {
-		// If new user:
-		if (userData.val() == null){
-			console.log('creating new account');
-			let newAccount = new Model.User(uidGenerated, authData[provider].displayName || "");
-			console.log(newAccount);
-			this.setState(
-				function(state){
-					state.userData = newAccount;
-					return state;
-				}, this.updateFirebase);
-			this.setView('game');
+	initUser(){
+		// create new user if needed
+		if (!this.state.userData.val()) {
+			return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].displayName || ""));
 		} else {
-			this.setState({userData: userData.val()} );
-			var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
-			if ((totalItems-1) <= this.state.userData.gameData.position){
-				this.setView('endGame');
-			} else {
-				this.setView('game');
-			}
-			this.determineIconclass();
+			return this.state.userData.val();
 		}
 	}
 
+	updateDB(){
+		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
+	}
 
+	setView(view){
+		this.setState({view: view});
+	}
+
+
+// ---------------------------- 
 
 
 
@@ -170,9 +196,9 @@ class HackingHistorians extends React.Component{
     					<img className="logoIntro" src={ logoIntro } />
     					<span className="auth-button facebook"> 
     						<span>Start</span>
-    						<button className="auth-sm icon-facebook" onClick={this.firebaseMethods.auth.bind(this, 'facebook', this.login.bind(this))}></button>
-    						<button className="auth-sm icon-twitter"  onClick={this.authWithFirebase.bind(this, 'twitter')}></button>
-    						<button className="auth-sm icon-google"  onClick={this.authWithFirebase.bind(this, 'google')}></button>
+    						<button className="auth-sm icon-facebook" onClick={this.login.bind(this, 'facebook')}></button>
+    						<button className="auth-sm icon-twitter"  onClick={this.login.bind(this, 'twitter')}></button>
+    						<button className="auth-sm icon-google"  onClick={this.login.bind(this, 'google')}></button>
     					</span>
 	    				<h4>Instructies</h4>
 	    				<ul className="instructies">

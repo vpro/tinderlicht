@@ -7,7 +7,6 @@ class Iconclass extends React.Component{
     	} else {
     		var text = "Sorry, this classification isn't human readable: " + this.props.appState.currentIconclass.$t;
     	}
-    	console.log(this.props);
 
     	return (
 			<div className="iconclass-container">

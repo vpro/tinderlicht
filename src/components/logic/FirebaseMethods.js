@@ -1,16 +1,16 @@
-class FirebaseMethods {
+class Login {
 	constructor(){
 		this.initiatizeDatabase = () => {	
 			this.firebaseRef = new Firebase('https://hackalod.firebaseio.com/');
 		};
 
-		this.auth = (provider, callback) => {
-			this.firebaseRef.authWithOAuthPopup(provider, callback);
+		this.auth = (provider) => {
+			this.firebaseRef.authWithOAuthPopup(provider);
 		};
 
 		this.getData = (authData, callback) => {
-			var uidGenerated = authData[authData.provider].id + '-' + authData.provider;
-			this.firebaseRef.child(uidGenerated).on('value', callback);
+			console.log('getData', this)
+			this.firebaseRef.child(authData.uid).on('value', callback);
 		};
 
 		this.updateFirebase = () => {
@@ -20,4 +20,4 @@ class FirebaseMethods {
 	}
 }
 
-export default FirebaseMethods;
+export default Login;
