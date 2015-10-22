@@ -1,19 +1,19 @@
 import React from 'react';
 import Firebase from 'firebase';
 
-import ImageContainer from './image/ImageContainer.jsx';
-import ImageMetadata from './image/ImageMetadata.jsx';
-import ImageTagging from './image/ImageTagging.jsx';
+import ImageContainer from './game/ImageContainer.jsx';
+import ImageMetadata from './game/ImageMetadata.jsx';
+import ImageTagging from './game/ImageTagging.jsx';
 
-import Iconclass from './iconclass/Iconclass.jsx';
+import Iconclass from './game/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
 
-import logoIntro from '../icons/logoblauwrood.png';
+import logoIntro from '../assets/icons/logoblauwrood.png';
 
-import data from '../data/handschriften.json';
-import iconClass from '../data/iconclass/datakeys2.json';
-import Model from '../data/model.jsx';
+import data from '../assets/data/handschriften.json';
+import iconClass from '../assets/data/iconclass/datakeys2.json';
+import Model from '../assets/data/model.jsx';
 
 class HackingHistorians extends React.Component{
 	constructor(props){
