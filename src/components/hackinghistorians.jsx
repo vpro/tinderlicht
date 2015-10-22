@@ -205,6 +205,7 @@ class HackingHistorians extends React.Component{
 		        		</div>
 		        		<div className="metadata-container">
 		        			<ImageMetadata />
+		        			<ImageTagging />
 		        		</div>
 		        	</div>
 	        	</div>

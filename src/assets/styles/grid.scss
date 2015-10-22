@@ -1,0 +1,15 @@
+.app-container {
+	@include make-row();
+}
+.game-container {
+	@include make-row();
+	@include make-md-column(10);
+	padding-top: 20px;
+}
+.interaction-container {
+	@include make-md-column(8);
+}
+.metadata-container {
+	@include make-md-column(4);
+	padding-top: 150px;
+}

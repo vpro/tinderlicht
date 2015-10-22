@@ -1,6 +1,8 @@
 @import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 @import 'auth.scss';
 @import 'icons.scss';
+@import 'metacontainer.scss';
+@import 'grid.scss';
 
 @font-face {
   font-family: 'GothamBold';
@@ -20,14 +22,10 @@
        url('../fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
-
-
-
 body {
 	background: $main-background;
 	overflow: hidden;
 }
-
 
 input, button, submit { border:none; } 
 
@@ -38,24 +36,6 @@ h4 {
 	color: $start-instructies-grijs;
 	font-size: 14px;
 	margin-top: 20px;
-}
-
-/* 805 386 */
-
-.app-container {
-	@include make-row();
-}
-
-.game-container {
-	@include make-row();
-	@include make-md-column(10);
-	padding-top: 20px;
-}
-.interaction-container {
-	@include make-md-column(8);
-}
-.metadata-container {
-	@include make-md-column(4);
 }
 
 .waaris-kop {
@@ -110,15 +90,6 @@ h4 {
 		opacity: 1;
 	}
 }
-
-/*.circle {
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	background-image: url("../icons/circle.svg");
-	border-radius: 50%;
-	opacity: 0.5;
-}*/
 
 /* Sidebar */
 .sidebar-container {
@@ -195,33 +166,3 @@ ul li a {
 	}
 }
 
-/* Metadata */
-.metadata {
-	margin-top: 150px;
-}
-.metadata li {
-	float: none;
-	list-style-type: none;
-	color: #c1c1c1;
-}
-.metadatatitle {
-	text-transform: uppercase;
-	font-size: 10px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-
-}
-.metadescription {
-	text-transform: none;
-	font-size: 14px;
-	line-height: 20px;
-}
-
-.imagetagging {
-	margin-top: 150px;
-}
-.imagetagging li {
-	float: none;
-	list-style-type: none;
-	color: #c1c1c1;
-}
