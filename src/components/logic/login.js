@@ -2,6 +2,8 @@ import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import Promise from 'bluebird';
 
+import Model from '../../assets/data/model.jsx';
+
 function login(provider) {
 	// Start firebase and Fireproof
 	this.firebase = new Firebase('https://hackalod.firebaseio.com/');
