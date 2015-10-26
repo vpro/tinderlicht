@@ -172,8 +172,6 @@ class HackingHistorians extends React.Component{
 	        );
 	    } else if (this.state.view = "exploreScreen"){
     		var userData = this.state.userData; 
-    		var gridboxWidth = document.getElementsByClassName("gridbox").clientWidth;
-    		console.log(gridboxWidth);
 
 	        return (
 	        	<div className="app-container">
@@ -186,17 +184,20 @@ class HackingHistorians extends React.Component{
 	        					<GridBox show={true}/>
 	        					<GridBox show={true}/>
 	        					<GridBox />
-	        				</div>	        				<div className="circle-column">
+	        				</div>	        				
+	        				<div className="circle-column">
 	        					<GridBox show={true}/>
 	        					<GridBox />
 	        					<GridBox />
 	        					<GridBox show={true}/>
-	        				</div>	        				<div className="circle-column">
+	        				</div>	        				
+	        				<div className="circle-column">
 	        					<GridBox show={true}/>
 	        					<GridBox />
 	        					<GridBox />
 	        					<GridBox show={true}/>
-	        				</div>	        				<div className="circle-column">
+	        				</div>	        				
+	        				<div className="circle-column">
 	        					<GridBox />
 	        					<GridBox show={true}/>
 	        					<GridBox show={true}/>
