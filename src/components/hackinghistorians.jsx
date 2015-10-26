@@ -13,6 +13,8 @@ import Iconclass from './game/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
 
+import GridBox from './explore/GridBox.jsx';
+
 import logoIntro from '../assets/icons/logoblauwrood.png';
 
 import data from '../assets/data/handschriften.json';
@@ -105,6 +107,7 @@ class HackingHistorians extends React.Component{
 				state.userData.gameData.score -= 10;
 			} else {
 				state.userData.gameData.score += 10;
+				this.setView('exploreScreen');
 			}
 
 			var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
@@ -164,6 +167,42 @@ class HackingHistorians extends React.Component{
 		        			<ImageMetadata />
 		        			<ImageTagging />
 		        		</div>
+		        	</div>
+	        	</div>
+	        );
+	    } else if (this.state.view = "exploreScreen"){
+    		var userData = this.state.userData; 
+    		var gridboxWidth = document.getElementsByClassName("gridbox").clientWidth;
+    		console.log(gridboxWidth);
+
+	        return (
+	        	<div className="app-container">
+	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
+	        		<Navigation />
+	        		<div className="game-container explore-state">
+	        			<div className="explore-container">
+	        				<div className="circle-column">
+	        					<GridBox />
+	        					<GridBox show={true}/>
+	        					<GridBox show={true}/>
+	        					<GridBox />
+	        				</div>	        				<div className="circle-column">
+	        					<GridBox show={true}/>
+	        					<GridBox />
+	        					<GridBox />
+	        					<GridBox show={true}/>
+	        				</div>	        				<div className="circle-column">
+	        					<GridBox show={true}/>
+	        					<GridBox />
+	        					<GridBox />
+	        					<GridBox show={true}/>
+	        				</div>	        				<div className="circle-column">
+	        					<GridBox />
+	        					<GridBox show={true}/>
+	        					<GridBox show={true}/>
+	        					<GridBox />
+	        				</div>
+	        			</div>
 		        	</div>
 	        	</div>
 	        );
