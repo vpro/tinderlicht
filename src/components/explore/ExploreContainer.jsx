@@ -7,13 +7,20 @@ var masonryOptions = {
 
 class Gallery extends React.Component{
     render() {
-        var childElements = this.props.elements.map(function(element){
-           return (
-                <li className="image-element-class">
-                    <img src={element.src} />
-                </li>
-            );
-        };
+        var records = this.props.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record;
+
+        var childElements = records.map(function(element, index){
+            console.log(element);
+
+            if (element.hasOwnProperty('srw$recordData')) {
+                var image = element.srw$recordData.srw_dc$dc.dc$identifier.$t;
+                return (
+                    <li key={index} className="image-element-class">
+                        <img src={image} />
+                    </li>
+                );
+            }
+        });
 
         return (
             <Masonry
@@ -26,6 +33,6 @@ class Gallery extends React.Component{
             </Masonry>
         );
     }
-});
+}
 
 export default Gallery;

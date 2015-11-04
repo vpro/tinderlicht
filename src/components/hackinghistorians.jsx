@@ -13,7 +13,7 @@ import Iconclass from './game/Iconclass.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import Navigation from './navigation/Navigation.jsx';
 
-import GridBox from './explore/GridBox.jsx';
+import Gallery from './explore/ExploreContainer.jsx';
 
 import logoIntro from '../assets/icons/logoblauwrood.png';
 
@@ -172,39 +172,10 @@ class HackingHistorians extends React.Component{
 	        );
 	    } else if (this.state.view = "exploreScreen"){
     		var userData = this.state.userData; 
-
 	        return (
 	        	<div className="app-container">
 	        		<Sidebar verluchtingen={this.state.verluchtingen} userData={userData}/>
 	        		<Navigation />
-	        		<div className="game-container explore-state">
-	        			<div className="explore-container">
-	        				<div className="circle-column">
-	        					<GridBox />
-	        					<GridBox show={true}/>
-	        					<GridBox show={true}/>
-	        					<GridBox />
-	        				</div>	        				
-	        				<div className="circle-column">
-	        					<GridBox show={true}/>
-	        					<GridBox />
-	        					<GridBox />
-	        					<GridBox show={true}/>
-	        				</div>	        				
-	        				<div className="circle-column">
-	        					<GridBox show={true}/>
-	        					<GridBox />
-	        					<GridBox />
-	        					<GridBox show={true}/>
-	        				</div>	        				
-	        				<div className="circle-column">
-	        					<GridBox />
-	        					<GridBox show={true}/>
-	        					<GridBox show={true}/>
-	        					<GridBox />
-	        				</div>
-	        			</div>
-		        	</div>
 	        	</div>
 	        );
 	    } else if (this.state.view == 'endGame'){
