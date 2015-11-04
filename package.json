@@ -58,6 +58,7 @@
     "react-hot-loader": "^1.1.5",
     "react-intro-tour": "0.0.7",
     "react-leaflet": "^0.8.0",
+    "react-masonry-component": "^2.0.0",
     "react-tools": "^0.13.0-rc1",
     "react-wysiwyg": "^2.1.7",
     "sass-loader": "3.0.0",

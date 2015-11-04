@@ -1,13 +1,31 @@
 import React from 'react';
+import Masonry from 'react-masonry-component';
 
-class ExploreContainer extends React.Component{
+var masonryOptions = {
+    transitionDuration: 0
+};
+
+class Gallery extends React.Component{
     render() {
-		return (
-        		<ul className="metadata">
+        var childElements = this.props.elements.map(function(element){
+           return (
+                <li className="image-element-class">
+                    <img src={element.src} />
+                </li>
+            );
+        };
 
-        		</ul>
-		)
+        return (
+            <Masonry
+                className={'my-gallery-class'} // default ''
+                elementType={'ul'} // default 'div'
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+            >
+                {childElements}
+            </Masonry>
+        );
     }
-}
+});
 
-export default ExploreContainer;
+export default Gallery;
