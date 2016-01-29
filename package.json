@@ -1,9 +1,9 @@
 {
-  "name": "Hacking-Historians-App",
+  "name": "Tinderlicht",
   "version": "1.0.0",
-  "description": "App for the Hack-a-LOD",
+  "description": "",
   "main": "bundle.js",
-  "author": "Erik van Zummeren, Robert-Jan Korteschiel",
+  "author": "Erik van Zummeren",
   "license": "MIT",
   "engines": {
     "iojs": ">= 1.6.2"
@@ -59,11 +59,8 @@
     "react-intro-tour": "0.0.7",
     "react-leaflet": "^0.8.0",
     "react-masonry-component": "^2.0.0",
-    "react-tools": "^0.13.0-rc1",
     "react-wysiwyg": "^2.1.7",
     "sass-loader": "3.0.0",
-    "sinon": "git://github.com/cjohansen/Sinon.JS#sinon-2.0",
-    "sinon-chai": "^2.7.0",
     "style-loader": "^0.12.4",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.5",

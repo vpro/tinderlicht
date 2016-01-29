@@ -1,14 +1,11 @@
-# Hack-a-LOD - The Hacking Historians app
+# Tinderlicht
 
-This app uses React together with webpack as build tool. It follows a component based structure.
-
-To get the app running after cloning it type:
+First:
 ``` npm run prepare ```
 
-To start the server:
+Server:
 ``` npm run dev ```
 
-To create a deployable build:
+Deploy:
 ``` npm run deploy ```
 
-What the app should do is for the hackathon. 

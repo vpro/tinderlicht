@@ -1,26 +1,31 @@
 @import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
-@import 'auth.scss';
+@import 'variables.scss';
 @import 'icons.scss';
-@import 'metacontainer.scss';
-@import 'grid.scss';
-@import 'explore.scss';
+
+@import 'auth.scss';
+@import 'nav.scss';
+@import 'settings.scss';
+@import 'tinder.scss';
 
 @font-face {
-  font-family: 'GothamBold';
-  src: url('../fonts/gotham-bold-webfont.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/gotham-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/gotham-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('../fonts/gotham-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/gotham-bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+  font-family: 'SimplisticSans-Bold';
+  src: url('../fonts/SimplisticSans-Bold.eot'); /* IE9 */
+  src: url('../fonts/SimplisticSans-Bold.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SimplisticSans-Bold.ttf') format('ttf');
 }
 
 @font-face {
-  font-family: 'GothamMedium';
-  src: url('../fonts/gotham-medium-webfont.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/gotham-medium-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/gotham-medium-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('../fonts/gotham-medium-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+  font-family: 'SimplisticSans-Medium';
+  src: url('../fonts/SimplisticSans-Medium.eot'); /* IE9 */
+  src: url('../fonts/SimplisticSans-Medium.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SimplisticSans-Medium.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'SimplisticSans-Normal';
+  src: url('../fonts/SimplisticSans-Normal.eot'); /* IE9 */
+  src: url('../fonts/SimplisticSans-Normal.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SimplisticSans-Normal.ttf') format('ttf');
 }
 
 body {
@@ -28,142 +33,14 @@ body {
 	overflow: hidden;
 }
 
-input, button, submit, button:active { border:none; outline: none; } 
+submit, button, button:active { border: none; outline: none;}
 
-
-
-h4 {
-	font-family: GothamMedium;
-	color: $start-instructies-grijs;
-	font-size: 14px;
-	margin-top: 20px;
+.app-container {
+/*  display: flex;
+  flex-direction: row;
+  align-items: center;*/
+  max-width: 600px;
 }
 
-.waaris-kop {
-	font-family: GothamMedium;
-	text-transform: none;
-	font-size: 18px;
-	color: $sidebar-textcolor;
-	background-color: $staatkop-color;
-	display: inline-block;
-	padding: 8px 12px !important;
-	border-radius: 6px;
-
-}
-
-.geenhit-button {
-	font-family: GothamMedium;
-	font-size: 16px;
-	text-decoration: underline;
-	padding: 7px 12px;
-	margin-left: 10px;
-	border-radius: 6px;
-	background: #ea697c;
-	color: white;
-}
-
-.iconclass-container {
-	padding-top: 30px;
-	color: black;
-	width: 72%;
-	margin: 0 0 0 20%;
-}
-
-.iconclass {
-	font-family: GothamMedium;
-	color: #9d9d9c;
-	font-size: 18px;
-}
-
-.image-container {
-	position: relative;
-	margin: 0 auto;
-	width: 60%;
-	img {
-		margin-top: 20px;
-		max-width: 100%;
-		max-height: 66vh;
-		z-index: 100;
-		cursor: url("../icons/circle2geel.svg") 64 64, crosshair;
-	}
-	img:hover {
-		transition:.5s;
-		opacity: 1;
-	}
-}
-
-/* Sidebar */
-.sidebar-container {
-	@include make-xs-column(4);
-	@include make-sm-column(3);
-	@include make-md-column(2);
-	background-color: $sidebar-background;
-	height: 100%;
-	padding: 20px 40px 20px;
-}
-h3 {
-	font-family: GothamBold;
-	font-size: 14px;
-	text-transform: uppercase;
-	color: $sidebar-textcolor;
-	padding-bottom: 10px;
-}
-.prev-container {
-	position: relative;
-	margin: 20px 0;
-}
-
-.prev-image {
-	background-position: center;
-	width: 100%;
-	height: 100px;
-}
-
-.positive-score {
-    width: 40px;
-    z-index: 100;
-    position: absolute;
-    bottom: -20px;
-    right:-20px;
-}
-
-/* Score */
-.Score {
-	position: absolute;
-	bottom: 10px;
-}
-.Score h3 {
-	margin-bottom: -2px;
-	padding-bottom: 0 !important;
-}
-
-.Score span {
-	font-family: GothamBold;
-	font-size: 30px;
-	color: $sidebar-textcolor;
-
-}
-/* Navigation */
-ul {
-	font-family: GothamMedium;
-	font-size: 12px;
-	text-transform: Uppercase;
-	color: #8e8e8e;
-	right: 30px;
-	top: 20px;
-	position: absolute;
-	z-index: 10;
-}
-
-ul li {
-	float: left;
-	padding-left: 20px;
-}
-
-ul li a {
-	color: #8e8e8e;
-	&:visited {
-	color: #8e8e8e;
-	}
-}
+/*input, button, submit, button:active { border:none; outline: none; } */
 

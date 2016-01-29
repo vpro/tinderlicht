@@ -1,0 +1,51 @@
+/* Tinder swipe */
+.profile {
+	width: 75%;
+  background: white;
+  margin-left: 12.5%;
+  margin-top: 12.5%;
+}
+
+.profile__card {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.profile__photo { 
+	width: 100%; 
+	margin-top: 5%;
+}
+
+.profile__name { 
+	font-family: SimplisticSans-Medium, Arial; 
+	font-size: 24px;
+	margin-top: 20px;
+	color: $text-color;
+	display: block;
+}
+
+.profile__age { 
+	font-family: SimplisticSans-Normal, Arial; 
+	color: lighten($text-color, 0%);
+}
+
+.profile__description { 
+	font-family: SimplisticSans-Normal, Arial; 
+	font-size: 16px;
+	color: lighten($text-color, 20%);
+}
+
+/* Tinder no matches */
+
+/* Tinder likes */
+.noMatch {
+	font-family: SimplisticSans-Normal, Arial;
+	font-size: 16px;
+	color: $text-color;
+	padding: 0 9%;
+	line-height: $line-height-text;
+	/* Voelt een beetje goedkoop, kijken voor alternatief?*/
+	position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

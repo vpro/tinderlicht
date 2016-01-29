@@ -6,7 +6,7 @@ import Model from '../../assets/data/model.jsx';
 
 function login(provider) {
 	// Start firebase and Fireproof
-	this.firebase = new Firebase('https://hackalod.firebaseio.com/');
+	this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
 	Fireproof.bless(Promise);
 	this.fireproof = new Fireproof(this.firebase);
 	this.setState = Promise.promisify(this.setState);
@@ -17,6 +17,7 @@ function login(provider) {
 		.then((authData)=>{
 			return this.setState((state)=>{
 				state.authData = authData;
+				console.log(state.authData);
 				return state;
 			});
 		})
@@ -32,7 +33,7 @@ function login(provider) {
 		// Check the user and create new account if needed
 		.then(Promise.method(()=>{
 			if (this.state.userData.val() == null) {
-				return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].displayName || ""));
+				return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url || ""));
 			} else {
 				return this.state.userData.val();
 			}
@@ -47,7 +48,8 @@ function login(provider) {
 		// Update Firebase with the current info
 		.then(this.updateDB.bind(this))
 		// Finnaly set the view
-		.then(this.setView.bind(this,'game'));
+
+		.then(this.setView.bind(this,'settings'));
 }
 
 export default login;

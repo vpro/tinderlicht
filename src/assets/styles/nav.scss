@@ -1,0 +1,44 @@
+nav {
+	@include make-row();
+	width: 100%;
+	height: $nav-hoogte;
+	background-color: $navbar-background;
+	margin: 0 !important;
+}
+
+.nav__logo {
+	@include make-xs-column(6);
+}
+
+.nav__logosmall {
+	font-size: 2em;
+	margin-top: 0;
+ 	line-height: $nav-hoogte;
+}
+
+.nav__like {
+ 	@include make-xs-column(3);
+ 	text-align: center;
+ 	line-height: $nav-hoogte;
+ 	font-size: 1.5em;
+ 	padding: 12px;
+ 	color: white;
+ 	&:hover {
+ 		color: $tegenlicht-oranje;
+ 		cursor: pointer;
+ 	}
+}
+
+.nav__loves {
+ 	@include make-xs-column(3);
+ 	text-align: center;
+ 	line-height: $nav-hoogte;
+ 	font-size: 1.5em;
+ 	padding: 12px;
+ 	color: white;
+ 	&:hover {
+ 		color: $tegenlicht-oranje;
+ 		cursor: pointer;
+ 	}
+}
+
