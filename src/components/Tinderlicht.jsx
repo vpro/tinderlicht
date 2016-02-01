@@ -16,7 +16,6 @@ import Settings from './settings/settings.jsx';
 
 
 import data from '../assets/data/handschriften.json';
-// import iconClass from '../assets/data/iconclass/iconclassDump.json';
 import Model from '../assets/data/model.jsx';
 
 class Tinderlicht extends React.Component{
@@ -27,36 +26,16 @@ class Tinderlicht extends React.Component{
 			verluchtingen: data,
 			appState: {
 				imageClickPosition: null,
-				currentIconclass: "45353",
-				betrayed: 0,
-				userAction: 1
+				currentName: 'Joost',
+				currentPhoto: 'https://s3.amazonaws.com/uifaces/faces/twitter/nzcode/128.jpg',
+				currentAge: 29,
+				currentProfileText: 'Ik ben Jan. Bij nader inzien is deze foto eigenlijk niet zo verstandig voor een datingapp'
 			},
-			view: 'tinder',
+			view: 'auth',
 			authData: null,
 			userData: null
 		}
 	}
-
-	clickProcessor(){
-		this.setState(function(state){
-			state.appState.historyItem.betrayed = state.appState.betrayed;
-			// state.appState.historyItem.iconclass = state.appState.currentIconclass.$t;
-			state.appState.historyItem.iconclass = "bla";
-
-			// Verwijzing naar totale Tinder profielen
-
-			var totalItems = this.state.verluchtingen.srw$searchRetrieveResponse.srw$records.srw$record.length;
-
-			if ((totalItems-1) <= state.userData.gameData.position){
-				this.setView('tinderNoMatches');
-			}
-
-			state.userData.gameData.position++;
-
-			return state;
-		}, this.updateDB);
-	} 
-
 
 	updateDB(){
 		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
@@ -64,6 +43,12 @@ class Tinderlicht extends React.Component{
 
 	setView(view){
 		this.setState({view: view});
+	}
+
+	componentDidMount(){
+		// Hier heel shitty json uit firebase halen wrs met axios
+		var profileData = {};
+		console.log(profileData);
 	}
 
     render() {
@@ -104,7 +89,11 @@ class Tinderlicht extends React.Component{
 	        return (
 	        	<div className="app-container">
 	        		<NavBar/>
-	        		<Profile/>
+	        		<Profile 
+	        			profileName={this.state.appState.currentName} 
+	        			profilePhoto={this.state.appState.currentPhoto}
+	        			profileAge={this.state.appState.currentAge} 
+	        			profileText={this.state.appState.currentProfileText} />
 	        	</div>
 	        );
 	    } else if (this.state.view == 'tinderNoMatches'){

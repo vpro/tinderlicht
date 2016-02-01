@@ -12,7 +12,17 @@ function login(provider) {
 	this.setState = Promise.promisify(this.setState);
 
 	// Start the login process
-	this.fireproof.authWithOAuthPopup(provider)
+	this.fireproof.authWithOAuthPopup(provider,
+		function(error, authData) {
+			  if (error) {
+			    console.log("Login Failed!", error);
+			  } else {
+			    // the access token will allow us to make Open Graph API calls
+			    console.log(authData.facebook.accessToken);
+			  }
+			}, {
+			  scope: "email,user_likes" // the permissions requested
+			})
 		// Set the retrieved authData to the state
 		.then((authData)=>{
 			return this.setState((state)=>{
@@ -49,7 +59,7 @@ function login(provider) {
 		.then(this.updateDB.bind(this))
 		// Finnaly set the view
 
-		.then(this.setView.bind(this,'settings'));
+		.then(this.setView.bind(this,'tinder'));
 }
 
 export default login;

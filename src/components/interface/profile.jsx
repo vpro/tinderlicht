@@ -2,14 +2,15 @@ import React from 'react';
 
 class Profile extends React.Component{
     render() {
+        console.log(this.props);
         return (
             <div className="profileContainer">
                 <div className="profile">
                     <div className="profile__card">
-                    <img className="profile__photo" src="https://s3.amazonaws.com/uifaces/faces/twitter/whale/128.jpg"/>
-                        <span className="profile__name">Karel, <span className="profile__age">29</span></span>
+                    <img className="profile__photo" src={this.props.profilePhoto} />
+                        <span className="profile__name">{this.props.profileName}, <span className="profile__age">{this.props.profileAge}</span></span>
                         <br/>
-                        <span className="profile__description">Hallo ik ben Karel. Dit is mijn profiel. Hiephoi. Ik heb nog wat extra tekst nodig. Nog een paar extra zinnen. Jadieja.</span>
+                        <span className="profile__description">{this.props.profileText}</span>
                     </div>
                 </div>
                 <div>

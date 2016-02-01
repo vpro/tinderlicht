@@ -12,6 +12,7 @@ class Settings extends React.Component{
 			}
 		}	
 
+		// Deze shit idealiter allemaal naar Tinderlicht.jsx
 		handleChange(event, state){
 			console.log(event.target.value);
 
@@ -20,14 +21,9 @@ class Settings extends React.Component{
 			}, this.fireproof.update({[this.state.userData.id]: this.state.userData}));
   	}
 
-  	goToTinder(event){
-			this.setState({view: 'tinder'});
-		}
-
     render() {
     	var userData = this.props.userData; 
     	var profile = userData.profile; 
-    	var profileText = userData.profile.profileText;
 
     	return (
 			<div className="profileSetup">
@@ -35,11 +31,11 @@ class Settings extends React.Component{
 				{ /* <img src={userData.profilePhoto} /> */ }
 					<br />
 				<p>Vul aan:</p>
-				<textarea type="text" value={profileText} onChange={this.handleChange.bind(this)}/>
+				<textarea type="text" value={profile.profileText} onChange={this.handleChange.bind(this)}/>
 					<br />
 				<p>Wil je een notificatie krijgen? Vul je e-mailadres in:</p>
 					<input type="text" value={profile.favoriteEpisode}  />
-				<button onClick={this.goToTinder}>Verder</button>
+				<button onClick={this.props.goTinder}>Verder</button>
 			</div>
 		);
 	}
