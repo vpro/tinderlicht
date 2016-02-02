@@ -1,3 +1,4 @@
+echo "EERST HUIDIGE ZOOI COMMITEN!!!!!!!!!!!!!!!!"
 npm run deploy
 git checkout gh-pages
 cp -a $HOME/Desktop/Tinderlicht/build/* $HOME/Desktop/Tinderlicht/
