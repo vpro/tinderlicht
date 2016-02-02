@@ -27,6 +27,11 @@
        url('../fonts/SimplisticSans-Normal.ttf') format('ttf');
 }
 
+@viewport{
+    zoom: 1.0;
+    width: device-width;
+}
+
 body {
 	background: $main-background;
 	overflow: hidden;
