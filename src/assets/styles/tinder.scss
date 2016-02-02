@@ -47,6 +47,7 @@
 
 .profile__buttons {
 	text-align: center;
+	margin-top: 40px;
 }
 
 .icon-base {
@@ -54,16 +55,24 @@
 	padding: 20px;
 	font-size: 17px;
 	color: white;
+	cursor: pointer;
 }
 
 .icon-cross {
 	@extend .icon-base;
 	background: $navbar-background;
+	&:hover{
+		background: darken($navbar-background, 10%);
+	};
 }
 
 .icon-heart {
 	@extend .icon-base;
 	background: $tegenlicht-oranje;
+	margin-left: 15px;
+	&:hover{
+		background: darken($tegenlicht-oranje, 10%);
+	};
 }
 
 /* Tinder no matches */

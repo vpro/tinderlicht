@@ -6,24 +6,20 @@ import Promise from 'bluebird';
 import login from './logic/login.js';
 
 import NavBar from './interface/navbar.jsx';
+import Settings from './interface/settings.jsx';
 import Profile from './interface/profile.jsx';
-import Settings from './settings/settings.jsx';
+import Match from './interface/match.jsx';
 
-// import ImageContainer from './game/ImageContainer.jsx';
-
-// import Iconclass from './game/Iconclass.jsx';
-// import Sidebar from './sidebar/Sidebar.jsx';
-
-
-import data from '../assets/data/handschriften.json';
+import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
+
 
 class Tinderlicht extends React.Component{
 	constructor(props){
 		super(props);
 		this.login = login;
 		this.state = {
-			verluchtingen: data,
+			profilesData: _.values(data),
 			appState: {
 				imageClickPosition: null,
 				currentName: 'Joost',
@@ -37,6 +33,37 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
+	seeIfOtherPersonLikesYouToo(currentProfile) {
+		for(let i = 0; i < this.state.allData[currentProfile].tinderStats.length; i++){
+				if(this.state.userData.id === this.state.allData[currentProfile].tinderStats.likes[i]){
+					// setView it's a match
+					// send a message
+					// 
+				}
+	}}
+
+	registerLike(){
+		// seeIfOtherPersonLikesYouToo(currentProfile);
+		// 
+	}
+
+//  var ref = new Firebase("https://tinderlicht.firebaseio.com");
+// ref.orderByChild("date").on("child_added", function(snapshot) {
+//   console.log(snapshot.key() + " was " + snapshot.val());
+// });
+
+	registerClick(event){
+		event.persist();
+		event.preventDefault();
+		this.setState(function(state){
+			let curPos = this.state.userData.tinderStats.currentPosition;
+			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
+			state.userData.tinderStats.currentPosition++
+			return state;
+		}, this.updateDB)
+		console.log(this.state.userData.tinderStats.currentPosition);
+	}
+
 	updateDB(){
 		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
 	}
@@ -48,9 +75,6 @@ class Tinderlicht extends React.Component{
 	componentDidMount(){
 		// Hier heel shitty json uit firebase halen wrs met axios
 		var profileData = {};
-		console.log(profileData);
-		console.log('waarom zie ik niets?');
-		console.log(this.userData);
 	}
 
     render() {
@@ -91,13 +115,27 @@ class Tinderlicht extends React.Component{
 	        return (
 	        	<div className="app-container">
 	        		<NavBar/>
-	        		<Profile 
-	        			profileName={this.state.appState.currentName} 
-	        			profilePhoto={this.state.appState.currentPhoto}
-	        			profileAge={this.state.appState.currentAge} 
-	        			profileText={this.state.appState.currentProfileText} />
+	        		  <div className="profileContainer">
+			        		<Profile 
+			        			profileName={this.state.profilesData[this.state.userData.tinderStats.currentPosition].name} 
+			        			profilePhoto={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profilePhoto}
+			        			profileAge={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.age} 
+			        			profileText={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.profileText} />
+			        	</div>
+			        	<div className="profile__buttons">
+                  <span onClick={this.registerClick.bind(this)} className="icon-cross"></span>
+                  <span onClick={this.registerClick.bind(this)} className="icon-heart"></span>
+                </div>
 	        	</div>
 	        );
+	    } else if (this.state.view == "match") {
+	    	return (
+	    		<div className="app-container">
+	    			<NavBar />
+	    				<br/>
+	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}/>
+	    		</div>
+	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
 	    	return (
 	    		<div className="app-container">

@@ -4,7 +4,6 @@ class Profile extends React.Component{
     render() {
         console.log(this.props);
         return (
-            <div className="profileContainer">
                 <div className="profile">
                     <div className="profile__card">
                     <img className="profile__photo" src={this.props.profilePhoto} />
@@ -13,11 +12,6 @@ class Profile extends React.Component{
                         <span className="profile__description">{this.props.profileText}</span>
                     </div>
                 </div>
-                <div className="profile__buttons">
-                    <span className="icon-cross"></span>
-                    <span className="icon-heart"></span>
-                </div>
-            </div>
         );
     }
 }

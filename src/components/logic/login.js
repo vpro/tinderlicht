@@ -46,9 +46,9 @@ function login(provider) {
 			if (this.state.userData.val() == null) {
 				console.log('hier gaat tie mis?')
 				if (this.state.authData.provider === 'facebook') {
-					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url || ""));
+					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url, this.state.authData[this.state.authData.provider].cachedUserProfile.link, (Math.floor(Date.now() / 1000)), this.state.authData[this.state.authData.provider].email || ""));
 				} else {
-					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.name, 'male', this.state.authData[this.state.authData.provider].cachedUserProfile.profile_image_url || ""));
+					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.name, 'male', this.state.authData[this.state.authData.provider].cachedUserProfile.profile_image_url, 'http://www.twitter.com/' + this.state.authData[this.state.authData.provider].username, (Math.floor(Date.now() / 1000)), null || ""));
 				}
 			} else {
 				return this.state.userData.val();
