@@ -27,14 +27,9 @@
        url('../fonts/SimplisticSans-Normal.ttf') format('ttf');
 }
 
-@viewport{
-    zoom: 1.0;
-    width: device-width;
-}
 
 body {
 	background: $main-background;
-	overflow: hidden;
 }
 
 submit, button, button:active { border: none; outline: none;}
@@ -46,4 +41,16 @@ submit, button, button:active { border: none; outline: none;}
 }
 
 /*input, button, submit, button:active { border:none; outline: none; } */
+
+
+/* MEDIA QUERY ELLENDE */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    .app-container {
+      width: 378px;
+    }
+}
 
