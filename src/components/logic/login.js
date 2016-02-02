@@ -17,7 +17,7 @@ function login(provider) {
 			  if (error) {
 			    console.log("Login Failed!", error);
 			  } else {
-			    // the access token will allow us to make Open Graph API calls
+			    // the access token will allow us to make Open Graph API calls (kan weg)
 			    console.log(authData.facebook.accessToken);
 			  }
 			}, {
@@ -37,13 +37,19 @@ function login(provider) {
 		.then((userData)=>{
 			return this.setState((state)=>{
 				state.userData = userData;
+				console.log(state.userData);
 				return state;
 			});
 		})
 		// Check the user and create new account if needed
 		.then(Promise.method(()=>{
 			if (this.state.userData.val() == null) {
-				return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url || ""));
+				console.log('hier gaat tie mis?')
+				if (this.state.authData.provider === 'facebook') {
+					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url || ""));
+				} else {
+					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.name, 'male', this.state.authData[this.state.authData.provider].cachedUserProfile.profile_image_url || ""));
+				}
 			} else {
 				return this.state.userData.val();
 			}

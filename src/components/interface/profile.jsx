@@ -13,7 +13,7 @@ class Profile extends React.Component{
                         <span className="profile__description">{this.props.profileText}</span>
                     </div>
                 </div>
-                <div>
+                <div className="profile__buttons">
                     <span className="icon-cross"></span>
                     <span className="icon-heart"></span>
                 </div>

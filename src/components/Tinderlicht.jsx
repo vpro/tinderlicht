@@ -49,6 +49,8 @@ class Tinderlicht extends React.Component{
 		// Hier heel shitty json uit firebase halen wrs met axios
 		var profileData = {};
 		console.log(profileData);
+		console.log('waarom zie ik niets?');
+		console.log(this.userData);
 	}
 
     render() {

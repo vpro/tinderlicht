@@ -1,3 +1,13 @@
+/* Settings */
+.profileSetup {
+	@include make-row();
+	margin: 0;
+	padding-top: 50px;
+	font-family: SimplisticSans-Medium;
+	text-align: center;
+	color: $start-instructies-grijs;
+}
+
 /* Tinder swipe */
 .profile {
 	width: 75%;
@@ -33,6 +43,27 @@
 	font-family: SimplisticSans-Normal, Arial; 
 	font-size: 16px;
 	color: lighten($text-color, 20%);
+}
+
+.profile__buttons {
+	text-align: center;
+}
+
+.icon-base {
+	border-radius: 100px;
+	padding: 20px;
+	font-size: 17px;
+	color: white;
+}
+
+.icon-cross {
+	@extend .icon-base;
+	background: $navbar-background;
+}
+
+.icon-heart {
+	@extend .icon-base;
+	background: $tegenlicht-oranje;
 }
 
 /* Tinder no matches */
