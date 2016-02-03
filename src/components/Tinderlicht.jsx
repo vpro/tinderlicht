@@ -58,8 +58,7 @@ class Tinderlicht extends React.Component{
 		  html: '<html>Beste ' + name + ',<br/><br /> Er is een match op vprotl. Mocht je bladiebladiebla, dan kan je je registreren op <a href="http://tegenlicht.vpro.nl">de website</a><hr>PS: Mocht je geen e-mail meer willen ontvangen, stuur dan een e-mailtje naar tegenlicht@vpro.nl voor een opt-out.</html>'
 	  }), {
 	  headers: {
-	  		"Authorization": 'Basic ' + mailgunKey,
-	  		"Access-Control-Allow-Headers": 'Authorization'
+	  		"Authorization": 'Basic ' + mailgunKey
 	  	}
 	  })
 	  .then(function (response) {
