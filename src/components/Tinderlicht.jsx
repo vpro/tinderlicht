@@ -9,6 +9,7 @@ import NavBar from './interface/navbar.jsx';
 import Settings from './interface/settings.jsx';
 import Profile from './interface/profile.jsx';
 import Match from './interface/match.jsx';
+import MutualLikes from './interface/mutual-likes.jsx';
 
 import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
@@ -41,6 +42,13 @@ class Tinderlicht extends React.Component{
 		registerLike();
 	}
 
+	clickNext(event){
+		event.persist();
+		event.preventDefault();
+		this.determinePosition();
+		this.setView('tinder');
+	}
+
 	registerDislike(){
 		this.setState(function(state){
 			let curPos = this.state.userData.tinderStats.currentPosition;
@@ -61,21 +69,20 @@ class Tinderlicht extends React.Component{
 		this.seeIfMatch();
 	}
 
-	seeIfMatch(currentProfile) {
+	seeIfMatch() {
 		var thisPos = this.state.userData.tinderStats.currentPosition;
-		console.log('gebeurt hier iets?')
+		var determineIfClick = false;
+
 		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
-				if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
-					// setView it's a match
-					// send a message
-					// 
-					// this.determinePosition();
-					console.log('dit zou een hit moeten zijn')
-					console.log(this.state.profilesData[thisPos].tinderStats.likes[i])
-				} else {
-					console.log('geen hit')
-				}	
-	}}
+			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
+				console.log('HIT')
+				console.log(this.state.profilesData[thisPos].tinderStats.likes[i])
+				// stuur mail naar de ander();
+				this.setView('match');
+				determineIfClick = false;
+			}
+		}
+	}
 
 	determinePosition(){
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
@@ -96,14 +103,10 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
-
-
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
 //   console.log(snapshot.key() + " was " + snapshot.val());
 // });
-
-
 
 	updateDB(){
 		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
@@ -175,6 +178,7 @@ class Tinderlicht extends React.Component{
 	    			<NavBar />
 	    				<br/>
 	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}/>
+	    			<span onClick={this.clickNext.bind(this)}>Ga verder</span>
 	    		</div>
 	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
