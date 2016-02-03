@@ -3,8 +3,11 @@ import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import Promise from 'bluebird';
 
+import axios from 'axios';
+
 import login from './logic/login.js';
 
+import Auth from './interface/auth.jsx';
 import NavBar from './interface/navbar.jsx';
 import Settings from './interface/settings.jsx';
 import Profile from './interface/profile.jsx';
@@ -15,6 +18,9 @@ import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
 
 
+
+
+// client side variant
 class Tinderlicht extends React.Component{
 	constructor(props){
 		super(props);
@@ -29,6 +35,40 @@ class Tinderlicht extends React.Component{
 			userData: null
 		}
 	}
+
+	toQueryString(obj) {
+		var parts = [];
+		for (var i in obj) {
+		  if (obj.hasOwnProperty(i)) {
+		    parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
+		  }
+		}
+		return parts.join("&");
+	}
+
+	sendEmail(name, adress){
+	var mailgunKey = window.btoa('api:key-def1ef87628689cc4994f262c244afbe');
+
+	axios.post('https://api.mailgun.net/v3/sandboxc6071d29be3c4afcbc730683e8ddb72a.mailgun.org/messages', 
+		this.toQueryString({
+		  from: 'Mailgun Sandbox <postmaster@sandboxc6071d29be3c4afcbc730683e8ddb72a.mailgun.org>',
+		  to: name + ' <' + adress + '>',
+		  subject: 'Mail',
+		  text: 'Bericht',
+		  html: '<html>Beste ' + name + ',<br/><br /> Er is een match op vprotl. Mocht je bladiebladiebla, dan kan je je registreren op <a href="http://tegenlicht.vpro.nl">de website</a><hr>PS: Mocht je geen e-mail meer willen ontvangen, stuur dan een e-mailtje naar tegenlicht@vpro.nl voor een opt-out.</html>'
+	  }), {
+	  headers: {
+	  		"Authorization": 'Basic ' + mailgunKey,
+	  		"Access-Control-Allow-Headers": 'Authorization'
+	  	}
+	  })
+	  .then(function (response) {
+	    console.log(response);
+	  })
+	  .catch(function (response) {
+	    console.log(response);
+	  });
+}
 
 	clickDislike(event){
 		event.persist();
@@ -77,7 +117,9 @@ class Tinderlicht extends React.Component{
 			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
 				console.log('HIT')
 				console.log(this.state.profilesData[thisPos].tinderStats.likes[i])
-				// stuur mail naar de ander();
+				
+				this.sendEmail('Erik', 'erikvanzummeren@gmail.com');
+
 				this.setView('match');
 				determineIfClick = false;
 			}
@@ -126,9 +168,7 @@ class Tinderlicht extends React.Component{
     		return (
     			<div className="app-container">
     				<div className="auth-container">
-    						<h1>vpro<span className="oranje">tinder</span>licht</h1>
-    						<p className="introduction">Wat leuk dat je een date zoekt om samen mee naar de <a href="https://dezwijger.nl/programma/tinder-love" target="_blank">Tegenlicht Meet Up</a> te gaan. Om je aan iemand te kunnen matchen, moet je inloggen met Twitter of Facebook. Je kan hieronder kiezen voor 1 van de 2. (Stating the obvious?)</p>
-    						<br />
+    					<Auth />
     					<span className="auth-button facebook"> 
     						<button className="auth-sm" onClick={this.login.bind(this, 'facebook')}>Login met Facebook</button>
     					</span>
@@ -177,7 +217,8 @@ class Tinderlicht extends React.Component{
 	    		<div className="app-container">
 	    			<NavBar />
 	    				<br/>
-	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}/>
+	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}
+	    						profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id} />
 	    			<span onClick={this.clickNext.bind(this)}>Ga verder</span>
 	    		</div>
 	    	)
