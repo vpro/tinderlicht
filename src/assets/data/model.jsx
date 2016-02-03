@@ -7,7 +7,7 @@ class User {
     this.profileUrl = profileUrl; 
     this.date = date;
     this.email = email;
-    this.genderPreference = "";
+    this.genderPreference = "female";
     this.tinderStats = new TinderStats;
     this.profile = new Profile;
   };

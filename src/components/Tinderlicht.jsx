@@ -29,19 +29,6 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
-	seeIfOtherPersonLikesYouToo(currentProfile) {
-		for(let i = 0; i < this.state.allData[currentProfile].tinderStats.length; i++){
-				if(this.state.userData.id === this.state.allData[currentProfile].tinderStats.likes[i]){
-					// setView it's a match
-					// send a message
-					// 
-				}
-	}}
-
-	genderSkip(){
-		// Enige wat deze doet is het skippen bij gender. Wrs ook oproepen bij init
-	}
-
 	clickDislike(event){
 		event.persist();
 		event.preventDefault();
@@ -58,37 +45,65 @@ class Tinderlicht extends React.Component{
 		this.setState(function(state){
 			let curPos = this.state.userData.tinderStats.currentPosition;
 			state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
-			state.userData.tinderStats.currentPosition++
 			return state;
 		}, this.updateDB)
+		console.log('register dislike');
+		this.determinePosition();
 	}
-	
+
 	registerLike(){
 		this.setState(function(state){
 			let curPos = this.state.userData.tinderStats.currentPosition;
 			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
-			state.userData.tinderStats.currentPosition++
 			return state;
 		}, this.updateDB)
+		console.log('Register like');
+		this.seeIfMatch();
 	}
+
+	seeIfMatch(currentProfile) {
+		var thisPos = this.state.userData.tinderStats.currentPosition;
+		console.log('gebeurt hier iets?')
+		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
+				if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
+					// setView it's a match
+					// send a message
+					// 
+					// this.determinePosition();
+					console.log('dit zou een hit moeten zijn')
+					console.log(this.state.profilesData[thisPos].tinderStats.likes[i])
+				} else {
+					console.log('geen hit')
+				}	
+	}}
+
+	determinePosition(){
+		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
+		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
+		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
+			console.log('True: Dit is een vrouw')
+			this.setState(function(state){
+				state.userData.tinderStats.currentPosition++
+				return state;
+			}, this.updateDB)
+		} else {
+			console.log('False: Dit is een man')
+			this.setState(function(state){
+				state.userData.tinderStats.currentPosition++
+				this.determinePosition()
+				return state;
+			}, this.updateDB)
+		}
+	}
+
+
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
 //   console.log(snapshot.key() + " was " + snapshot.val());
 // });
 
-	registerClick(event){
-		event.persist();
-		event.preventDefault();
 
-		this.setState(function(state){
-			let curPos = this.state.userData.tinderStats.currentPosition;
-			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
-			state.userData.tinderStats.currentPosition++
-			return state;
-		}, this.updateDB)
-		console.log(this.state.userData.tinderStats.currentPosition);
-	}
 
 	updateDB(){
 		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
