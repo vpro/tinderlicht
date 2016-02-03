@@ -22,10 +22,6 @@ class Tinderlicht extends React.Component{
 			profilesData: _.values(data),
 			appState: {
 				imageClickPosition: null,
-				currentName: 'Joost',
-				currentPhoto: 'https://s3.amazonaws.com/uifaces/faces/twitter/nzcode/128.jpg',
-				currentAge: 29,
-				currentProfileText: 'Ik ben Jan. Bij nader inzien is deze foto eigenlijk niet zo verstandig voor een datingapp'
 			},
 			view: 'auth',
 			authData: null,
@@ -42,9 +38,38 @@ class Tinderlicht extends React.Component{
 				}
 	}}
 
+	genderSkip(){
+		// Enige wat deze doet is het skippen bij gender. Wrs ook oproepen bij init
+	}
+
+	clickDislike(event){
+		event.persist();
+		event.preventDefault();
+		registerDislike();
+	}
+
+	clickLike(event){
+		event.persist();
+		event.preventDefault();
+		registerLike();
+	}
+
+	registerDislike(){
+		this.setState(function(state){
+			let curPos = this.state.userData.tinderStats.currentPosition;
+			state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
+			state.userData.tinderStats.currentPosition++
+			return state;
+		}, this.updateDB)
+	}
+	
 	registerLike(){
-		// seeIfOtherPersonLikesYouToo(currentProfile);
-		// 
+		this.setState(function(state){
+			let curPos = this.state.userData.tinderStats.currentPosition;
+			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
+			state.userData.tinderStats.currentPosition++
+			return state;
+		}, this.updateDB)
 	}
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
@@ -55,6 +80,7 @@ class Tinderlicht extends React.Component{
 	registerClick(event){
 		event.persist();
 		event.preventDefault();
+
 		this.setState(function(state){
 			let curPos = this.state.userData.tinderStats.currentPosition;
 			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
@@ -123,8 +149,8 @@ class Tinderlicht extends React.Component{
 			        			profileText={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.profileText} />
 			        	</div>
 			        	<div className="profile__buttons">
-                  <span onClick={this.registerClick.bind(this)} className="icon-cross"></span>
-                  <span onClick={this.registerClick.bind(this)} className="icon-heart"></span>
+                  <span onClick={this.registerDislike.bind(this)} className="icon-cross"></span>
+                  <span onClick={this.registerLike.bind(this)} className="icon-heart"></span>
                 </div>
 	        	</div>
 	        );

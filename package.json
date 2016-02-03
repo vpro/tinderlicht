@@ -33,7 +33,6 @@
     "eslint-loader": "^1.1.0",
     "eslint-plugin-react": "^3.5.1",
     "extract-text-webpack-plugin": "^0.8.2",
-    "faker": "^3.0.1",
     "file-loader": "^0.8.1",
     "firebase": "^2.3.1",
     "fireproof": "^3.0.3",
@@ -43,10 +42,8 @@
     "jsonld": "^0.4.2",
     "jsx-loader": "^0.13.2",
     "keymirror": "^0.1.1",
-    "leaflet": "^0.7.5",
     "lodash": "^3.3.0",
     "marked": "^0.3.3",
-    "mocha": "^2.2.1",
     "moment": "^2.9.0",
     "nock": "^2.15.0",
     "node-sass": "^3.3.3",
@@ -57,15 +54,12 @@
     "react-dom": "^0.14.0",
     "react-hot-loader": "^1.1.5",
     "react-intro-tour": "0.0.7",
-    "react-leaflet": "^0.8.0",
-    "react-masonry-component": "^2.0.0",
     "react-wysiwyg": "^2.1.7",
     "sass-loader": "3.0.0",
     "style-loader": "^0.12.4",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.5.3",
-    "webpack-dev-server": "^1.7.0",
-    "yaml-loader": "^0.1.0"
+    "webpack-dev-server": "^1.7.0"
   }
 }

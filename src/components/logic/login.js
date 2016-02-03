@@ -33,6 +33,11 @@ function login(provider) {
 		})
 		// Get the userData from firebase
 		.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
+		// .then((allData)=>{
+		// 	this.fireproof.orderByChild("date").on("child_added", function(snapshot) {
+		// 	  console.log(snapshot.exportVal());
+		// 	});
+		// })
 		// Set the retrieved userData to the state
 		.then((userData)=>{
 			return this.setState((state)=>{
@@ -44,7 +49,6 @@ function login(provider) {
 		// Check the user and create new account if needed
 		.then(Promise.method(()=>{
 			if (this.state.userData.val() == null) {
-				console.log('hier gaat tie mis?')
 				if (this.state.authData.provider === 'facebook') {
 					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url, this.state.authData[this.state.authData.provider].cachedUserProfile.link, (Math.floor(Date.now() / 1000)), this.state.authData[this.state.authData.provider].email || ""));
 				} else {
@@ -63,7 +67,7 @@ function login(provider) {
 		})
 		// Update Firebase with the current info
 		.then(this.updateDB.bind(this))
-		// Finnaly set the view
+		// Finaly set the view
 
 		.then(this.setView.bind(this,'tinder'));
 }

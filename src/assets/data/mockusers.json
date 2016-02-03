@@ -6,8 +6,6 @@
     "id":"facebook:108283576224444",
     "name":"Jan",
     "profile":{
-      "favoriteCharacter":"",
-      "favoriteEpisode":"",
       "profileSet":false,
       "age":8,
       "profileText":"Ladieladiela"
@@ -31,8 +29,6 @@
     "id":"facebook:1674222819496920",
     "name":"Erik",
     "profile":{
-      "favoriteCharacter":"",
-      "favoriteEpisode":"",
       "profileSet":false,
       "age": 3,
       "profileText":"Boediejaj"
@@ -52,12 +48,10 @@
   "twitter:2782113954":{
     "date":1454430160,
     "email":"",
-    "gender":"male",
+    "gender":"female",
     "id":"twitter:2782113954",
     "name":"evanzummeren",
     "profile":{
-      "favoriteCharacter":"",
-      "favoriteEpisode":"",
       "profileSet":false,
       "age": 22,
       "profileText":"Een ander lulverhaal"
