@@ -114,18 +114,20 @@ class Tinderlicht extends React.Component{
 
 	seeIfMatch() {
 		var thisPos = this.state.userData.tinderStats.currentPosition;
-		var determineIfClick = false;
+		var thereIsAMatch = null;
+
 
 		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
 			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
-				console.log('HIT')
-				console.log(this.state.profilesData[thisPos].tinderStats.likes[i])
-				
 				this.sendEmail('Erik', 'erikvanzummeren@gmail.com');
-
-				this.setView('match');
-				determineIfClick = false;
+				thereIsAMatch = true;
 			}
+		}
+
+		if(thereIsAMatch === true) {
+			this.setView('match');
+		} else {
+			this.determinePosition();
 		}
 	}
 
