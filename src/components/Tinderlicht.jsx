@@ -36,43 +36,6 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
-	toQueryString(obj) {
-		var parts = [];
-		for (var i in obj) {
-		  if (obj.hasOwnProperty(i)) {
-		    parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
-		  }
-		}
-		return parts.join("&");
-	}
-
-	sendEmail(name, adress){
-	// var mailgunKey = window.btoa('api:key-def1ef87628689cc4994f262c244afbe');
-
-	axios.post('https://api.mailgun.net/v3/sandboxc6071d29be3c4afcbc730683e8ddb72a.mailgun.org/messages', 
-		this.toQueryString({
-		  from: 'Mailgun Sandbox <postmaster@sandboxc6071d29be3c4afcbc730683e8ddb72a.mailgun.org>',
-		  to: name + ' <' + adress + '>',
-		  subject: 'Mail',
-		  text: 'Bericht',
-		  html: '<html>Beste ' + name + ',<br/><br /> Er is een match op vprotl. Mocht je bladiebladiebla, dan kan je je registreren op <a href="http://tegenlicht.vpro.nl">de website</a><hr>PS: Mocht je geen e-mail meer willen ontvangen, stuur dan een e-mailtje naar tegenlicht@vpro.nl voor een opt-out.</html>'
-	  }), {
-	  headers: {
-	  		"Authorization": 'Basic ' + window.btoa('api:key-def1ef87628689cc4994f262c244afbe'),
-	  		"Access-Control-Allow-Headers": 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization',
-	  		"Access-Control-Expose-Headers": 'PROTOCOL,X-Powered-By,Etag',
-	  		"Access-Control-Allow-Origin": '*'
-	  	}
-	  })
-	  .then(function (response) {
-	  	console.log('waarom zie ik niks?');
-	    console.log(response);
-	  })
-	  .catch(function (response) {
-	    console.log(response);
-	  });
-}
-
 	clickDislike(event){
 		event.persist();
 		event.preventDefault();
@@ -116,10 +79,8 @@ class Tinderlicht extends React.Component{
 		var thisPos = this.state.userData.tinderStats.currentPosition;
 		var thereIsAMatch = null;
 
-
 		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
 			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
-				this.sendEmail('Erik', 'erikvanzummeren@gmail.com');
 				thereIsAMatch = true;
 			}
 		}
