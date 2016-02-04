@@ -77,14 +77,12 @@ class Tinderlicht extends React.Component{
 		event.persist();
 		event.preventDefault();
 		registerDislike();
-		// registerChoice('dislike');
 	}
 
 	clickLike(event){
 		event.persist();
 		event.preventDefault();
 		registerLike()
-		// registerChoice('like');
 	}
 
 	clickNext(event){
@@ -92,24 +90,6 @@ class Tinderlicht extends React.Component{
 		event.preventDefault();
 		this.determinePosition();
 		this.setView('tinder');
-	}
-
-	registerChoice(taste){
-		this.setState(function(state){
-			let curPos = this.state.userData.tinderStats.currentPosition;
-			if( taste === 'dislike') {
-				console.log('werkt dit echt?');
-				state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
-			} else if (taste === 'like') {
-				state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
-			}
-			return state;
-		}, this.updateDB)	
-			if( taste === 'dislike') {
-				this.determinePosition();
-			} else if (taste === 'like') {
-				this.seeIfMatch();
-			}	
 	}
 
 	registerDislike(){
