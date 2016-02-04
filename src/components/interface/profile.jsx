@@ -3,9 +3,8 @@ import Tinderlicht from '../Tinderlicht.jsx';
 
 class Profile extends React.Component{
   componentWillMount(){
-    { /* this.props.firstPosFunc.bind(this); */ }
+    /* Hier iets bedenken waarmee ik determinePosition kan aanroepen */
   }
-
 
   render() {
     console.log(this.props);

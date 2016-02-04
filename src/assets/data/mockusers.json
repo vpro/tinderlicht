@@ -84,10 +84,10 @@
     "tinderStats":{
       "currentPosition":0,
       "dislikes":[
-        ""
+        "facebook:167"
       ],
       "likes":[
-        ""
+        "facebook:1674222819496920"
       ]
     }
   },
@@ -161,6 +161,29 @@
     }
   },
         "twitter:3234333324":{
+    "date":1454430160,
+    "email":"",
+    "gender":"female",
+    "id":"twitter:3234324",
+    "name":"Jasmijn",
+    "profile":{
+      "profileSet":false,
+      "age": 22,
+      "profileText":"Een ander lulverhaal"
+    },
+    "profilePhoto":"https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg",
+    "profileUrl":"http://www.twitter.com/evanzummeren",
+    "tinderStats":{
+      "currentPosition":0,
+      "dislikes":[
+        ""
+      ],
+      "likes":[
+        ""
+      ]
+    }
+  },
+          "favv":{
     "date":1454430160,
     "email":"",
     "gender":"female",

@@ -27,10 +27,12 @@ class Tinderlicht extends React.Component{
 		this.login = login;
 		this.state = {
 			profilesData: _.values(data),
+			profilesDataObj: data,
 			appState: {
-				imageClickPosition: null,
+				mutualLikes: [],
 			},
 			view: 'auth',
+			mutualLikes: [],
 			authData: null,
 			userData: null
 		}
@@ -96,13 +98,13 @@ class Tinderlicht extends React.Component{
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
 		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
-			console.log('True: Dit is een vrouw')
+			console.log('Juiste voorkeur')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else {
-			console.log('False: Dit is een man')
+			console.log('Niet de juiste voorkeur: Skip')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				this.determinePosition()
@@ -111,6 +113,29 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
+	clickMutualLike(event){
+		event.persist();
+		event.preventDefault();
+		this.createMutualLikes();
+	}
+
+	createMutualLikes(){
+		var tempMutualLikes = [];
+		for (let i = 0; i < this.state.userData.tinderStats.likes.length; i++){
+			var currentProf = this.state.userData.tinderStats.likes[i];
+			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, this.state.userData.id) === true){
+				console.log(currentProf, ' is een match') 
+				tempMutualLikes.push(currentProf);
+			} else {
+				console.log(currentProf, ' geen match');
+			}
+		}
+
+		this.setState(function(state){
+			state.mutualLikes = tempMutualLikes
+			return state;
+		})
+}
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
 //   console.log(snapshot.key() + " was " + snapshot.val());
@@ -175,6 +200,7 @@ class Tinderlicht extends React.Component{
 			        	<div className="profile__buttons">
                   <span onClick={this.registerDislike.bind(this)} className="icon-cross"></span>
                   <span onClick={this.registerLike.bind(this)} className="icon-heart"></span>
+                  <span onClick={this.clickMutualLike.bind(this)}>Geneer mutual likes</span>
                 </div>
 	        	</div>
 	        );
