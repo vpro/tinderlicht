@@ -28,14 +28,25 @@ class Tinderlicht extends React.Component{
 		this.state = {
 			profilesData: _.values(data),
 			profilesDataObj: data,
-			appState: {
-				mutualLikes: [],
-			},
 			view: 'auth',
 			mutualLikes: [],
+			// mutualLikes: ["twitter:3234888324", "twitter:2782113954"],
 			authData: null,
 			userData: null
 		}
+	}
+
+	componentWillMount(){
+		/* Kijken of je bij het einde bent */
+		this.checkEndOfUsers();
+	}
+
+	componentDidUpdate(){
+		/* TO DO: Bij laatste set view naar no matches */
+	}
+
+	checkEndOfUsers(){
+		console.log(this.state);
 	}
 
 	clickDislike(event){
@@ -135,7 +146,17 @@ class Tinderlicht extends React.Component{
 			state.mutualLikes = tempMutualLikes
 			return state;
 		})
-}
+		console.log(this.state.mutualLikes);
+		this.showMutualLikes();
+
+	}
+
+	showMutualLikes(){
+		console.log('gaat tie eigenlijk wel?');
+		this.setView('matches');
+	}
+
+
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
 //   console.log(snapshot.key() + " was " + snapshot.val());
@@ -212,6 +233,18 @@ class Tinderlicht extends React.Component{
 	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}
 	    						profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id} />
 	    			<span onClick={this.clickNext.bind(this)}>Ga verder</span>
+	    		</div>
+	    	)
+	    } else if (this.state.view == "matches") {
+	    	return (
+	    		<div className="app-container">
+	    			<NavBar />
+	    				<br/>
+	    			<ul>
+	    			{this.state.mutualLikes.map((profileIds) => {
+	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
+	    			})}	
+	    			</ul>
 	    		</div>
 	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
