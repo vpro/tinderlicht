@@ -47,7 +47,7 @@ class Tinderlicht extends React.Component{
 	}
 
 	sendEmail(name, adress){
-	var mailgunKey = window.btoa('api:key-def1ef87628689cc4994f262c244afbe');
+	// var mailgunKey = window.btoa('api:key-def1ef87628689cc4994f262c244afbe');
 
 	axios.post('https://api.mailgun.net/v3/sandboxc6071d29be3c4afcbc730683e8ddb72a.mailgun.org/messages', 
 		this.toQueryString({
@@ -58,10 +58,14 @@ class Tinderlicht extends React.Component{
 		  html: '<html>Beste ' + name + ',<br/><br /> Er is een match op vprotl. Mocht je bladiebladiebla, dan kan je je registreren op <a href="http://tegenlicht.vpro.nl">de website</a><hr>PS: Mocht je geen e-mail meer willen ontvangen, stuur dan een e-mailtje naar tegenlicht@vpro.nl voor een opt-out.</html>'
 	  }), {
 	  headers: {
-	  		"Authorization": 'Basic ' + mailgunKey
+	  		"Authorization": 'Basic ' + window.btoa('api:key-def1ef87628689cc4994f262c244afbe'),
+	  		"Access-Control-Allow-Headers": 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization',
+	  		"Access-Control-Expose-Headers": 'PROTOCOL,X-Powered-By,Etag',
+	  		"Access-Control-Allow-Origin": '*'
 	  	}
 	  })
 	  .then(function (response) {
+	  	console.log('waarom zie ik niks?');
 	    console.log(response);
 	  })
 	  .catch(function (response) {
@@ -73,12 +77,14 @@ class Tinderlicht extends React.Component{
 		event.persist();
 		event.preventDefault();
 		registerDislike();
+		// registerChoice('dislike');
 	}
 
 	clickLike(event){
 		event.persist();
 		event.preventDefault();
-		registerLike();
+		registerLike()
+		// registerChoice('like');
 	}
 
 	clickNext(event){
@@ -86,6 +92,24 @@ class Tinderlicht extends React.Component{
 		event.preventDefault();
 		this.determinePosition();
 		this.setView('tinder');
+	}
+
+	registerChoice(taste){
+		this.setState(function(state){
+			let curPos = this.state.userData.tinderStats.currentPosition;
+			if( taste === 'dislike') {
+				console.log('werkt dit echt?');
+				state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
+			} else if (taste === 'like') {
+				state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
+			}
+			return state;
+		}, this.updateDB)	
+			if( taste === 'dislike') {
+				this.determinePosition();
+			} else if (taste === 'like') {
+				this.seeIfMatch();
+			}	
 	}
 
 	registerDislike(){
