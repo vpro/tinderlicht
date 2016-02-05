@@ -1,15 +1,5 @@
 @import 'variables.scss';
 
-body {
-  font-size: normal;
-}
-@media (max-width: 1000px) {
-  body { font-size: normal; }
-}
-@media (max-width: 600px) {
-  body { font-size: normal; }
-}
-
 h1 {
 	font-family: SimplisticSans-Bold;
 	text-align: center;
@@ -24,13 +14,13 @@ h1 {
 }
 
 .auth-button {
-	width: 250px;
+	width: 45%;
 	font-family: SimplisticSans-Medium;
-	/*font-size: 18px;*/
-	font-size: 1.25em; 
+	font-size: 2em;
+	padding: 0.3em; 
 	color: white;
 	background: $fb-login;
-	border-radius: 10px;
+	border-radius: 24px;
 	text-transform: uppercase;
 	display: block;
 	margin: 0 auto;
