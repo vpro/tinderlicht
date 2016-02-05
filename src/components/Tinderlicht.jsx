@@ -18,35 +18,31 @@ import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
 
 
-
-
 // client side variant
 class Tinderlicht extends React.Component{
 	constructor(props){
 		super(props);
 		this.login = login;
 		this.state = {
+			
 			profilesData: _.values(data),
 			profilesDataObj: data,
 			view: 'auth',
 			mutualLikes: [],
-			// mutualLikes: ["twitter:3234888324", "twitter:2782113954"],
 			authData: null,
 			userData: null
 		}
 	}
 
-	componentWillMount(){
-		/* Kijken of je bij het einde bent */
-		this.checkEndOfUsers();
-	}
-
-	componentDidUpdate(){
-		/* TO DO: Bij laatste set view naar no matches */
-	}
 
 	checkEndOfUsers(){
 		console.log(this.state);
+	var totalProfiles = this.state.profilesData.length - 1;
+		if(this.state.userData.tinderStats.currentPosition < totalProfiles){
+		} else {
+			this.setView('tinderNoMatches');
+		}
+
 	}
 
 	clickDislike(event){
@@ -107,6 +103,7 @@ class Tinderlicht extends React.Component{
 
 	determinePosition(){
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
+
 		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
 			console.log('Juiste voorkeur')
@@ -159,7 +156,7 @@ class Tinderlicht extends React.Component{
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
-//   console.log(snapshot.key() + " was " + snapshot.val());
+//   console.log(snapshot.val());
 // });
 
 	updateDB(){
@@ -210,6 +207,7 @@ class Tinderlicht extends React.Component{
     		var userData = this.state.userData; 
 	        return (
 	        	<div className="app-container">
+	        		{ this.checkEndOfUsers() }
 	        		<NavBar/>
 	        		  <div className="profileContainer">
 			        		<Profile 
@@ -223,6 +221,7 @@ class Tinderlicht extends React.Component{
                   <span onClick={this.registerLike.bind(this)} className="icon-heart"></span>
                   <span onClick={this.clickMutualLike.bind(this)}>Geneer mutual likes</span>
                 </div>
+	        		}
 	        	</div>
 	        );
 	    } else if (this.state.view == "match") {
@@ -252,7 +251,7 @@ class Tinderlicht extends React.Component{
 	    		<div className="app-container">
 	    			<NavBar/>
 	    				<br/>
-	    			<p className="noMatch">Helaas. Er zijn nog geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
+	    			<p className="noMatch">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
 	    		</div>
 	    	);
 	    }

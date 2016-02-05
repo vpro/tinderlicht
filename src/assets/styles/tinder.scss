@@ -60,7 +60,7 @@
 
 .icon-cross {
 	@extend .icon-base;
-	background: $navbar-background;
+	background: $dislike-background;
 	&:hover{
 		background: darken($navbar-background, 10%);
 	};

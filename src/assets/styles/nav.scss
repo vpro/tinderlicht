@@ -1,14 +1,11 @@
 nav {
 	@include make-row();
 	width: 100%;
-	height: $nav-hoogte;
+	height: 44pt;
 	background-color: $navbar-background;
 	margin: 0 !important;
 }
 
-.nav__logo {
-	@include make-xs-column(6);
-}
 
 .nav__logosmall {
 	font-size: 2em;
@@ -17,11 +14,11 @@ nav {
 }
 
 .nav__like {
- 	@include make-xs-column(3);
+	width: 25%;
+	float: left;
  	text-align: center;
- 	line-height: $nav-hoogte;
  	font-size: 1.5em;
- 	padding: 12px;
+ 	padding-top: 13pt;
  	color: white;
  	&:hover {
  		color: $tegenlicht-oranje;
@@ -29,12 +26,24 @@ nav {
  	}
 }
 
+.nav__logo {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+
+.nav__tinderlichtlogo {
+	max-width: 170px;
+	width: 85%;
+	padding-top: 15px;
+}
+
 .nav__loves {
- 	@include make-xs-column(3);
+	width: 25%;
+	float: left;
  	text-align: center;
- 	line-height: $nav-hoogte;
  	font-size: 1.5em;
- 	padding: 12px;
+ 	padding-top: 13pt;
  	color: white;
  	&:hover {
  		color: $tegenlicht-oranje;

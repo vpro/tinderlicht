@@ -11,6 +11,19 @@ function login(provider) {
 	this.fireproof = new Fireproof(this.firebase);
 	this.setState = Promise.promisify(this.setState);
 
+	console.log(this.firebase);
+
+	this.firebase.orderByChild("date").on("child_added", function(snapshot) {
+	  console.log(snapshot.val());
+
+	 //  this.setState((state)=>{
+		// 		state.authData = authData;
+		// 		console.log(state.authData);
+		// 		return state;
+		// });
+
+	});
+
 	// Start the login process
 	this.fireproof.authWithOAuthPopup(provider,
 		function(error, authData) {
@@ -33,11 +46,6 @@ function login(provider) {
 		})
 		// Get the userData from firebase
 		.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
-		// .then((allData)=>{
-		// 	this.fireproof.orderByChild("date").on("child_added", function(snapshot) {
-		// 	  console.log(snapshot.exportVal());
-		// 	});
-		// })
 		// Set the retrieved userData to the state
 		.then((userData)=>{
 			return this.setState((state)=>{
