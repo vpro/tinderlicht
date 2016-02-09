@@ -1,11 +1,13 @@
 import React from 'react';
 
+import tinderlicht from '../../assets/icons/tinderlicht.svg';
+
 class Auth extends React.Component{
   render() {
 	  return (
 	  	<div>
-				<h1>vpro<span className="oranje">tinder</span>licht</h1>
-				<p className="introduction">Wat leuk dat je een date zoekt om samen mee naar de <a href="https://dezwijger.nl/programma/tinder-love" target="_blank">Tegenlicht Meet Up</a> te gaan. Om je aan iemand te kunnen matchen, moet je inloggen met Twitter of Facebook. Je kan hieronder kiezen voor 1 van de 2. (Stating the obvious?)</p>
+        <img className="auth__logointro" src={tinderlicht} />
+				<p className="auth__introductiontext">Tinderlicht is de datingapp voor Tegenlichtkijkers. Vind een date, en ga samen naar een van de <a href="https://dezwijger.nl/programma/tinder-love" target="_blank">Tegenlicht Meet Ups</a>. Om je aan iemand te kunnen matchen, moet je inloggen met Twitter of Facebook.</p>
 				<br />
 	  	</div>
 	    );

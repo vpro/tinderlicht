@@ -1,31 +1,31 @@
 @import 'variables.scss';
 
-h1 {
-	font-family: SimplisticSans-Bold;
-	text-align: center;
-	color: $tegenlicht-wit;
-	/*font-size: 38px;*/
-	font-size: 2.6em; 
-	margin-top: 50px;
+.auth__logointro {
+	width: 60%;
+	padding-bottom: 30px;
 }
 
-.oranje {
-	color: $tegenlicht-oranje;
+.auth__introductiontext {
+	font-family: SimplisticSans-Normal;
+	color: $text-color;
+	font-size: 16px;
+	line-height: 28px;
 }
+
+.auth-container {
+	max-width: 600px;
+	text-align: center;
+	padding: 50px;
+}
+
+
+
+
+
 
 .auth-button {
-	width: 45%;
 	font-family: SimplisticSans-Medium;
-	font-size: 2em;
-	padding: 0.3em; 
-	color: white;
-	background: $fb-login;
 	border-radius: 24px;
-	text-transform: uppercase;
-	display: block;
-	margin: 0 auto;
-	margin-top: 20px;
-	text-align: center;
 	cursor: pointer;
 	&:hover{
 		background: lighten($fb-login, 5%);
@@ -42,6 +42,45 @@ h1 {
 	&:hover{
 		background: lighten($twitter-login, 5%)
 	};
+}
+
+/* De ouwe meuk */
+h1 {
+	font-family: SimplisticSans-Bold;
+	text-align: center;
+	color: $tegenlicht-wit;
+	/*font-size: 38px;*/
+	font-size: 2.6em; 
+	margin-top: 50px;
+}
+
+.oranje {
+	color: $tegenlicht-oranje;
+}
+
+.auth-button {
+	width: 250px;
+	font-family: SimplisticSans-Medium;
+	/*font-size: 18px;*/
+	font-size: 1.25em; 
+	color: white;
+	background: $fb-login;
+	border-radius: 10px;
+	text-transform: uppercase;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.auth-sm {
+	background: none;
+	padding: 12px 5px 12px 5px;
+}
+
+.twitter {
+	background: $twitter-login;
 }
 
 .introduction {

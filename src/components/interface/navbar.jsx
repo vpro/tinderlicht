@@ -2,6 +2,7 @@ import React from 'react';
 
 import tinderlicht from '../../assets/icons/tinderlicht.svg';
 
+
 class NavBar extends React.Component{
     render() {
     	return (
