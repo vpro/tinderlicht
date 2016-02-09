@@ -1,7 +1,7 @@
 @import 'variables.scss';
 
 .auth__logointro {
-	width: 60%;
+	width: 80%;
 	padding-bottom: 30px;
 }
 
@@ -13,15 +13,11 @@
 }
 
 .auth-container {
-	max-width: 600px;
+	max-width: 500px;
 	text-align: center;
 	padding: 50px;
+	margin: auto;
 }
-
-
-
-
-
 
 .auth-button {
 	font-family: SimplisticSans-Medium;
@@ -59,7 +55,6 @@ h1 {
 }
 
 .auth-button {
-	width: 250px;
 	font-family: SimplisticSans-Medium;
 	/*font-size: 18px;*/
 	font-size: 1.25em; 
@@ -70,6 +65,7 @@ h1 {
 	display: block;
 	margin: 0 auto;
 	margin-top: 20px;
+	max-width: 250px;
 	text-align: center;
 	cursor: pointer;
 }
@@ -77,6 +73,7 @@ h1 {
 .auth-sm {
 	background: none;
 	padding: 12px 5px 12px 5px;
+	text-transform: none;
 }
 
 .twitter {
