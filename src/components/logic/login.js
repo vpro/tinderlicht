@@ -26,7 +26,7 @@ function login(provider) {
 
 	// Start the login process
 	// http://stackoverflow.com/questions/27870370/authwithoauthpopup-doesnt-work-on-mobile
-	this.fireproof.authWithOAuthRedirect(provider,
+	this.fireproof.authWithOAuthPopup(provider,
 		function(error, authData) {
 			  if (error) {
 			    console.log("Login Failed!", error);
@@ -40,6 +40,7 @@ function login(provider) {
 		// Set the retrieved authData to the state
 		.then((authData)=>{
 			return this.setState((state)=>{
+				console.log('gaat tie hier langs?')
 				state.authData = authData;
 				console.log(state.authData);
 				return state;
