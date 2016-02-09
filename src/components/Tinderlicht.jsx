@@ -230,8 +230,7 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
-								<p className="settings-text">Leuk dat je meedoet met Tinderlicht. De datingapp voor Tegenlichtkijkers!</p>
-								<p className="settings-text">Leuk dat je meedoet met Tinderlicht. De datingapp voor Tegenlichtkijkers!</p>
+								<p className="settings-text">Hier een simpele liketekst</p>
 								
 								<Facebook />
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
