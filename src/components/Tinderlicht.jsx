@@ -191,12 +191,8 @@ class Tinderlicht extends React.Component{
     			<div className="app-container">
     				<div className="auth-container">
     					<Auth />
-    					<span className="auth-button facebook"> 
-    						<div className="auth-sm" onClick={this.login.bind(this, 'facebook')}>Login met Facebook</div>
-    					</span>
-    					<span className="auth-button twitter"> 
-    						<div className="auth-sm" onClick={this.login.bind(this, 'twitter')}>Login met Twitter</div>
-    					</span>
+    						<div className="auth-button auth-sm facebook" onClick={this.login.bind(this, 'facebook')}>Login met Facebook</div>
+    						<div className="auth-button auth-sm twitter" onClick={this.login.bind(this, 'twitter')}>Login met Twitter</div>
     				</div>
     			</div>
     		);
