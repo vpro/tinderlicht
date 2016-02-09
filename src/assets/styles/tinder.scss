@@ -178,3 +178,11 @@ input {
   padding-left: 10px;
   height: 58px;
 }
+
+.settings__pickstatus--on {
+	color: white;
+}
+.settings__pickstatus--off {
+	color: #666;
+	cursor: pointer;
+}

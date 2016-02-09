@@ -4,6 +4,7 @@ import Fireproof from 'fireproof';
 import Promise from 'bluebird';
 
 import axios from 'axios';
+import classNames from 'classnames';
 
 import login from './logic/login.js';
 
@@ -167,14 +168,39 @@ class Tinderlicht extends React.Component{
 			return state;
 		}, this.updateDB)	
 	}
+	/* 'event handlers' */
+	buttonNext(event){ this.nextSettingsState() }
+	setMaleHandler(event){ this.setGender('male') }
+	setFemaleHandler(event){ this.setGender('female') }
+	setPreferenceMaleHandler(event) { this.setPreference(male) }
+	setPreferenceFemaleHandler(event) { this.setPreference(female) }
 
-	buttonNext(event){
-		this.nextSettingsState()
-		console.log('klik?')
+	setGender(gender){
+		this.setState(function(state){
+			state.userData.gender = gender;
+			return state;
+		}, this.updateDB)	
 	}
 
+	setPreference(gender){
+		console.log(gender)
+	}
+
+	// setMale(){
+	// 	this.setState(function(state){
+	// 		state.userData.gender = 'male';
+	// 		return state;
+	// 	}, this.updateDB)	
+	// }
+
+	// setFemale(){
+	// 	this.setState(function(state){
+	// 		state.userData.gender = 'female';
+	// 		return state;
+	// 	}, this.updateDB)			
+	// }
+
 	nextSettingsState(){
-		console.log('echt klik?')
 		if(this.state.view <= 5){
 			var newState = this.state.view + 1;
 			console.log(newState);
@@ -259,13 +285,13 @@ class Tinderlicht extends React.Component{
 						)
     	} else if (this.state.view == 3) {
     		var userData = this.state.userData; 
-
+    		    
     			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Geaardheid</h1>
-								<p className="settings-text">Ik ben een man/vrouw</p>
+								<p className="settings-text">Ik ben een <span className={this.state.userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={this.state.userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
 								<p className="settings-text">En ik zoek een man/vrouw</p>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
