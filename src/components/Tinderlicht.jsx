@@ -172,33 +172,9 @@ class Tinderlicht extends React.Component{
 	buttonNext(event){ this.nextSettingsState() }
 	setMaleHandler(event){ this.setGender('male') }
 	setFemaleHandler(event){ this.setGender('female') }
-	setPreferenceMaleHandler(event) { this.setPreference(male) }
-	setPreferenceFemaleHandler(event) { this.setPreference(female) }
-
-	setGender(gender){
-		this.setState(function(state){
-			state.userData.gender = gender;
-			return state;
-		}, this.updateDB)	
-	}
-
-	setPreference(gender){
-		console.log(gender)
-	}
-
-	// setMale(){
-	// 	this.setState(function(state){
-	// 		state.userData.gender = 'male';
-	// 		return state;
-	// 	}, this.updateDB)	
-	// }
-
-	// setFemale(){
-	// 	this.setState(function(state){
-	// 		state.userData.gender = 'female';
-	// 		return state;
-	// 	}, this.updateDB)			
-	// }
+	setPreferenceMaleHandler(event) { this.setPreference('male') }
+	setPreferenceFemaleHandler(event) { this.setPreference('female') }
+	handleEmailChange(event) { this.setEmail() }
 
 	nextSettingsState(){
 		if(this.state.view <= 5){
@@ -213,6 +189,28 @@ class Tinderlicht extends React.Component{
 			this.setView('tinder');
 		}
 	}
+
+	setGender(gender){
+		this.setState(function(state){
+			state.userData.gender = gender;
+			return state;
+		}, this.updateDB)	
+	}
+
+	setPreference(gender){
+		this.setState(function(state){
+			state.userData.genderPreference = gender;
+			return state;
+		}, this.updateDB)	
+	}
+
+	setEmail(){
+		
+	}
+
+
+
+
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
@@ -292,7 +290,7 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Geaardheid</h1>
 								<p className="settings-text">Ik ben een <span className={this.state.userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={this.state.userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
-								<p className="settings-text">En ik zoek een man/vrouw</p>
+								<p className="settings-text">En ik zoek een <span className={this.state.userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={this.state.userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -305,6 +303,7 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Je e-mailadres?</h1>
 								<p className="settings-text">Wanneer je een match hebt willen we je graag een mailtje sturen.</p>
+								<input placeholder="jouw@emailadres.nl" value={this.state.userData.email} onChange={this.handleEmailChange.bind(this)}></input>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
