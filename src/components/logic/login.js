@@ -25,7 +25,8 @@ function login(provider) {
 	});
 
 	// Start the login process
-	this.fireproof.authWithOAuthPopup(provider,
+	// http://stackoverflow.com/questions/27870370/authwithoauthpopup-doesnt-work-on-mobile
+	this.fireproof.authWithOAuthRedirect(provider,
 		function(error, authData) {
 			  if (error) {
 			    console.log("Login Failed!", error);
