@@ -35,7 +35,7 @@ nav {
 .nav__tinderlichtlogo {
 	max-width: 170px;
 	width: 85%;
-	padding-top: 15px;
+	padding-top: 19px;
 }
 
 .nav__loves {
@@ -49,5 +49,18 @@ nav {
  		color: $tegenlicht-oranje;
  		cursor: pointer;
  	}
+}
+
+.verderbutton {
+    border: 2px solid white;
+    display: inline;
+    padding: 10px 35px;
+    font-family: SimplisticSans-Medium;
+    color: white;
+    font-size: 16px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 

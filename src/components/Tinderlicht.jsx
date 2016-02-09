@@ -36,7 +36,7 @@ class Tinderlicht extends React.Component{
 
 
 	checkEndOfUsers(){
-		console.log(this.state);
+	console.log(this.state);
 	var totalProfiles = this.state.profilesData.length - 1;
 		if(this.state.userData.tinderStats.currentPosition < totalProfiles){
 		} else {
@@ -153,6 +153,19 @@ class Tinderlicht extends React.Component{
 		this.setView('matches');
 	}
 
+	handleAgeChange(event){
+		var leeftijd = event.target.value.substring(0, 2);
+		console.log(leeftijd);
+		this.ageChanger(leeftijd);
+	}
+
+	ageChanger(leeftijd){
+		this.setState(function(state){
+			state.userData.profile.age = leeftijd
+			return state;
+		}, this.updateDB)	
+	}
+
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
@@ -193,9 +206,14 @@ class Tinderlicht extends React.Component{
     			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
 					if (userData.profile.profileSet === false) {
 						return (
-							<div>
+							<div className="settings">
 								<NavBar/>
-								<Settings userData={userData}/>
+								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
+								<p className="settings-text">Leuk dat je meedoet met Tinderlicht. De datingapp voor Tegenlichtkijkers!</p>
+								<p className="settings-text">Hoe oud ben je?</p>
+								<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
+								<div className="verderbutton">Verder</div>
+								{ /* <Settings userData={userData}/> */ }
 							</div>
 						)
 					} else { 
@@ -219,9 +237,8 @@ class Tinderlicht extends React.Component{
 			        	<div className="profile__buttons">
                   <span onClick={this.registerDislike.bind(this)} className="icon-cross"></span>
                   <span onClick={this.registerLike.bind(this)} className="icon-heart"></span>
-                  <span onClick={this.clickMutualLike.bind(this)}>Geneer mutual likes</span>
+                  <span onClick={this.clickMutualLike.bind(this)}>Genereer mutual likes</span>
                 </div>
-	        		}
 	        	</div>
 	        );
 	    } else if (this.state.view == "match") {

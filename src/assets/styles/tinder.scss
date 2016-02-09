@@ -139,3 +139,42 @@ ul {
 		background: lighten(#929292, 10%);
 	};
 }
+
+/* Settings */
+h1 {
+	font-family: SimplisticSans-Bold;
+	text-align: left;
+	color: $tegenlicht-wit;
+	/*font-size: 38px;*/
+	font-size: 2.6em; 
+	margin-top: 50px;
+	margin-left: 40px;
+}
+
+.settings {
+	background: black;
+	height: 100%;
+}
+
+.settings-text {
+	font-family: SimplisticSans-Normal;
+	font-size: 20px;
+	line-height: 30px;
+	color: white;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+input {
+	margin-top: 20px;
+	margin-left: 40px;
+  border: none;
+  border-bottom: 1px dotted white;
+  background: none;
+  color: white;
+  font-size: 36px;
+  width: 90px;
+  font-family: SimplisticSans-Medium;
+  padding-left: 10px;
+  height: 46px;
+}

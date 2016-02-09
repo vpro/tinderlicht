@@ -77,7 +77,7 @@ function login(provider) {
 		.then(this.updateDB.bind(this))
 		// Finaly set the view
 
-		.then(this.setView.bind(this,'tinder'));
+		.then(this.setView.bind(this,'settings'));
 }
 
 export default login;
