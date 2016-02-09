@@ -40,7 +40,6 @@ function login(provider) {
 		// Set the retrieved authData to the state
 		.then((authData)=>{
 			return this.setState((state)=>{
-				console.log('gaat tie hier langs?')
 				state.authData = authData;
 				console.log(state.authData);
 				return state;
@@ -79,7 +78,7 @@ function login(provider) {
 		.then(this.updateDB.bind(this))
 		// Finaly set the view
 
-		.then(this.setView.bind(this,'settings'));
+		.then(this.setView.bind(this,1));
 }
 
 export default login;

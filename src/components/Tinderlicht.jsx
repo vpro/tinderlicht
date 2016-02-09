@@ -14,6 +14,8 @@ import Profile from './interface/profile.jsx';
 import Match from './interface/match.jsx';
 import MutualLikes from './interface/mutual-likes.jsx';
 
+import Facebook from './interface/social.jsx';
+
 import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
 
@@ -166,6 +168,25 @@ class Tinderlicht extends React.Component{
 		}, this.updateDB)	
 	}
 
+	buttonNext(event){
+		this.nextSettingsState()
+		console.log('klik?')
+	}
+
+	nextSettingsState(){
+		console.log('echt klik?')
+		if(this.state.view <= 5){
+			var newState = this.state.view + 1;
+			console.log(newState);
+			this.setView(this.state.view+1)
+		} else {
+			this.setState(function(state){
+				state.userData.profile.profileSet = true;
+				return state;
+			}, this.updateDB)	
+			this.setView('tinder');
+		}
+	}
 
 //  var ref = new Firebase("https://tinderlicht.firebaseio.com");
 // ref.orderByChild("date").on("child_added", function(snapshot) {
@@ -200,19 +221,22 @@ class Tinderlicht extends React.Component{
     				</div>
     			</div>
     		);
-    	} else if (this.state.view == 'settings') {
+    	} else if (this.state.view == 1) {
     		var userData = this.state.userData; 
 
     			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
 					if (userData.profile.profileSet === false) {
 						return (
 							<div className="settings">
-								<NavBar/>
+								<NavBar settingsmode={true}/>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
 								<p className="settings-text">Leuk dat je meedoet met Tinderlicht. De datingapp voor Tegenlichtkijkers!</p>
-								<p className="settings-text">Hoe oud ben je?</p>
-								<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
-								<div className="verderbutton">Verder</div>
+								<p className="settings-text">Leuk dat je meedoet met Tinderlicht. De datingapp voor Tegenlichtkijkers!</p>
+								
+								<Facebook />
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+
+
 								{ /* <Settings userData={userData}/> */ }
 							</div>
 						)
@@ -221,6 +245,69 @@ class Tinderlicht extends React.Component{
 							{/* Moet iets returnen */}
 							return (<p>Loading</p>);
 					}		
+    	} else if (this.state.view == 2) {
+    		var userData = this.state.userData; 
+
+    			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
+						return (
+							<div className="settings">
+								<NavBar settingsmode={true}/>
+									<h1>Leeftijd</h1>
+									<p className="settings-text">Hoe oud ben je?</p>
+									<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+							</div>
+						)
+    	} else if (this.state.view == 3) {
+    		var userData = this.state.userData; 
+
+    			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
+						return (
+							<div className="settings">
+								<NavBar settingsmode={true}/>
+								<h1>Geaardheid</h1>
+								<p className="settings-text">Ik ben een man/vrouw</p>
+								<p className="settings-text">En ik zoek een man/vrouw</p>
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+							</div>
+						)
+    	} else if (this.state.view == 4) {
+    		var userData = this.state.userData; 
+
+    			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
+						return (
+							<div className="settings">
+								<NavBar settingsmode={true}/>
+								<h1>Je e-mailadres?</h1>
+								<p className="settings-text">Wanneer je een match hebt willen we je graag een mailtje sturen.</p>
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+							</div>
+						)
+    	} else if (this.state.view == 5) {
+    		var userData = this.state.userData; 
+
+    			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
+						return (
+							<div className="settings">
+								<NavBar settingsmode={true}/>
+								<h1>Profieltekst</h1>
+								<p className="settings-text">Schrijf hier een profieltekst</p>
+								<input placeholder="Type hier je profieltekst, niet langer dan 140 tekens"></input>
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+							</div>
+						)
+    	} else if (this.state.view == 6) {
+    		var userData = this.state.userData; 
+
+    			{/* Als profielSet is false, dan Settings anders ga naar Tinder */}
+						return (
+							<div className="settings">
+								<NavBar settingsmode={true}/>
+								<h1>Tegenlicht meet-up</h1>
+								<p className="settings-text">Ik ga misschien/zeker naar een Tegelicht meetup</p>
+								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+							</div>
+						)
     	} else if (this.state.view == 'tinder') {
     		var userData = this.state.userData; 
 	        return (
