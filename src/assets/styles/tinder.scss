@@ -166,9 +166,11 @@ h1 {
 	padding-right: 40px;
 }
 
---small {
+.--small {
 	font-size: 16px !important;
 }
+
+a { color: $tegenlicht-oranje;}
 
 input {
 	margin-top: 20px;
