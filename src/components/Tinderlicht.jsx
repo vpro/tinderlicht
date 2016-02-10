@@ -394,8 +394,6 @@ class Tinderlicht extends React.Component{
 								      <label><Radio value="haarlem" />Haarlem (Pletterij, 24 feb)</label><br/>
 								      <label><Radio value="den bosch" />Den Bosch (RUW, 25 feb)</label><br/>
 								      <label><Radio value="eindhoven" />Eindhoven (Oude Rechtbank, 9 mrt)</label>
-
-
 								    </div>
 								  )}
 								</RadioGroup>
@@ -425,12 +423,13 @@ class Tinderlicht extends React.Component{
 	        );
 	    } else if (this.state.view == "match") {
 	    	return (
-	    		<div className="app-container">
+	    		<div className="settings">
 	    			<NavBar />
 	    				<br/>
+	    			<h1>Een match</h1>
 	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}
 	    						profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id} />
-	    			<span onClick={this.clickNext.bind(this)}>Ga verder</span>
+	    			<div className="verderbutton" onClick={this.clickNext.bind(this)}>Verder</div>
 	    		</div>
 	    	)
 	    } else if (this.state.view == "matches") {
@@ -447,10 +446,11 @@ class Tinderlicht extends React.Component{
 	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
 	    	return (
-	    		<div className="app-container">
+	    		<div className="settings">
 	    			<NavBar/>
 	    				<br/>
-	    			<p className="noMatch">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
+						<h1>Geen matches</h1>
+	    			<p className="settings-text">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
 	    		</div>
 	    	);
 	    }
