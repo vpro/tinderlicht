@@ -66,7 +66,7 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "react": "^0.14.7",
-    "react-social": "^1.0.4",
+    "react-radio-group": "^2.2.0",
     "react-swiper": "^0.1.5"
   }
 }

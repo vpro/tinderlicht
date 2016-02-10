@@ -179,6 +179,23 @@ input {
   height: 58px;
 }
 
+.settings__emailinput {
+	width: 300px;
+	font-size: 18px;
+}
+
+.settings__profileinput {
+	margin-top: 20px;
+	margin-left: 40px;
+  border: 1px dotted white;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 300px;
+  font-family: SimplisticSans-Medium;
+  padding-left: 10px;
+}
+
 .settings__pickstatus--on {
 	color: white;
 }

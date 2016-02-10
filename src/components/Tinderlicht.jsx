@@ -4,7 +4,7 @@ import Fireproof from 'fireproof';
 import Promise from 'bluebird';
 
 import axios from 'axios';
-import classNames from 'classnames';
+import RadioGroup from 'react-radio-group';
 
 import login from './logic/login.js';
 
@@ -15,7 +15,6 @@ import Profile from './interface/profile.jsx';
 import Match from './interface/match.jsx';
 import MutualLikes from './interface/mutual-likes.jsx';
 
-import Facebook from './interface/social.jsx';
 
 import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
@@ -132,7 +131,7 @@ class Tinderlicht extends React.Component{
 
 	createMutualLikes(){
 		var tempMutualLikes = [];
-		for (let i = 0; i < this.state.userData.tinderStats.likes.length; i++){
+		for (let i = 1; i < this.state.userData.tinderStats.likes.length; i++){
 			var currentProf = this.state.userData.tinderStats.likes[i];
 			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, this.state.userData.id) === true){
 				console.log(currentProf, ' is een match') 
@@ -174,7 +173,20 @@ class Tinderlicht extends React.Component{
 	setFemaleHandler(event){ this.setGender('female') }
 	setPreferenceMaleHandler(event) { this.setPreference('male') }
 	setPreferenceFemaleHandler(event) { this.setPreference('female') }
-	handleEmailChange(event) { this.setEmail() }
+	setMeetupNietHandler(event) { this.setTegenlicht('niet') }
+	setMeetupMisschienHandler(event) { this.setTegenlicht('misschien') }
+	setMeetupZekerHandler(event) { this.setTegenlicht('zeker') }
+
+	handleEmailChange(event) { 
+		var emailadres = event.target.value;
+		this.setEmail(emailadres);
+	}
+
+	handleProfileChange(event){
+		var profieltekst = event.target.value.substring(0, 200);
+		this.setProfile(profieltekst);
+	}
+
 
 	nextSettingsState(){
 		if(this.state.view <= 5){
@@ -204,8 +216,27 @@ class Tinderlicht extends React.Component{
 		}, this.updateDB)	
 	}
 
-	setEmail(){
-		
+	setEmail(emailadr){
+		this.setState(function(state){
+			state.userData.email = emailadr;
+			return state;
+		}, this.updateDB)			
+	}
+
+	setProfile(profieltekst){
+		this.setState(function(state){
+			state.userData.profile.profileText = profieltekst
+			return state;
+		}, this.updateDB)	
+	}
+
+	setTegenlicht(status){
+		console.log(status);
+		console.log('zie ik wat?')
+		this.setState(function(state){
+			state.userData.tegenlichtMeetup = status;
+			return state;
+		}, this.updateDB)	
 	}
 
 
@@ -256,7 +287,6 @@ class Tinderlicht extends React.Component{
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
 								<p className="settings-text">Hier een simpele liketekst</p>
 								
-								<Facebook />
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 
 
@@ -289,8 +319,8 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Geaardheid</h1>
-								<p className="settings-text">Ik ben een <span className={this.state.userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={this.state.userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
-								<p className="settings-text">En ik zoek een <span className={this.state.userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={this.state.userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">Ik ben een <span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">En ik zoek een <span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -303,7 +333,7 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Je e-mailadres?</h1>
 								<p className="settings-text">Wanneer je een match hebt willen we je graag een mailtje sturen.</p>
-								<input placeholder="jouw@emailadres.nl" value={this.state.userData.email} onChange={this.handleEmailChange.bind(this)}></input>
+								<input className="settings__emailinput" placeholder="jouw@emailadres.nl" value={userData.email} onChange={this.handleEmailChange.bind(this)}></input>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -316,7 +346,7 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Profieltekst</h1>
 								<p className="settings-text">Schrijf hier een profieltekst</p>
-								<input placeholder="Type hier je profieltekst, niet langer dan 140 tekens"></input>
+								<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Type hier je profieltekst, niet meer dan 200 tekens" value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -328,7 +358,21 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Tegenlicht meet-up</h1>
-								<p className="settings-text">Ik ga misschien/zeker naar een Tegelicht meetup</p>
+								<p className="settings-text">Ik ga <span className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupNietHandler.bind(this)}>niet</span>/
+									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>misschien</span>/
+									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> 
+								&#32; naar een Tegenlicht meetup</p>
+								<p className="settings-text">Wanneer ik ga, dan ga ik naar:</p>
+								<select value="zwijger">
+							    <option value="zwijger">Amsterdam (Pakhuis de Zwijger, 17 feb)</option>
+							    <option value="amersfoort">Amersfoort (Stadslab033, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
+							  </select>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
