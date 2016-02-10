@@ -2,6 +2,7 @@ import React from 'react';
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import Promise from 'bluebird';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import axios from 'axios';
 import RadioGroup from 'react-radio-group';
@@ -298,8 +299,10 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
+								<ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
 								<p className="settings-text">Hier een simpele liketekst</p>
+								</ReactCSSTransitionGroup>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 								{ /* http://stackoverflow.com/questions/25234101/how-to-integrate-the-twitter-widget-into-reactjs */ }
 
@@ -389,7 +392,9 @@ class Tinderlicht extends React.Component{
 								      <label><Radio value="zwolle" />Zwolle (Club Cele, 23 feb)</label><br/>
 								      <label><Radio value="delft" />Delft (Lijm & Cultuur, 24 feb)</label><br/>
 								      <label><Radio value="haarlem" />Haarlem (Pletterij, 24 feb)</label><br/>
+								      <label><Radio value="den bosch" />Den Bosch (RUW, 25 feb)</label><br/>
 								      <label><Radio value="eindhoven" />Eindhoven (Oude Rechtbank, 9 mrt)</label>
+
 
 								    </div>
 								  )}
