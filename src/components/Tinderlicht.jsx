@@ -234,7 +234,7 @@ class Tinderlicht extends React.Component{
 		console.log(status);
 		console.log('zie ik wat?')
 		this.setState(function(state){
-			state.userData.tegenlichtMeetup = status;
+			state.userData.profile.tegenlichtMeetup = status;
 			return state;
 		}, this.updateDB)	
 	}
@@ -360,19 +360,28 @@ class Tinderlicht extends React.Component{
 								<h1>Tegenlicht meet-up</h1>
 								<p className="settings-text">Ik ga <span className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupNietHandler.bind(this)}>niet</span>/
 									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>misschien</span>/
-									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> 
-								&#32; naar een Tegenlicht meetup</p>
-								<p className="settings-text">Wanneer ik ga, dan ga ik naar:</p>
-								<select value="zwijger">
-							    <option value="zwijger">Amsterdam (Pakhuis de Zwijger, 17 feb)</option>
-							    <option value="amersfoort">Amersfoort (Stadslab033, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							    <option value="vlaardingen">Vlaardingen (KADE40, 17 feb)</option>
-							  </select>
+									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> naar een Tegenlicht meetup</p>
+								
+								<p className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtMeetup == 'zeker' ? 'Ik ga zeker naar' : 'Ik ga misschien naar'}:</p>
+
+								<RadioGroup name="meetupLocatie" selectedValue={this.state.selectedValue} onChange={this.handleChange}>
+								  {Radio => (
+								    <div className={userData.profile.tegenlichtMeetup == 'niet' ? 'meetupLocs meetupLocs--off' : 'meetupLocs meetupLocs--on'}>
+								      <label><Radio value="amsterdam" />Amsterdam (Pakhuis de Zwijger, 17 feb)</label><br/>
+								      <label><Radio value="amersfoort" />Amersfoort (Stadslab033, 17 feb)</label><br/>
+								      <label><Radio value="vlaardingen" />Vlaardingen (KADE40, 17 feb)</label><br/>
+								      <label><Radio value="nijmegen" />Nijmegen (DROOMvillaLUX, 18 feb)</label><br/>
+								      <label><Radio value="rotterdam" />Rotterdam (Venture Cafe, 18 feb)</label><br/>
+								      <label><Radio value="groningen" />Groningen (De Wolkenfabriek, 18 feb)</label><br/>
+								      <label><Radio value="zwolle" />Zwolle (Club Cele, 23 feb)</label><br/>
+								      <label><Radio value="delft" />Delft (Lijm & Cultuur, 24 feb)</label><br/>
+								      <label><Radio value="haarlem" />Haarlem (Pletterij, 24 feb)</label><br/>
+								      <label><Radio value="eindhoven" />Eindhoven (Oude Rechtbank, 9 mrt)</label>
+
+								    </div>
+								  )}
+								</RadioGroup>
+
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)

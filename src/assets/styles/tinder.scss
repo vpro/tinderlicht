@@ -203,3 +203,29 @@ input {
 	color: #666;
 	cursor: pointer;
 }
+
+.settings-text--off {
+	display: none;
+}
+
+.meetupLocs--off {
+	display: none;
+}
+
+.meetupLocs--on {
+	display: visible;
+}
+
+.meetupLocs input {
+	margin-left: 40px;
+	height: 40px;
+}
+
+.meetupLocs span {
+	font-family: SimplisticSans-Medium;
+	font-size: 14px;
+	color: white;
+	margin-top: -28px;
+  display: block;
+  margin-left: 90px;
+}
