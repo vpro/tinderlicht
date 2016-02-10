@@ -35,7 +35,7 @@ function login(provider) {
 			    console.log(authData.facebook.accessToken);
 			  }
 			}, {
-			  scope: "email,user_likes" // the permissions requested
+			  scope: "email" // the permissions requested
 			})
 		// Set the retrieved authData to the state
 		.then((authData)=>{

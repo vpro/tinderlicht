@@ -13,7 +13,7 @@ class Match extends React.Component{
     }
     console.log(this.props);
   return (
-      <p className="settings-text --small">Jullie zijn een match! Je kan de ander {socialMediaVerb} via <a href={this.props.profileUrl}>{socialMediaType}</a>. Je kan dan via {socialMediaCommunication} met elkaar in gesprek komen. Als jullie besluiten om samen naar de Tegenlicht Meet Up te gaan, dan kan je ons dat via <a href="http://tegenlicht.vpro.nl" target="_blank">deze speciale aanmeldpagina</a> laten weten. We reserveren dan een tafeltje voor je en jullie krijgen allebei een gratis glaasje wijn!</p>
+      <p className="settings-text">Jullie zijn een match! Je kan de ander {socialMediaVerb} via <a href={this.props.profileUrl}>{socialMediaType}</a>. Je kan dan via {socialMediaCommunication} met elkaar in gesprek komen. Besluiten jullie om samen naar de landelijke Tegenlicht Meet Up in Pakhuis de Zwijger te gaan, dan kun je dat ons via de mail laten weten. Voor de eerste 10 koppels is een romantisch tafeltje met 2 glaasjes rode wijn gereserveerd.</p>
     );
   }
 }

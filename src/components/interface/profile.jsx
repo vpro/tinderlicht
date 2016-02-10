@@ -2,21 +2,31 @@ import React from 'react';
 import Tinderlicht from '../Tinderlicht.jsx';
 
 class Profile extends React.Component{
-  componentWillMount(){
-    /* Hier iets bedenken waarmee ik determinePosition kan aanroepen */
-  }
-
   render() {
-    console.log(this.props);
+    if(this.props.profileId.charAt(0) === 'f'){
+      var trimId = this.props.profileId;
+      trimId = trimId.substring(9, 100);
+      var profPhoto = "http://graph.facebook.com/v2.5/" + trimId + "/picture?width=400"  
+    } else {
+      var profPhoto = this.props.profilePhoto;
+    }
+
+    var profStyle = {
+      backgroundImage: 'url(' + profPhoto + ')',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+
     return (
-      <div className="profile">
+      <div className="profile" style={profStyle}>
         <div className="profile__card">
-        <img className="profile__photo" src={this.props.profilePhoto} />
           <span className="profile__name">{this.props.profileName}, <span className="profile__age">{this.props.profileAge}</span></span>
           <br/>
           <span className="profile__description">{this.props.profileText}</span>
         </div>
       </div>
+
+
     );
   }
 }

@@ -33,7 +33,7 @@ class Tinderlicht extends React.Component{
 			
 			profilesData: _.values(data),
 			profilesDataObj: data,
-			view: 'innersettings',
+			view: 'auth',
 			mutualLikes: [],
 			authData: null,
 			userData: null
@@ -67,6 +67,10 @@ class Tinderlicht extends React.Component{
 		event.preventDefault();
 		this.determinePosition();
 		this.setView('tinder');
+	}
+
+	clickTinder(event){
+		this.setView('tinder');		
 	}
 
 	registerDislike(){
@@ -429,12 +433,13 @@ clickInnersettings(event){
 	        	<div className="app-container">
 	        		{ this.checkEndOfUsers() }
 	    			<nav>
-		    			<div  onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
-		    			<div className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
+		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	        		  <div className="profileContainer">
 			        		<Profile 
+			        			profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id}
 			        			profileName={this.state.profilesData[this.state.userData.tinderStats.currentPosition].name} 
 			        			profilePhoto={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profilePhoto}
 			        			profileAge={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.age} 
@@ -449,7 +454,11 @@ clickInnersettings(event){
 	    } else if (this.state.view == "match") {
 	    	return (
 	    		<div className="settings">
-	    			<NavBar />
+	    			<nav>
+		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
+		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
+		    		</nav>
 	    				<br/>
 	    			<h1>Een match</h1>
 	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}
@@ -459,8 +468,12 @@ clickInnersettings(event){
 	    	)
 	    } else if (this.state.view == "matches") {
 	    	return (
-	    		<div className="app-container">
-	    			<NavBar />
+	    		<div className="settings">
+	    			<nav>
+		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
+		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
+		    		</nav>
 	    				<br/>
 	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up</p>
 	    			<ul>
@@ -473,7 +486,11 @@ clickInnersettings(event){
 	    } else if (this.state.view == "innersettings") {
 	    	return (
 	    		<div className="settings">
-	    			<NavBar />
+	    			<nav>
+		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
+		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
+		    		</nav>
 	    				<br/>
 	    			<p className="settings-text">Klik hier om je profiel opnieuw in te stellen</p>
 	    			<p className="settings-text">Wil je je account verwijderen? Mail tegenlicht@vpro.nl</p>
