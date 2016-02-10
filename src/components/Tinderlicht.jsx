@@ -48,7 +48,6 @@ class Tinderlicht extends React.Component{
 		} else {
 			this.setView('tinderNoMatches');
 		}
-
 	}
 
 	clickDislike(event){
@@ -117,6 +116,12 @@ class Tinderlicht extends React.Component{
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
+		} else if(this.state.userData.genderPreference === 'bi') { 
+			console.log('bisexual')
+			this.setState(function(state){
+				state.userData.tinderStats.currentPosition++
+				return state;
+			}, this.updateDB)
 		} else {
 			console.log('Niet de juiste voorkeur: Skip')
 			this.setState(function(state){
@@ -176,6 +181,7 @@ class Tinderlicht extends React.Component{
 	setFemaleHandler(event){ this.setGender('female') }
 	setPreferenceMaleHandler(event) { this.setPreference('male') }
 	setPreferenceFemaleHandler(event) { this.setPreference('female') }
+	setPreferenceBiHandler(event) { this.setPreference('bi') }
 	setMeetupNietHandler(event) { this.setTegenlichtStatus('niet') }
 	setMeetupMisschienHandler(event) { this.setTegenlichtStatus('misschien') }
 	setMeetupZekerHandler(event) { this.setTegenlichtStatus('zeker') }
@@ -344,8 +350,8 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Geaardheid</h1>
 								<p className="settings-text">Het helpt ook om te weten wat je geslacht is en waar je voorkeur naar uit gaat.</p>
-								<p className="settings-text">Wat is je geslacht?<br/><span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
-								<p className="settings-text">Wie zoek je?<br/><span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">Wat is je geslacht? <span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">Wie zoek je? <span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span>/<span className={userData.genderPreference === 'bi' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceBiHandler.bind(this)}>maakt niet uit</span></p>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -370,9 +376,9 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>Profieltekst</h1>
-								<p className="settings-text">Schrijf hier een profieltekst</p>
-								<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Type hier je profieltekst, niet meer dan 200 tekens" value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
+								<h1>Omschrijf jezelf</h1>
+								<p className="settings-text">Wat verwacht je van een afspraakje tijdens een Tegenlicht Meet Up en wie ben je? Kijk je elke week VPRO Tegenlicht of ben je meer een zondagskijker?</p>
+								<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Gebruik maximaal 200 tekens om jezelf te omschrijven voor potentiële matches." value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -467,7 +473,7 @@ class Tinderlicht extends React.Component{
 		    		</nav>
 	    				<br/>
 						<h1>Geen matches</h1>
-	    			<p className="settings-text --small">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
+	    			<p className="settings-text --small">Je hebt iedereen in ons bestand beoordeeld! Wie weet melden zich snel weer nieuwe mensen aan, dus kom binnenkort nog eens terug. Wie weet vind je dan je ideale match! Je kunt natuurlijk ook gewoon naar een Tegenlicht Meet Up gaan en wie weet spreek je iemand na afloop tijdens de borrel. Proost!</p>
 	    		</div>
 	    	);
 	    }
