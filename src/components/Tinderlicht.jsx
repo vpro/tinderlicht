@@ -33,7 +33,7 @@ class Tinderlicht extends React.Component{
 			
 			profilesData: _.values(data),
 			profilesDataObj: data,
-			view: 'auth',
+			view: 'innersettings',
 			mutualLikes: [],
 			authData: null,
 			userData: null
@@ -268,6 +268,12 @@ class Tinderlicht extends React.Component{
 	}
 
 
+clickInnersettings(event){
+		event.persist();
+		event.preventDefault();
+		this.setView('innersettings');
+}
+
 
 
 
@@ -423,7 +429,7 @@ class Tinderlicht extends React.Component{
 	        	<div className="app-container">
 	        		{ this.checkEndOfUsers() }
 	    			<nav>
-		    			<div className="nav__like"><span className="icon-user"></span></div>
+		    			<div  onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
 		    			<div className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
@@ -456,11 +462,22 @@ class Tinderlicht extends React.Component{
 	    		<div className="app-container">
 	    			<NavBar />
 	    				<br/>
+	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up</p>
 	    			<ul>
 	    			{this.state.mutualLikes.map((profileIds) => {
 	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
 	    			})}	
 	    			</ul>
+	    		</div>
+	    	)
+	    } else if (this.state.view == "innersettings") {
+	    	return (
+	    		<div className="settings">
+	    			<NavBar />
+	    				<br/>
+	    			<p className="settings-text">Klik hier om je profiel opnieuw in te stellen</p>
+	    			<p className="settings-text">Wil je je account verwijderen? Mail tegenlicht@vpro.nl</p>
+	    			<p className="settings-text">Wil je een e-mail opt-out? Mail tegenlicht@vpro.nl</p>
 	    		</div>
 	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
@@ -473,7 +490,7 @@ class Tinderlicht extends React.Component{
 		    		</nav>
 	    				<br/>
 						<h1>Geen matches</h1>
-	    			<p className="settings-text --small">Je hebt iedereen in ons bestand beoordeeld! Wie weet melden zich snel weer nieuwe mensen aan, dus kom binnenkort nog eens terug. Wie weet vind je dan je ideale match! Je kunt natuurlijk ook gewoon naar een Tegenlicht Meet Up gaan en wie weet spreek je iemand na afloop tijdens de borrel. Proost!</p>
+	    			<p className="settings-text">Je hebt iedereen in ons bestand beoordeeld! Wie weet melden zich snel weer nieuwe mensen aan, dus kom binnenkort nog eens terug. Wie weet vind je dan je ideale match! Je kunt natuurlijk ook gewoon naar een Tegenlicht Meet Up gaan en wie weet spreek je iemand na afloop tijdens de borrel. Proost!</p>
 	    		</div>
 	    	);
 	    }
