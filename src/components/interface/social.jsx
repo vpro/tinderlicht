@@ -1,18 +1,20 @@
-import { FacebookButton, FacebookCount } from "react-social";
 import React from 'react';
 
 
-class Facebook extends React.Component{
-
+class Twitter extends React.Component{
   render() {
   	let url = "http://tegenlicht.vpro.nl"
     return (
-      <FacebookButton url={url}>
-        <FacebookCount url={url} />
-        {" Share " + url}
-      </FacebookButton>
+    	<div>
+    	  <a href="https://twitter.com/vprotegenlicht"
+    className="twitter-follow-button"
+    data-show-count="false"
+    data-show-screen-name="false"
+  >Volg ons op Twitter
+  </a>
+ 			</div>
     );
   }
 }
 
-export default Facebook;
+export default Twitter;

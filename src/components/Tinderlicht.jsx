@@ -15,6 +15,8 @@ import Profile from './interface/profile.jsx';
 import Match from './interface/match.jsx';
 import MutualLikes from './interface/mutual-likes.jsx';
 
+import Twitter from './interface/social.jsx';
+
 
 import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
@@ -298,9 +300,8 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
 								<p className="settings-text">Hier een simpele liketekst</p>
-								
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
-
+								{ /* http://stackoverflow.com/questions/25234101/how-to-integrate-the-twitter-widget-into-reactjs */ }
 
 								{ /* <Settings userData={userData}/> */ }
 							</div>
