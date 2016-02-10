@@ -173,9 +173,9 @@ class Tinderlicht extends React.Component{
 	setFemaleHandler(event){ this.setGender('female') }
 	setPreferenceMaleHandler(event) { this.setPreference('male') }
 	setPreferenceFemaleHandler(event) { this.setPreference('female') }
-	setMeetupNietHandler(event) { this.setTegenlicht('niet') }
-	setMeetupMisschienHandler(event) { this.setTegenlicht('misschien') }
-	setMeetupZekerHandler(event) { this.setTegenlicht('zeker') }
+	setMeetupNietHandler(event) { this.setTegenlichtStatus('niet') }
+	setMeetupMisschienHandler(event) { this.setTegenlichtStatus('misschien') }
+	setMeetupZekerHandler(event) { this.setTegenlichtStatus('zeker') }
 
 	handleEmailChange(event) { 
 		var emailadres = event.target.value;
@@ -187,6 +187,10 @@ class Tinderlicht extends React.Component{
 		this.setProfile(profieltekst);
 	}
 
+	setTegenlichtLocatieHandler(event){
+	var locatie = event;
+	this.setTegenlichtLocatie(locatie);
+	}
 
 	nextSettingsState(){
 		if(this.state.view <= 5){
@@ -202,6 +206,7 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
+	/* Settings gender */
 	setGender(gender){
 		this.setState(function(state){
 			state.userData.gender = gender;
@@ -216,6 +221,7 @@ class Tinderlicht extends React.Component{
 		}, this.updateDB)	
 	}
 
+	/* Settings email */
 	setEmail(emailadr){
 		this.setState(function(state){
 			state.userData.email = emailadr;
@@ -223,20 +229,26 @@ class Tinderlicht extends React.Component{
 		}, this.updateDB)			
 	}
 
+	/* Settings profile */
 	setProfile(profieltekst){
 		this.setState(function(state){
 			state.userData.profile.profileText = profieltekst
 			return state;
 		}, this.updateDB)	
 	}
-
-	setTegenlicht(status){
-		console.log(status);
-		console.log('zie ik wat?')
+	/* Settings Meetup */
+	setTegenlichtStatus(status){
 		this.setState(function(state){
 			state.userData.profile.tegenlichtMeetup = status;
 			return state;
 		}, this.updateDB)	
+	}
+
+	setTegenlichtLocatie(location){
+		this.setState(function(state){
+			state.userData.profile.tegenlichtLocatie = location;
+			return state;
+		}, this.updateDB)			
 	}
 
 
@@ -362,9 +374,9 @@ class Tinderlicht extends React.Component{
 									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>misschien</span>/
 									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> naar een Tegenlicht meetup</p>
 								
-								<p className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtMeetup == 'zeker' ? 'Ik ga zeker naar' : 'Ik ga misschien naar'}:</p>
+								<p className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtMeetup == 'zeker' ? 'Ik ga zeker naar:' : 'Ik ga misschien naar:'}</p>
 
-								<RadioGroup name="meetupLocatie" selectedValue={this.state.selectedValue} onChange={this.handleChange}>
+								<RadioGroup name="meetupLocatie" selectedValue={this.state.userData.profile.tegenlichtLocatie} onChange={this.setTegenlichtLocatieHandler.bind(this)}>
 								  {Radio => (
 								    <div className={userData.profile.tegenlichtMeetup == 'niet' ? 'meetupLocs meetupLocs--off' : 'meetupLocs meetupLocs--on'}>
 								      <label><Radio value="amsterdam" />Amsterdam (Pakhuis de Zwijger, 17 feb)</label><br/>
