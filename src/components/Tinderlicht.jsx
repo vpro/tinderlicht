@@ -19,6 +19,7 @@ import MutualLikes from './interface/mutual-likes.jsx';
 import Twitter from './interface/social.jsx';
 
 
+import tinderlicht from '../assets/icons/tinderlicht.svg';
 import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
 
@@ -154,7 +155,6 @@ class Tinderlicht extends React.Component{
 	}
 
 	showMutualLikes(){
-		console.log('gaat tie eigenlijk wel?');
 		this.setView('matches');
 	}
 
@@ -254,6 +254,13 @@ class Tinderlicht extends React.Component{
 		}, this.updateDB)			
 	}
 
+	/* Nav */
+	tinderMenuHandler(event){
+		event.persist();
+		event.preventDefault();
+		this.setView('tinder');
+	}
+
 
 
 
@@ -299,9 +306,9 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+								<ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
-								<p className="settings-text">Hier een simpele liketekst</p>
+								<p className="settings-text">Om fans van het programma aan elkaar te matchen, moet je wel fan van het programma zijn. Als je VPRO Tegenlicht nog niet volgt op Facebook, dan kun je dat nu alsnog doen.</p>
 								</ReactCSSTransitionGroup>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 								{ /* http://stackoverflow.com/questions/25234101/how-to-integrate-the-twitter-widget-into-reactjs */ }
@@ -322,7 +329,8 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 									<h1>Leeftijd</h1>
-									<p className="settings-text">Hoe oud ben je?</p>
+									<p className="settings-text">Om je zo goed mogelijk te kunnen matchen, willen we graag een paar gegevens van je weten. Die gebruiken we alleen om je te kunnen matchen en voor geen enkel ander doel.</p>
+									<p className="settings-text">Mogen we weten hoe oud je bent?</p>
 									<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
@@ -335,8 +343,9 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Geaardheid</h1>
-								<p className="settings-text">Ik ben een <span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
-								<p className="settings-text">En ik zoek een <span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">Het helpt ook om te weten wat je geslacht is en waar je voorkeur naar uit gaat.</p>
+								<p className="settings-text">Wat is je geslacht?<br/><span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
+								<p className="settings-text">Wie zoek je?<br/><span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span></p>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -348,7 +357,8 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Je e-mailadres?</h1>
-								<p className="settings-text">Wanneer je een match hebt willen we je graag een mailtje sturen.</p>
+								<p className="settings-text">Om je op de hoogte te brengen van een match, willen we je graag mailen.</p>
+								<p className="settings-text">We gebruiken je mailadres uitsluitend voor het versturen van notificaties over nieuwe matches en delen je mailadres niet met derden.</p>
 								<input className="settings__emailinput" placeholder="jouw@emailadres.nl" value={userData.email} onChange={this.handleEmailChange.bind(this)}></input>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
@@ -406,7 +416,11 @@ class Tinderlicht extends React.Component{
 	        return (
 	        	<div className="app-container">
 	        		{ this.checkEndOfUsers() }
-	        		<NavBar/>
+	    			<nav>
+		    			<div className="nav__like"><span className="icon-user"></span></div>
+		    			<div className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
+		    		</nav>
 	        		  <div className="profileContainer">
 			        		<Profile 
 			        			profileName={this.state.profilesData[this.state.userData.tinderStats.currentPosition].name} 
@@ -417,7 +431,6 @@ class Tinderlicht extends React.Component{
 			        	<div className="profile__buttons">
                   <span onClick={this.registerDislike.bind(this)} className="icon-cross"></span>
                   <span onClick={this.registerLike.bind(this)} className="icon-heart"></span>
-                  <span onClick={this.clickMutualLike.bind(this)}>Genereer mutual likes</span>
                 </div>
 	        	</div>
 	        );
@@ -447,10 +460,14 @@ class Tinderlicht extends React.Component{
 	    } else if (this.state.view == 'tinderNoMatches'){
 	    	return (
 	    		<div className="settings">
-	    			<NavBar/>
+	    			<nav>
+		    			<div className="nav__like"><span className="icon-user"></span></div>
+		    			<div className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
+		    		</nav>
 	    				<br/>
 						<h1>Geen matches</h1>
-	    			<p className="settings-text">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
+	    			<p className="settings-text --small">Helaas. Er zijn nu geen matches beschikbaar. Maar kom snel een keer terug, want misschien zijn er dan wel potentiële dates die op je wachten. Je kan natuurlijk ook op de bonnefooi naar de Tegenlicht Meet Up gaan en wie weet spreek je dan iemand tijdens de borrel na afloop. Aanmelden kan hier.</p>
 	    		</div>
 	    	);
 	    }

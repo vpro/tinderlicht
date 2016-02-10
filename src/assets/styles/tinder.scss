@@ -236,3 +236,22 @@ input {
   display: block;
   margin-left: 90px;
 }
+
+/* Animatie */
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 50000ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 30000ms ease-in;
+}
