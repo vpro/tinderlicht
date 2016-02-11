@@ -9,7 +9,15 @@ SecureFireproof.prototype = {
 
     child: function ( childPath ) {
 
-
+        return $.ajax({
+            contentType: 'application/json',
+            crossDomain: true,
+            dataType: 'json',
+            jsonp: false,
+            processData: false,
+            type: 'GET',
+            url: this.backendServer+'/child/'+ childPath
+        }).promise();
     },
 
     update: function ( value ) {

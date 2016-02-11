@@ -16,17 +16,6 @@ function login(provider) {
 
 	console.log(this.firebase);
 
-	this.firebase.orderByChild("date").on("child_added", function(snapshot) {
-	  console.log(snapshot.val());
-
-	 //  this.setState((state)=>{
-		// 		state.authData = authData;
-		// 		console.log(state.authData);
-		// 		return state;
-		// });
-
-	});
-
 	// Start the login process
 	// http://stackoverflow.com/questions/27870370/authwithoauthpopup-doesnt-work-on-mobile
 	this.fireproof.authWithOAuthPopup(provider,
@@ -50,10 +39,12 @@ function login(provider) {
 		})
 		// Get the userData from firebase
 		// TODO: use secureFireproof
-		.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
+		.then((authData)=>{
+			return this.secureFireproof.child( encodeURIComponent( this.state.authData.uid ) )
+		})
 		// Set the retrieved userData to the state
 		.then((userData)=>{
-			return this.setState((state)=>{
+			return this.setState((state)=>{debugger
 				state.userData = userData;
 				console.log(state.userData);
 				return state;
@@ -61,14 +52,16 @@ function login(provider) {
 		})
 		// Check the user and create new account if needed
 		.then(Promise.method(()=>{
-			if (this.state.userData.val() == null) {
+			if ( ! this.state.userData ) {
 				if (this.state.authData.provider === 'facebook') {
 					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.first_name, this.state.authData[this.state.authData.provider].cachedUserProfile.gender, this.state.authData[this.state.authData.provider].cachedUserProfile.picture.data.url, this.state.authData[this.state.authData.provider].cachedUserProfile.link, (Math.floor(Date.now() / 1000)), this.state.authData[this.state.authData.provider].email || ""));
 				} else {
 					return (new Model.User(this.state.authData.uid, this.state.authData[this.state.authData.provider].cachedUserProfile.name, 'male', this.state.authData[this.state.authData.provider].cachedUserProfile.profile_image_url, 'http://www.twitter.com/' + this.state.authData[this.state.authData.provider].username, (Math.floor(Date.now() / 1000)), null || ""));
 				}
 			} else {
-				return this.state.userData.val();
+				// for security reasons emailadress is not exposed through the database call so add this through the authData
+				this.state.userData.email = this.state.authData[this.state.authData.provider].email || "";
+				return this.state.userData;
 			}
 		}.bind(this)))
 		// Update the state with the new user or the same user
