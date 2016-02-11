@@ -3,7 +3,7 @@
     "date":1454430167,
     "email":"jan.floris@outlook.com",
     "gender":"male",
-    "id":"facebook:108283576224444",
+    "id":"facebook:10208100833496370",
     "name":"Jan",
     "profile":{
       "profileSet":false,
@@ -54,7 +54,7 @@
     "profile":{
       "profileSet":false,
       "age": 22,
-      "profileText":"Een ander lulverhaal"
+      "profileText":"Profieltekst mag maximaal 200 karakters bevatten. Eventjes kijken hoeveel dit er nu zijn en hoeveel er nog maximaal bij mag. Best wel veel zo te zien. Nog een paar extra woorden voordat ik aan de 200"
     },
     "profilePhoto":"https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
     "profileUrl":"http://www.twitter.com/evanzummeren",
@@ -123,7 +123,7 @@
     "profile":{
       "profileSet":false,
       "age": 22,
-      "profileText":"Een ander lulverhaal"
+      "profileText":"Profieltekst mag maximaal 200 karakters bevatten. Eventjes kijken hoeveel dit er nu zijn en hoeveel er nog maximaal bij mag. Best wel veel zo te zien. Nog een paar extra woorden voordat ik aan de 200"
     },
     "profilePhoto":"https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg",
     "profileUrl":"http://www.twitter.com/evanzummeren",
@@ -192,7 +192,7 @@
     "profile":{
       "profileSet":false,
       "age": 22,
-      "profileText":"Een ander lulverhaal"
+      "profileText":"Profieltekst mag maximaal 200 karakters bevatten. Eventjes kijken hoeveel dit er nu zijn en hoeveel er nog maximaal bij mag. Best wel veel zo te zien. Nog een paar extra woorden voordat ik aan de 200"
     },
     "profilePhoto":"https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg",
     "profileUrl":"http://www.twitter.com/evanzummeren",

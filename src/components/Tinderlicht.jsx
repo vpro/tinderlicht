@@ -105,6 +105,9 @@ class Tinderlicht extends React.Component{
 
 		if(thereIsAMatch === true) {
 			this.setView('match');
+			var timestamp = Date.now()
+			/* Update aanpassen naar push? */
+			this.fireproof.update({matches: {"isThereAMatch": timestamp, 'bla': 'blablabladl'}});
 		} else {
 			this.determinePosition();
 		}
@@ -115,19 +118,16 @@ class Tinderlicht extends React.Component{
 
 		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
-			console.log('Juiste voorkeur')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else if(this.state.userData.genderPreference === 'bi') { 
-			console.log('bisexual')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else {
-			console.log('Niet de juiste voorkeur: Skip')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				this.determinePosition()
@@ -147,10 +147,9 @@ class Tinderlicht extends React.Component{
 		for (let i = 1; i < this.state.userData.tinderStats.likes.length; i++){
 			var currentProf = this.state.userData.tinderStats.likes[i];
 			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, this.state.userData.id) === true){
-				console.log(currentProf, ' is een match') 
 				tempMutualLikes.push(currentProf);
 			} else {
-				console.log(currentProf, ' geen match');
+				console.log('geen match');
 			}
 		}
 
@@ -430,7 +429,7 @@ clickInnersettings(event){
     	} else if (this.state.view == 'tinder') {
     		var userData = this.state.userData; 
 	        return (
-	        	<div className="app-container">
+	        	<div className="app-container tinderview">
 	        		{ this.checkEndOfUsers() }
 	    			<nav>
 		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
