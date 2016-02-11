@@ -58,11 +58,10 @@ class Tinderlicht extends React.Component{
 
 	checkEndOfUsers(){
 	console.log(this.state);
-	var totalProfiles = this.state.profilesData.length - 1;
-		if(this.state.userData.tinderStats.currentPosition < totalProfiles){
-		} else {
-			this.setView('tinderNoMatches');
-		}
+		var totalProfiles = this.state.profilesData.length - 1;
+		if(totalProfiles <= this.state.userData.tinderStats.currentPosition){
+						this.setView('tinderNoMatches');
+		} 
 	}
 
 	clickDislike(event){
@@ -186,11 +185,17 @@ class Tinderlicht extends React.Component{
 	}
 
 	createMutualLikes(){
+		var userData = this.state.userData;
 		var tempMutualLikes = [];
-		for (let i = 1; i < this.state.userData.tinderStats.likes.length; i++){
-			var currentProf = this.state.userData.tinderStats.likes[i];
-			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, this.state.userData.id) === true){
+
+		/* Hij loopt evenlang als de lengte van mijn eigen likes */
+		for (let i = 1; i < userData.tinderStats.likes.length; i++){
+			console.log('Loop een keer')
+			var currentProf = userData.tinderStats.likes[i];
+			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, userData.id) === true){
 				tempMutualLikes.push(currentProf);
+				console.log('er is een match')
+				console.log(tempMutualLikes);
 			} else {
 				console.log('geen match');
 			}
