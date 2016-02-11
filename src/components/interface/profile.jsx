@@ -21,6 +21,7 @@ class Profile extends React.Component{
       <div className="profile" style={profStyle}>
         <div className="profile__card">
           <span className="profile__name">{this.props.profileName}, <span className="profile__age">{this.props.profileAge}</span></span>
+          <span classname="profile__meetup">{this.props.profileMeetup}</span>
           <br/>
           <span className="profile__description">{this.props.profileText}</span>
         </div>

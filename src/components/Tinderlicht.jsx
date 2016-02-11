@@ -499,6 +499,7 @@ class Tinderlicht extends React.Component{
 			        		<Profile 
 			        			profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id}
 			        			profileName={this.state.profilesData[this.state.userData.tinderStats.currentPosition].name} 
+			        			profileMeetup={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.tegenlichtLocatie}
 			        			profilePhoto={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profilePhoto}
 			        			profileAge={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.age} 
 			        			profileText={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profile.profileText} />

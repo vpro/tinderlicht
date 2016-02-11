@@ -37,11 +37,19 @@
     margin-top: 290px;
     padding: 20px 30px 30px 30px;
     display: inline-block;
+    position: relative;
 }
 
 .profile__photo { 
 	width: 100%; 
 	margin-top: 5%;
+}
+
+.profile__meetup {
+	position: absolute;
+	right: 20px;
+	font-family: SimplisticSans-Medium;
+	font-size: 14px;
 }
 
 .profile__name { 
