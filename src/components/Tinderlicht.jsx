@@ -153,7 +153,6 @@ class Tinderlicht extends React.Component{
 		console.log('Huidige positie', this.state.userData.tinderStats.currentPosition)
 		console.log('Determine position [DP] draait')
 
-		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
 			console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
 			console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
