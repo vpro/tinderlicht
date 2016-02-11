@@ -16,7 +16,7 @@ import Profile from './interface/profile.jsx';
 import Match from './interface/match.jsx';
 import MutualLikes from './interface/mutual-likes.jsx';
 
-import Twitter from './interface/social.jsx';
+import Socialmedia from './interface/social.jsx';
 
 
 import tinderlicht from '../assets/icons/tinderlicht.svg';
@@ -60,7 +60,7 @@ class Tinderlicht extends React.Component{
 	console.log(this.state);
 		var totalProfiles = this.state.profilesData.length - 1;
 		if(totalProfiles <= this.state.userData.tinderStats.currentPosition){
-						this.setView('tinderNoMatches');
+			this.setView('tinderNoMatches');
 		} 
 	}
 
@@ -329,11 +329,11 @@ class Tinderlicht extends React.Component{
 	}
 
 
-clickInnersettings(event){
+	clickInnersettings(event){
 		event.persist();
 		event.preventDefault();
 		this.setView('innersettings');
-}
+	}
 
 
 
@@ -381,10 +381,9 @@ clickInnersettings(event){
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
 								<h1>Hoi <span className="oranje">{this.state.userData.name}</span>,</h1>
-								<p className="settings-text">Om fans van het programma aan elkaar te matchen, moet je wel fan van het programma zijn. Als je VPRO Tegenlicht nog niet volgt op Facebook, dan kun je dat nu alsnog doen.</p>
-								</ReactCSSTransitionGroup>
+
+								<Socialmedia profileId={this.state.userData.id} />
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 								{ /* http://stackoverflow.com/questions/25234101/how-to-integrate-the-twitter-widget-into-reactjs */ }
 

@@ -1,20 +1,25 @@
 import React from 'react';
 
 
-class Twitter extends React.Component{
+class Socialmedia extends React.Component{
   render() {
-  	let url = "http://tegenlicht.vpro.nl"
+    if(this.props.profileId.charAt(0) === 'f'){
+      var tekst = "Om fans van het programma aan elkaar te matchen, moet je wel fan van het programma zijn. Als je VPRO Tegenlicht nog niet volgt op Facebook, dan kun je dat nu alsnog doen.";
+      var atekst = "Like ons op Facebook";
+      var smurl = "http://www.facebook.com/vprotegenlicht"
+    } else {
+      var tekst = "Om fans van het programma aan elkaar te matchen, moet je wel fan van het programma zijn. Als je @vprotegenlicht nog niet volgt op Twitter, dan kun je dat nu alsnog doen.";
+      var atekst = "Volg ons op Twitter";
+      var smurl = "http://www.twitter.com/vprotegenlicht"
+    }
+
     return (
-    	<div>
-    	  <a href="https://twitter.com/vprotegenlicht"
-    className="twitter-follow-button"
-    data-show-count="false"
-    data-show-screen-name="false"
-  >Volg ons op Twitter
-  </a>
- 			</div>
+      <div>
+        <p className="settings-text">{tekst}</p>
+        <span><a className="socialmedia__link" href={smurl} target="_blank">{atekst}</a></span>
+      </div>
     );
   }
 }
 
-export default Twitter;
+export default Socialmedia;
