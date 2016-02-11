@@ -30,8 +30,6 @@ class Tinderlicht extends React.Component{
 		super(props);
 		this.login = login;
 		this.state = {
-			
-			fish: null,
 			profilesData: null,
 			profilesDataObj: null,
 			view: 'auth',
@@ -45,9 +43,11 @@ class Tinderlicht extends React.Component{
 		this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
 
 		var dataObj = {};
+		var dataArr = []
 		var testvar = ['empty']
 		this.firebase.orderByChild("date").on("child_added", function(snapshot) {
 		  dataObj[snapshot.key()] = snapshot.val();
+		  dataArr.push(snapshot.val());
 		  testvar.push('child');
 		  console.log(testvar)
 		  // returns a list with objects
@@ -56,19 +56,10 @@ class Tinderlicht extends React.Component{
 		this.setState(function(state){
 			testvar.push('setstate')
 			state.profilesDataObj = dataObj;
+			state.profilesData = dataArr;
 			return state;
 		}) 
 	}
-
-	setArray(){
-		console.log('set array gaataf')
-		this.setState(function(state){
-			state.profilesData = _.values(state.profilesDataObj);
-			return state;
-		}) 		
-	}
-
-
 
 	checkEndOfUsers(){
 	console.log(this.state);
