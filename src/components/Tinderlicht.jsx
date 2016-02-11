@@ -457,9 +457,9 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>Tegenlicht meet-up</h1>
-								<p className="settings-text">Ik ga <span className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupNietHandler.bind(this)}>niet</span>/
-									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>misschien</span>/
+								<h1>Tegenlicht Meet Up</h1>
+								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupNietHandler.bind(this)}>de landelijke meetup in Pakhuis de Zwijger (17 februari)</span>/
+									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>een lokale meetup</span>/
 									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> naar een Tegenlicht meetup</p>
 								
 								<p className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtMeetup == 'zeker' ? 'Ik ga zeker naar:' : 'Ik ga misschien naar:'}</p>
