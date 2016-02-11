@@ -11,19 +11,6 @@ function login(provider) {
 	this.fireproof = new Fireproof(this.firebase);
 	this.setState = Promise.promisify(this.setState);
 
-	console.log(this.firebase);
-
-	this.firebase.orderByChild("date").on("child_added", function(snapshot) {
-	  console.log(snapshot.val());
-
-	 //  this.setState((state)=>{
-		// 		state.authData = authData;
-		// 		console.log(state.authData);
-		// 		return state;
-		// });
-
-	});
-
 	// Start the login process
 	// http://stackoverflow.com/questions/27870370/authwithoauthpopup-doesnt-work-on-mobile
 	this.fireproof.authWithOAuthPopup(provider,
@@ -76,8 +63,8 @@ function login(provider) {
 		})
 		// Update Firebase with the current info
 		.then(this.updateDB.bind(this))
+		.then(this.setArray.bind(this))
 		// Finaly set the view
-
 		.then(this.setView.bind(this,1));
 }
 

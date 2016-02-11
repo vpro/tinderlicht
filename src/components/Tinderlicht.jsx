@@ -31,14 +31,43 @@ class Tinderlicht extends React.Component{
 		this.login = login;
 		this.state = {
 			
-			profilesData: _.values(data),
-			profilesDataObj: data,
+			fish: null,
+			profilesData: null,
+			profilesDataObj: null,
 			view: 'auth',
 			mutualLikes: [],
 			authData: null,
 			userData: null
 		}
 	}
+
+	componentWillMount(){
+		this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
+
+		var dataObj = {};
+		var testvar = ['empty']
+		this.firebase.orderByChild("date").on("child_added", function(snapshot) {
+		  dataObj[snapshot.key()] = snapshot.val();
+		  testvar.push('child');
+		  console.log(testvar)
+		  // returns a list with objects
+		})
+
+		this.setState(function(state){
+			testvar.push('setstate')
+			state.profilesDataObj = dataObj;
+			return state;
+		}) 
+	}
+
+	setArray(){
+		console.log('set array gaataf')
+		this.setState(function(state){
+			state.profilesData = _.values(state.profilesDataObj);
+			return state;
+		}) 		
+	}
+
 
 
 	checkEndOfUsers(){
@@ -79,7 +108,7 @@ class Tinderlicht extends React.Component{
 			state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
 			return state;
 		}, this.updateDB)
-		console.log('register dislike');
+		console.log('Click: Dislike');
 		this.determinePosition();
 	}
 
@@ -89,64 +118,74 @@ class Tinderlicht extends React.Component{
 			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
 			return state;
 		}, this.updateDB)
-		console.log('Register like');
+		console.log('Click: Like');
 		this.seeIfMatch();
 	}
 
 	seeIfMatch() {
 		var thisPos = this.state.userData.tinderStats.currentPosition;
 		var thereIsAMatch = null;
+		console.log('Check: Is er een match?')
 
 		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
 			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
 				thereIsAMatch = true;
+				console.log('Check: Ja, er is een match')
+			} else {
+				console.log('Check: Nee, er is geen match')
 			}
 		}
 
 		if(thereIsAMatch === true) {
 			this.setView('match');
-			var timestamp = Date.now()
-			/* Update aanpassen naar push? */
-			this.fireproof.update({matches: {"isThereAMatch": timestamp, 'bla': 'blablabladl'}});
 		} else {
 			this.determinePosition();
 		}
 	}
 
 	initialPosition(){
-		console.log('trigger')
+		console.log('Initiele positie bepalen')
 		var thisPos = this.state.userData.tinderStats.currentPosition;
 
-		console.log('preference', this.state.userData.genderPreference)
-		console.log('thisgender', this.state.profilesData[thisPos].gender)
+		console.log('Initiele positie: Mijn voorkeur is', this.state.userData.genderPreference)
+		console.log('Initiele positie: De eerste hit is een', this.state.profilesData[thisPos].gender)
 
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
-			console.log('do nothing')
+			console.log('Initiele positie:  Dit was de juiste voorkeur, positie blijft bestaan')
 
 		} else {
 			this.setState(function(state){
+				console.log('Initiele positie: Niet de juiste voorkeur, eentje optellen')
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		}
-
 	}
 
 	determinePosition(){
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
+		console.log('Huidige positie', this.state.userData.tinderStats.currentPosition)
+		console.log('Determine position [DP] draait')
 
 		/* Als gender juist is dan tonen, anders nog een keer deze func draaien */
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
+			console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
+			console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
+			console.log('DP: Dat klopt, een positie verder')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else if(this.state.userData.genderPreference === 'bi') { 
+			console.log('DP: Ik krijg dit alleen te zien wanneer ik biseksueel ben')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else {
+			console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
+			console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
+			console.log('DP: Klopt niet, plus een en herhaal functie')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				this.determinePosition()
@@ -199,6 +238,7 @@ class Tinderlicht extends React.Component{
 	}
 	/* 'event handlers' */
 	buttonNext(event){ this.nextSettingsState() }
+	finalButtonNext(event){ this.goTinder() }
 	setMaleHandler(event){ this.setGender('male') }
 	setFemaleHandler(event){ this.setGender('female') }
 	setPreferenceMaleHandler(event) { this.setPreference('male') }
@@ -219,8 +259,8 @@ class Tinderlicht extends React.Component{
 	}
 
 	setTegenlichtLocatieHandler(event){
-	var locatie = event;
-	this.setTegenlichtLocatie(locatie);
+		var locatie = event;
+		this.setTegenlichtLocatie(locatie);
 	}
 
 	nextSettingsState(){
@@ -235,6 +275,15 @@ class Tinderlicht extends React.Component{
 			}, this.updateDB)	
 			this.setView('tinder');
 		}
+	}
+
+	goTinder(){
+		this.setState(function(state){
+			state.userData.profile.profileSet = true;
+			return state;
+		}, this.updateDB)	
+		this.initialPosition();
+		this.setView('tinder');
 	}
 
 	/* Settings gender */
@@ -315,7 +364,9 @@ clickInnersettings(event){
 	componentDidMount(){
 		// Hier heel shitty json uit firebase halen wrs met axios
 		var profileData = {};
+		var dataObj = {}
 	}
+
 
     render() {
     	if (this.state.view == 'auth'){
@@ -442,7 +493,7 @@ clickInnersettings(event){
 								  )}
 								</RadioGroup>
 
-								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
+								<div className="verderbutton" onClick={this.finalButtonNext.bind(this)}>Verder</div>
 							</div>
 						)
     	} else if (this.state.view == 'tinder') {
@@ -450,7 +501,6 @@ clickInnersettings(event){
 	        return (
 	        	<div className="app-container tinderview">
 	        		{ this.checkEndOfUsers() }
-	        		{ this.initialPosition() }
 	    			<nav>
 		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
 		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
