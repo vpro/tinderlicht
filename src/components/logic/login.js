@@ -44,7 +44,7 @@ function login(provider) {
 		})
 		// Set the retrieved userData to the state
 		.then((userData)=>{
-			return this.setState((state)=>{debugger
+			return this.setState((state)=>{
 				state.userData = userData;
 				console.log(state.userData);
 				return state;

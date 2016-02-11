@@ -9,7 +9,9 @@ SecureFireproof.prototype = {
 
     child: function ( childPath ) {
 
-        return $.ajax({
+        var deferred = new $.Deferred();
+
+        $.ajax({
             contentType: 'application/json',
             crossDomain: true,
             dataType: 'json',
@@ -17,7 +19,17 @@ SecureFireproof.prototype = {
             processData: false,
             type: 'GET',
             url: this.backendServer+'/child/'+ childPath
-        }).promise();
+        }).then( function ( childData ) {
+
+            if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
+                deferred.resolve( childData );
+            } else {
+                deferred.resolve();
+            }
+
+        }, deferred.reject );
+
+        return deferred.promise();
     },
 
     update: function ( value ) {
