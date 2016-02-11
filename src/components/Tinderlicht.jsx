@@ -41,20 +41,15 @@ class Tinderlicht extends React.Component{
 
 	componentWillMount(){
 		this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
-
 		var dataObj = {};
 		var dataArr = []
-		var testvar = ['empty']
+		
 		this.firebase.orderByChild("date").on("child_added", function(snapshot) {
 		  dataObj[snapshot.key()] = snapshot.val();
 		  dataArr.push(snapshot.val());
-		  testvar.push('child');
-		  console.log(testvar)
-		  // returns a list with objects
 		})
 
 		this.setState(function(state){
-			testvar.push('setstate')
 			state.profilesDataObj = dataObj;
 			state.profilesData = dataArr;
 			return state;
