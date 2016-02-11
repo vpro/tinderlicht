@@ -3,7 +3,7 @@
     "server": "your-fire-base-host",
     "secret": "your-server-secret"
   },
-  "bridge": {
+  "backend": {
     "server": "your-bridge-host+port"
   }
 }

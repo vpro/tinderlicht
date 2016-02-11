@@ -5,6 +5,9 @@ var router = express.Router();
 var configToShare = {
     firebase: {
         server: config.firebase.server
+    },
+    backend: {
+        server: config.backend.server
     }
 };
 

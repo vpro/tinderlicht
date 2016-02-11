@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
+import SecureFireproof from './utils/SecureFireproof.js';
 import Promise from 'bluebird';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -107,7 +108,7 @@ class Tinderlicht extends React.Component{
 			this.setView('match');
 			var timestamp = Date.now()
 			/* Update aanpassen naar push? */
-			this.fireproof.update({matches: {"isThereAMatch": timestamp, 'bla': 'blablabladl'}});
+			this.secureFireproof.update({matches: {"isThereAMatch": timestamp, 'bla': 'blablabladl'}});
 		} else {
 			this.determinePosition();
 		}
@@ -286,7 +287,7 @@ clickInnersettings(event){
 // });
 
 	updateDB(){
-		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
+		return this.secureFireproof.update({[this.state.userData.id]: this.state.userData});
 	}
 
 	setView(view){

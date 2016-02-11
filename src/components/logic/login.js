@@ -1,12 +1,15 @@
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
+import SecureFireproof from '../utils/SecureFireproof.js';
 import Promise from 'bluebird';
+import TinderlichtConfig from '../utils/config.js';
 
 import Model from '../../assets/data/model.jsx';
 
 function login(provider) {
 	// Start firebase and Fireproof
-	this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
+	this.firebase = new Firebase( TinderlichtConfig.firebase.server );
+	this.secureFireproof = new SecureFireproof( TinderlichtConfig.backend.server );
 	Fireproof.bless(Promise);
 	this.fireproof = new Fireproof(this.firebase);
 	this.setState = Promise.promisify(this.setState);
@@ -46,6 +49,7 @@ function login(provider) {
 			});
 		})
 		// Get the userData from firebase
+		// TODO: use secureFireproof
 		.then((authData)=>{return this.fireproof.child(this.state.authData.uid).on('value')})
 		// Set the retrieved userData to the state
 		.then((userData)=>{

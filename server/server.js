@@ -21,6 +21,7 @@ fs.stat('../config.json', function ( err, stats ) {
          */
 
         var app = require('express')();
+        var cors = require('cors');
         var config = require('../config.json');
         var Firebase = require('firebase');
         var firebaseConnection = new Firebase( config.firebase.server );
@@ -36,6 +37,7 @@ fs.stat('../config.json', function ( err, stats ) {
         var configRouter = require('./routes/config');
         var updateRouter = require('./routes/update');
 
+        app.use(cors());
         app.use( childRouter );
         app.use( configRouter );
         app.use( updateRouter );

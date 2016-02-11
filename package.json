@@ -9,11 +9,11 @@
     "iojs": ">= 1.6.2"
   },
   "scripts": {
-    "create:index": "mustang -t index.tmpl -i config.json",
+    "create:index": "mustang -t index.tmpl -i config.json -o index.html",
     "predev": "npm run create:index && mkdir -p build/ && cp index.html build/",
     "dev": "webpack-dev-server --host 0.0.0.0 --hot --progress --colors --content-base build",
-    "server": "node server/server.js",
-    "server:dev": "DEBUG=*,tinderlicht node server/server.js",
+    "backend": "node server/server.js",
+    "backend:dev": "DEBUG=tinderlicht node server/server.js",
     "predeploy": "npm run create:index",
     "deploy": "NODE_ENV=production webpack -p",
     "test": "node webpack-mocha.config.js"
@@ -41,6 +41,7 @@
     "firebase": "^2.3.1",
     "fireproof": "^3.0.3",
     "immutable": "^3.6.2",
+    "jquery": "^2.2.0",
     "jsdom": "6.5.1",
     "json-loader": "^0.5.1",
     "jsonld": "^0.4.2",
@@ -66,6 +67,8 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "react": "^0.14.7",
