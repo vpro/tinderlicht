@@ -1,7 +1,7 @@
 # Tinderlicht
 
 First:
-``` npm run prepare ```
+``` npm install ```
 
 Server:
 ``` npm run dev ```

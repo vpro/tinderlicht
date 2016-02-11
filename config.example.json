@@ -1,0 +1,9 @@
+{
+  "firebase": {
+    "server": "your-fire-base-host",
+    "secret": "your-server-secret"
+  },
+  "bridge": {
+    "server": "your-bridge-host+port"
+  }
+}
