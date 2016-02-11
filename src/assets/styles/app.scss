@@ -86,6 +86,11 @@ body {
 	background: #000;
 }
 
+#app {
+  max-width: 800px;
+  margin: auto;
+}
+
 submit, button, button:active { border: none; outline: none;}
 
 .app-container {
