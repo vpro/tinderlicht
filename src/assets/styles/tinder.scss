@@ -269,3 +269,21 @@ input {
   opacity: 0.01;
   transition: opacity 30000ms ease-in;
 }
+
+/* MEDIA QUERIESSSSS */
+@media (max-width: 568px) {
+  	.profile {
+  		height: 320px !important;
+  	}
+  	.profile__card {
+  		margin-top: 180px !important;
+  	}
+}
+@media (min-width: 568px) and (max-width: 769px) {
+  	.profile {
+  		height: 440px !important;
+  	}
+  	.profile__card {
+  		margin-top: 300px !important;
+  	}
+}

@@ -113,6 +113,25 @@ class Tinderlicht extends React.Component{
 		}
 	}
 
+	initialPosition(){
+		console.log('trigger')
+		var thisPos = this.state.userData.tinderStats.currentPosition;
+
+		console.log('preference', this.state.userData.genderPreference)
+		console.log('thisgender', this.state.profilesData[thisPos].gender)
+
+		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
+			console.log('do nothing')
+
+		} else {
+			this.setState(function(state){
+				state.userData.tinderStats.currentPosition++
+				return state;
+			}, this.updateDB)
+		}
+
+	}
+
 	determinePosition(){
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
 
@@ -431,6 +450,7 @@ clickInnersettings(event){
 	        return (
 	        	<div className="app-container tinderview">
 	        		{ this.checkEndOfUsers() }
+	        		{ this.initialPosition() }
 	    			<nav>
 		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
 		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
