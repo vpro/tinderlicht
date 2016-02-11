@@ -2,7 +2,6 @@ import React from 'react';
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import Promise from 'bluebird';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import axios from 'axios';
 import RadioGroup from 'react-radio-group';
@@ -18,9 +17,7 @@ import MutualLikes from './interface/mutual-likes.jsx';
 
 import Socialmedia from './interface/social.jsx';
 
-
 import tinderlicht from '../assets/icons/tinderlicht.svg';
-import data from '../assets/data/mockusers.json';
 import Model from '../assets/data/model.jsx';
 
 

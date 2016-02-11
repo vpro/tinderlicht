@@ -16,6 +16,7 @@ class User {
 class TinderStats {
   constructor(){
     this.currentPosition = 0;
+    this.numberMatches = 0;
     this.likes = [""];
     this.dislikes = [""];
   };
