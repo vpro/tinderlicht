@@ -48,8 +48,14 @@
 .profile__meetup {
 	position: absolute;
 	right: 20px;
-	font-family: SimplisticSans-Medium;
+	font-family: SimplisticSans-Normal;
 	font-size: 14px;
+	margin-top: -29px;
+	text-align: right;
+	color: white;
+  background: #CCC;
+  padding: 5px;
+  line-height: 13px;
 }
 
 .profile__name { 
