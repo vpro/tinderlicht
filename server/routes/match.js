@@ -64,9 +64,9 @@ router.post( '/match/:id', function ( req, res ) {
 
                 var data = dataSnapshot.val();
 
-                if ( data && data.id === req.params.id ) {
+                if ( data && data.id === req.params.id && data.email.length ) {
 
-                    sendEmail( data.name, 'f.bosma@vpro.nl' ).then(function () {
+                    sendEmail( data.name, data.email ).then(function () {
                         helpers.respondWithSuccess( res );
                     }, function () {
                         helpers.respondWithServerError( res, 'mail failure');
