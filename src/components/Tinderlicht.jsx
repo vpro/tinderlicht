@@ -263,6 +263,13 @@ class Tinderlicht extends React.Component{
 
 	stopSpamming(event) { this.setEmailToFalse() }
 
+	setEmailToFalse(){
+		this.setState(function(state){
+			state.userData.email = '';
+			return state;
+		}, this.updateDB)	
+	}
+
 	handleEmailChange(event) { 
 		var emailadres = event.target.value;
 		this.setEmail(emailadres);
@@ -430,7 +437,7 @@ class Tinderlicht extends React.Component{
 									<h1>leeftijd</h1>
 									<p className="settings-text">Om je zo goed mogelijk te kunnen matchen, willen we graag een paar gegevens van je weten. Die gebruiken we alleen om je te kunnen matchen en voor geen enkel ander doel.</p>
 									<p className="settings-text">Mogen we weten hoe oud je bent?</p>
-									<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
+									<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="leeftijd" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
 							</div>
 						)
@@ -557,8 +564,8 @@ class Tinderlicht extends React.Component{
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
-	    			<h1>Matches</h1>
-	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up <a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
+	    			<h1>matches</h1>
+	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up. <a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
 	    			<ul>
 	    			{this.state.mutualLikes.map((profileIds) => {
 	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
@@ -580,8 +587,8 @@ class Tinderlicht extends React.Component{
 	    				<br/>
 	    			<h1>instellingen</h1>
 	    			<p className="settings-text">Pas je profieltekst aan:</p>
-	    				<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Gebruik maximaal 200 tekens om jezelf te omschrijven voor potentiële matches." value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
-	    			<p className="settings-text">Klik <span onClick={this.stopSpamming.bind(this)}>hier</span> om geen e-mails meer te ontvangen.</p>
+	    				<textarea className="settings__profileinput zondertop" rows="6" cols="60" type="text" placeholder="Gebruik maximaal 200 tekens om jezelf te omschrijven voor potentiële matches." value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
+	    			<p className="settings-text">Klik <span className="noemail" onClick={this.stopSpamming.bind(this)}>hier</span> om geen e-mails meer te ontvangen.</p>
 	    			<p className="settings-text">Wil je je account verwijderen? Mail <a href={mailMsg}>tegenlicht@vpro.nl</a></p>
 	    		</div>
 	    	)

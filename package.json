@@ -53,13 +53,14 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "mustache": "^2.2.1",
     "nodemailer": "^2.1.0",
-    "nodemailer-sendmail-transport": "^1.0.0",    
+    "nodemailer-sendmail-transport": "^1.0.0",
     "react-radio-group": "^2.2.0",
     "uglifyjs": "^2.4.10"
   }
