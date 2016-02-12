@@ -13,6 +13,12 @@ var firebaseConnection = new Firebase( config.firebase.server );
 var MAILGUN_KEY = new Buffer( config.mail.apikey ).toString('base64');
 var MAIL_TMPL = fs.readFileSync( __dirname +'/../templates/mail.tmpl', 'utf8');
 
+var nodemailer = require('nodemailer');
+var sendmailTransport = require('nodemailer-sendmail-transport');
+var mailTransporter = nodemailer.createTransport(sendmailTransport({
+    path: '/usr/lib/sendmail'
+}));
+
 // TODO: validate path
 var isValidPath = function ( path ) {
     return true;
@@ -46,6 +52,17 @@ var sendEmail = function ( name, adress ) {
         } );
 };
 
+var sendMailer = function ( name, adress, callback ) {
+
+    mailTransporter.sendMail({
+            from: 'VPRO Tegenlicht <postmaster@'+ mailDomain +'.mailgun.org>',
+            to: name + ' <' + adress + '>',
+            subject: 'Match via VPRO Tinderlicht!',
+            text: Mustache.render( MAIL_TMPL, { name: name, break: '\n' } ),
+            html: Mustache.render( MAIL_TMPL, { name: name, break: '<br />' } )
+        }, callback );
+};
+
 /**
  * Will only respond to a post request
  * @param {String} :id The user id of the user that has a match
@@ -66,11 +83,19 @@ router.post( '/match/:id', function ( req, res ) {
 
                 if ( data && data.id === req.params.id && data.email.length ) {
 
-                    sendEmail( data.name, data.email ).then(function () {
-                        helpers.respondWithSuccess( res );
-                    }, function () {
-                        helpers.respondWithServerError( res, 'mail failure');
-                    });
+                    //sendEmail( data.name, data.email ).then(function () {
+                    //    helpers.respondWithSuccess( res );
+                    //}, function () {
+                    //    helpers.respondWithServerError( res, 'mail failure');
+                    //});
+
+                    sendMailer( data.name, data.email, function ( err ) {
+                        if ( err ) {
+                            helpers.respondWithServerError( res, 'mail failure' );
+                        } else {
+                            helpers.respondWithSuccess( res );
+                        }
+                    } )
 
                 } else {
                     helpers.respondWithBadRequest( res );
