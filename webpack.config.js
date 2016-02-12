@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+require('es6-promise').polyfill();
+
 var config = {
   entry: {
     app: [
