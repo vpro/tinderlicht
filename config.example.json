@@ -7,8 +7,6 @@
     "server": "your-backend-server-host"
   },
   "mail": {
-    "apikey": "your mailgun api key",
-    "domain": "your mailgun domain",
     "from": "name <email>"
   }
 }

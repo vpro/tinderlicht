@@ -1,6 +1,5 @@
 var config = require( './../../config.json' );
 
-var axios = require( 'axios' );
 var debug = require( 'debug' )( 'tinderlicht' );
 var express = require( 'express' );
 var Firebase = require( 'firebase' );
@@ -10,12 +9,10 @@ var Mustache = require('mustache');
 var router = express.Router();
 
 var firebaseConnection = new Firebase( config.firebase.server );
-var MAILGUN_KEY = new Buffer( config.mail.apikey ).toString('base64');
-var MAIL_TMPL = fs.readFileSync( __dirname +'/../templates/mail.tmpl', 'utf8');
 
 var nodemailer = require('nodemailer');
 var sendmailTransport = require('nodemailer-sendmail-transport');
-var mailTransporter = nodemailer.createTransport(sendmailTransport({
+var mailTransporter = nodemailer.createTransport( sendmailTransport({
     path: '/usr/sbin/sendmail'
 }));
 
@@ -32,24 +29,6 @@ var toQueryString = function ( obj ) {
         }
     }
     return parts.join( "&" );
-};
-
-var sendEmail = function ( name, adress ) {
-
-    var mailDomain = config.mail.domain;
-
-    return axios.post( 'https://api.mailgun.net/v3/'+ mailDomain +'.mailgun.org/messages',
-        toQueryString( {
-            from: 'VPRO Tegenlicht <postmaster@'+ mailDomain +'.mailgun.org>',
-            to: name + ' <' + adress + '>',
-            subject: 'Match via VPRO Tinderlicht!',
-            text: Mustache.render( MAIL_TMPL, { name: name, break: '\n' } ),
-            html: Mustache.render( MAIL_TMPL, { name: name, break: '<br />' } )
-        } ), {
-            headers: {
-                "Authorization": 'Basic ' + MAILGUN_KEY
-            }
-        } );
 };
 
 var sendMailer = function ( name, adress, callback ) {
@@ -82,12 +61,6 @@ router.post( '/match/:id', function ( req, res ) {
                 var data = dataSnapshot.val();
 
                 if ( data && data.id === req.params.id && data.email.length ) {
-
-                    //sendEmail( data.name, data.email ).then(function () {
-                    //    helpers.respondWithSuccess( res );
-                    //}, function () {
-                    //    helpers.respondWithServerError( res, 'mail failure');
-                    //});
 
                     sendMailer( data.name, data.email, function ( err ) {
                         if ( err ) {

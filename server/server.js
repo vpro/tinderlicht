@@ -20,7 +20,8 @@ fs.stat('../config.json', function ( err, stats ) {
          * -
          */
 
-        var app = require('express')();
+        var express = require('express');
+        var app = express();
         var cors = require('cors');
         var config = require('../config.json');
         var Firebase = require('firebase');
@@ -35,14 +36,23 @@ fs.stat('../config.json', function ( err, stats ) {
 
         var childRouter = require('./routes/child');
         var configRouter = require('./routes/config');
+        var listRouter = require('./routes/list');
         var matchRouter = require('./routes/match');
         var updateRouter = require('./routes/update');
 
-        app.use(cors());
+        app.use( cors() );
         app.use( childRouter );
         app.use( configRouter );
+        app.use( listRouter );
         app.use( matchRouter );
         app.use( updateRouter );
+
+        if ( process.env.NODE_ENV && process.env.NODE_ENV === 'production' ) {
+            app.use( express.static( __dirname +'/../build') );
+            app.use('/', function( req, res ){
+              res.location( 'index.html' );
+            });
+        }
 
         firebaseConnection.authWithCustomToken( config.firebase.secret ).then( function () {
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
 import SecureFireproof from './utils/SecureFireproof.js';
+import TinderlichtConfig from './utils/config.js';
 import Promise from 'bluebird';
 
 import axios from 'axios';
@@ -38,20 +39,27 @@ class Tinderlicht extends React.Component{
 	}
 
 	componentWillMount(){
-		this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
-		var dataObj = {};
-		var dataArr = [];
-		
-		this.firebase.orderByChild("date").on("child_added", function(snapshot) {
-		  dataObj[snapshot.key()] = snapshot.val();
-		  dataArr.push(snapshot.val());
-		})
+		this.secureFireproof = new SecureFireproof( TinderlichtConfig.backend.server );
+		this.secureFireproof.list().then( function( profilesDataObj ) {
 
-		this.setState(function(state){
-			state.profilesDataObj = dataObj;
-			state.profilesData = dataArr;
-			return state;
-		}) 
+			var profilesData = [];
+
+		    if ( profilesDataObj ) {
+
+				for ( var profile in profilesDataObj ) {
+					if ( profilesDataObj.hasOwnProperty( profile ) ) {
+						profilesData.push( profilesDataObj[ profile ] );
+					}
+				}
+
+				this.setState(function(state){
+					state.profilesDataObj = profilesDataObj;
+					state.profilesData = profilesData;
+					return state;
+				})
+			}
+
+		}.bind( this ));
 	}
 
 	checkEndOfUsers(){
@@ -124,10 +132,15 @@ class Tinderlicht extends React.Component{
 		}
 
 		if(thereIsAMatch === true) {
+
 			this.setState(function(state){
 				state.userData.tinderStats.numberMatches++;
 				return state;
-			}, this.updateDB)	
+			}, this.updateDB);
+
+			// notify the other user
+			this.secureFireproof.match( this.state.profilesData[thisPos].id );
+
 			this.setView('match');
 		} else {
 			this.determinePosition();

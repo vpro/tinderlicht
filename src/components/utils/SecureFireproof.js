@@ -1,5 +1,16 @@
 import $ from 'jquery';
 
+var isCrossDomain = function( url ){
+
+    var currentDomain = document.location.hostname,
+        tempA = document.createElement( 'a' );
+
+    tempA.setAttribute( 'href', url );
+
+    return currentDomain !== tempA.hostname;
+
+};
+
 var SecureFireproof = function ( backendServer ) {
 
     this.backendServer = backendServer;
@@ -7,18 +18,44 @@ var SecureFireproof = function ( backendServer ) {
 
 SecureFireproof.prototype = {
 
+    list: function () {
+
+        var deferred = new $.Deferred();
+        var url = this.backendServer+'/list';
+
+        $.ajax({
+            crossDomain: isCrossDomain( url ),
+            dataType: 'json',
+            jsonp: false,
+            processData: false,
+            type: 'POST',
+            url: url
+        }).then( function ( childData ) {
+
+            if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
+                deferred.resolve( childData );
+            } else {
+                deferred.resolve();
+            }
+
+        }, deferred.reject );
+
+        return deferred.promise();
+    },
+
     child: function ( childPath ) {
 
         var deferred = new $.Deferred();
+        var url = this.backendServer+'/child/'+ encodeURIComponent( childPath );
 
         $.ajax({
             contentType: 'application/json',
-            crossDomain: true,
+            crossDomain: isCrossDomain( url ),
             dataType: 'json',
             jsonp: false,
             processData: false,
             type: 'GET',
-            url: this.backendServer+'/child/'+ encodeURIComponent( childPath )
+            url: url
         }).then( function ( childData ) {
 
             if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
@@ -33,25 +70,30 @@ SecureFireproof.prototype = {
     },
 
     match: function ( childPath ) {
+
+        var url = this.backendServer+'/match/'+ encodeURIComponent( childPath );
+
         return $.ajax({
-            crossDomain: true,
+            crossDomain: isCrossDomain( url ),
             jsonp: false,
             processData: false,
             type: 'POST',
-            url: this.backendServer+'/match/'+ encodeURIComponent( childPath )
+            url: url
         }).promise();
     },
 
     update: function ( value ) {
 
+        var url = this.backendServer+'/update';
+
         return $.ajax({
             contentType: 'application/json',
-            crossDomain: true,
+            crossDomain: isCrossDomain( url ),
             data: JSON.stringify( value || {} ),
             jsonp: false,
             processData: false,
             type: 'POST',
-            url: this.backendServer+'/update'
+            url: url
         }).promise();
     }
 };

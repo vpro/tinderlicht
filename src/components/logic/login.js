@@ -23,7 +23,7 @@ function login(provider) {
 			    console.log("Login Failed!", error);
 			  } else {
 			    // the access token will allow us to make Open Graph API calls (kan weg)
-			    console.log(authData.facebook.accessToken);
+			    //console.log(authData.facebook.accessToken);
 			  }
 			}, {
 			  scope: "email" // the permissions requested
@@ -32,7 +32,6 @@ function login(provider) {
 		.then((authData)=>{
 			return this.setState((state)=>{
 				state.authData = authData;
-				console.log(state.authData);
 				return state;
 			});
 		})
@@ -45,7 +44,6 @@ function login(provider) {
 		.then((userData)=>{
 			return this.setState((state)=>{
 				state.userData = userData;
-				console.log(state.userData);
 				return state;
 			});
 		})

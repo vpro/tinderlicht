@@ -9,12 +9,12 @@
     "iojs": ">= 1.6.2"
   },
   "scripts": {
-    "create:index": "mustang -t index.tmpl -i config.json -o index.html",
-    "predev": "npm run create:index && mkdir -p build/ && cp index.html build/",
+    "create:index": "mustang -t index.tmpl -i config.json -o build/index.html",
+    "predev": "mkdir -p build/ && npm run create:index",
     "dev": "webpack-dev-server --host 0.0.0.0 --hot --progress --colors --content-base build",
-    "backend": "node server/server.js",
+    "backend": "NODE_ENV=production node server/server.js",
     "backend:dev": "DEBUG=tinderlicht node server/server.js",
-    "predeploy": "npm run create:index",
+    "predeploy": "mkdir -p build/ && npm run create:index",
     "deploy": "NODE_ENV=production webpack -p",
     "test": "node webpack-mocha.config.js"
   },
