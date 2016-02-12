@@ -28,7 +28,7 @@ var config = {
       { test: /\.(js|jsx)$/, loader: "eslint-loader", exclude: /node_modules/},
       { test: /\.json$/, loader: 'json' },
       { test: /\.yml$/, loader: 'json!yaml' },
-      { test: /\.scss$/, loader: 'style!css!autoprefixer!sass' },
+      { test: /\.scss$/, loader: 'style!css!sass' },
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
     ]
   },
