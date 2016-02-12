@@ -34,7 +34,7 @@ var sendEmail = function ( name, adress ) {
 
     return axios.post( 'https://api.mailgun.net/v3/'+ mailDomain +'.mailgun.org/messages',
         toQueryString( {
-            from: 'Noreply <postmaster@'+ mailDomain +'.mailgun.org>',
+            from: 'VPRO Tegenlicht <postmaster@'+ mailDomain +'.mailgun.org>',
             to: name + ' <' + adress + '>',
             subject: 'Match via VPRO Tinderlicht!',
             text: Mustache.render( MAIL_TMPL, { name: name, break: '\n' } ),
@@ -47,9 +47,10 @@ var sendEmail = function ( name, adress ) {
 };
 
 /**
+ * Will only respond to a post request
  * @param {String} :id The user id of the user that has a match
  */
-router.get( '/match/:id', function ( req, res ) {
+router.post( '/match/:id', function ( req, res ) {
 
     if ( ! ( req.params && req.params.id && isValidPath( req.params.id ) ) ) {
 
