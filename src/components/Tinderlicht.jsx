@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 import Fireproof from 'fireproof';
+import SecureFireproof from './utils/SecureFireproof.js';
 import Promise from 'bluebird';
 
 import axios from 'axios';
@@ -368,7 +369,7 @@ class Tinderlicht extends React.Component{
 // });
 
 	updateDB(){
-		return this.fireproof.update({[this.state.userData.id]: this.state.userData});
+		return this.secureFireproof.update({[this.state.userData.id]: this.state.userData});
 	}
 
 	setView(view){

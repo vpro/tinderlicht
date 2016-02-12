@@ -18,7 +18,7 @@ class Settings extends React.Component{
 
 			this.setState(function(event, state){
 				state.userData.profile.favoriteEpisode = event.target.value;
-			}, this.fireproof.update({[this.state.userData.id]: this.state.userData}));
+			}, this.secureFireproof.update({[this.state.userData.id]: this.state.userData}));
   	}
 
     render() {

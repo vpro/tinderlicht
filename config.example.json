@@ -1,0 +1,14 @@
+{
+  "firebase": {
+    "server": "your-fire-base-host",
+    "secret": "your-firebase-app-secret"
+  },
+  "backend": {
+    "server": "your-backend-server-host"
+  },
+  "mail": {
+    "apikey": "your mailgun api key",
+    "domain": "your mailgun domain",
+    "from": "name <email>"
+  }
+}

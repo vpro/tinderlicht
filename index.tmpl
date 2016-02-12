@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<title>VPRO Tinderlicht</title>
+	<title>VproTinderLicht</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -17,7 +17,9 @@
     <div id="app">
   	</div>
 
-    <script type="text/javascript" src="http://localhost:4000/config.js" charset="utf-8"></script>
+    {{#backend}}
+    <script type="text/javascript" src="{{{server}}}/config.js" charset="utf-8"></script>
+    {{/backend}}
     <script type="text/javascript" src="vendor.bundle.js" charset="utf-8"></script>
     <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
 
