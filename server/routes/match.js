@@ -16,7 +16,7 @@ var MAIL_TMPL = fs.readFileSync( __dirname +'/../templates/mail.tmpl', 'utf8');
 var nodemailer = require('nodemailer');
 var sendmailTransport = require('nodemailer-sendmail-transport');
 var mailTransporter = nodemailer.createTransport(sendmailTransport({
-    path: '/usr/lib/sendmail'
+    path: '/usr/sbin/sendmail'
 }));
 
 // TODO: validate path
