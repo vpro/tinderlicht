@@ -362,14 +362,6 @@ class Tinderlicht extends React.Component{
 		this.setView('innersettings');
 	}
 
-
-
-
-//  var ref = new Firebase("https://tinderlicht.firebaseio.com");
-// ref.orderByChild("date").on("child_added", function(snapshot) {
-//   console.log(snapshot.val());
-// });
-
 	updateDB(){
 		return this.secureFireproof.update({[this.state.userData.id]: this.state.userData});
 	}
