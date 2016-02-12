@@ -21,7 +21,6 @@
 
 .auth-button {
 	font-family: SimplisticSans-Medium;
-	border-radius: 24px;
 	cursor: pointer;
 	&:hover{
 		background: lighten($fb-login, 5%);
@@ -51,7 +50,6 @@
 	font-size: 1.25em; 
 	color: white;
 	background: $fb-login;
-	border-radius: 10px;
 	text-transform: uppercase;
 	display: block;
 	margin: 0 auto;
