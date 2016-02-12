@@ -28,7 +28,7 @@ class Profile {
     this.profileText = "";
     this.age = "";
     this.tegenlichtMeetup = "zeker";
-    this.tegenlichtLocatie = "zwijger";
+    this.tegenlichtLocatie = "amsterdam";
   };
 };
 

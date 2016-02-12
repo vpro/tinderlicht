@@ -231,9 +231,19 @@ class Tinderlicht extends React.Component{
 	setPreferenceMaleHandler(event) { this.setPreference('male') }
 	setPreferenceFemaleHandler(event) { this.setPreference('female') }
 	setPreferenceBiHandler(event) { this.setPreference('bi') }
+
+	/* Deze kunnen in theorie weg */
 	setMeetupNietHandler(event) { this.setTegenlichtStatus('niet') }
 	setMeetupMisschienHandler(event) { this.setTegenlichtStatus('misschien') }
 	setMeetupZekerHandler(event) { this.setTegenlichtStatus('zeker') }
+
+	setMeetupAmsterdamHandler(event) { this.setMeetupAmsterdam() }
+	setMeetupAmsterdam(){
+		this.setState(function(state){
+			state.userData.profile.tegenlichtLocatie = 'amsterdam';
+			return state;
+		}, this.updateDB)	
+	}
 
 	handleEmailChange(event) { 
 		var emailadres = event.target.value;
@@ -455,16 +465,15 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Tegenlicht Meet Up</h1>
-								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupNietHandler.bind(this)}>de landelijke meetup in Pakhuis de Zwijger (17 februari)</span>/
-									<span className={userData.profile.tegenlichtMeetup == 'misschien' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupMisschienHandler.bind(this)}>een lokale meetup</span>/
-									<span className={userData.profile.tegenlichtMeetup == 'zeker' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupZekerHandler.bind(this)}>zeker</span> naar een Tegenlicht meetup</p>
+								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupAmsterdamHandler.bind(this)}>de landelijke meet up in Pakhuis de Zwijger (17 februari)</span>/
+									<span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--off' : 'settings__pickstatus--on'} onClick={this.setMeetupMisschienHandler.bind(this)}>een lokale meet up</span>
+									</p>
 								
-								<p className={userData.profile.tegenlichtMeetup == 'niet' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtMeetup == 'zeker' ? 'Ik ga zeker naar:' : 'Ik ga misschien naar:'}</p>
+								<p className={userData.profile.tegenlichtMeetup == 'amsterdam' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtLocatie == 'amsterdam' ? '' : 'Ik ga naar de lokale meet up in:'}</p>
 
 								<RadioGroup name="meetupLocatie" selectedValue={this.state.userData.profile.tegenlichtLocatie} onChange={this.setTegenlichtLocatieHandler.bind(this)}>
 								  {Radio => (
-								    <div className={userData.profile.tegenlichtMeetup == 'niet' ? 'meetupLocs meetupLocs--off' : 'meetupLocs meetupLocs--on'}>
-								      <label><Radio value="amsterdam" />Amsterdam (Pakhuis de Zwijger, 17 feb)</label><br/>
+								    <div className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'meetupLocs meetupLocs--off' : 'meetupLocs meetupLocs--on'}>
 								      <label><Radio value="amersfoort" />Amersfoort (Stadslab033, 17 feb)</label><br/>
 								      <label><Radio value="vlaardingen" />Vlaardingen (KADE40, 17 feb)</label><br/>
 								      <label><Radio value="nijmegen" />Nijmegen (DROOMvillaLUX, 18 feb)</label><br/>
