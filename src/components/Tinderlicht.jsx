@@ -120,6 +120,10 @@ class Tinderlicht extends React.Component{
 		}
 
 		if(thereIsAMatch === true) {
+			this.setState(function(state){
+				state.userData.tinderStats.numberMatches++;
+				return state;
+			}, this.updateDB)	
 			this.setView('match');
 		} else {
 			this.determinePosition();
@@ -247,6 +251,16 @@ class Tinderlicht extends React.Component{
 			return state;
 		}, this.updateDB)	
 	}
+
+	setMeetupLokaalHandler(event) { this.setMeetupLokaal() }
+	setMeetupLokaal(){
+		this.setState(function(state){
+			state.userData.profile.tegenlichtLocatie = 'amersfoort';
+			return state;
+		}, this.updateDB)	
+	}
+
+	stopSpamming(event) { this.setEmailToFalse() }
 
 	handleEmailChange(event) { 
 		var emailadres = event.target.value;
@@ -403,7 +417,7 @@ class Tinderlicht extends React.Component{
 					} else { 
 							this.setView('tinder');
 							{/* Moet iets returnen */}
-							return (<p>Loading</p>);
+							return (<p>Error</p>);
 					}		
     	} else if (this.state.view == 2) {
     		var userData = this.state.userData; 
@@ -412,7 +426,7 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-									<h1>Leeftijd</h1>
+									<h1>leeftijd</h1>
 									<p className="settings-text">Om je zo goed mogelijk te kunnen matchen, willen we graag een paar gegevens van je weten. Die gebruiken we alleen om je te kunnen matchen en voor geen enkel ander doel.</p>
 									<p className="settings-text">Mogen we weten hoe oud je bent?</p>
 									<input type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="18" max="99" placeholder="??" value={this.state.userData.profile.age} onChange={this.handleAgeChange.bind(this)}></input>
@@ -426,7 +440,7 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>Geaardheid</h1>
+								<h1>geaardheid</h1>
 								<p className="settings-text">Het helpt ook om te weten wat je geslacht is en waar je voorkeur naar uit gaat.</p>
 								<p className="settings-text">Wat is je geslacht? <span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
 								<p className="settings-text">Wie zoek je? <span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span>/<span className={userData.genderPreference === 'bi' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceBiHandler.bind(this)}>maakt niet uit</span></p>
@@ -440,7 +454,7 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>Je e-mailadres?</h1>
+								<h1>je e-mailadres?</h1>
 								<p className="settings-text">Om je op de hoogte te brengen van een match, willen we je graag mailen.</p>
 								<p className="settings-text">We gebruiken je mailadres uitsluitend voor het versturen van notificaties over nieuwe matches en delen je mailadres niet met derden.</p>
 								<input className="settings__emailinput" placeholder="jouw@emailadres.nl" value={userData.email} onChange={this.handleEmailChange.bind(this)}></input>
@@ -454,7 +468,7 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>Omschrijf jezelf</h1>
+								<h1>omschrijf jezelf</h1>
 								<p className="settings-text">Wat verwacht je van een afspraakje tijdens een Tegenlicht Meet Up en wie ben je? Kijk je elke week VPRO Tegenlicht of ben je meer een zondagskijker?</p>
 								<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Gebruik maximaal 200 tekens om jezelf te omschrijven voor potentiële matches." value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
 								<div className="verderbutton" onClick={this.buttonNext.bind(this)}>Verder</div>
@@ -469,7 +483,7 @@ class Tinderlicht extends React.Component{
 								<NavBar settingsmode={true}/>
 								<h1>Tegenlicht Meet Up</h1>
 								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupAmsterdamHandler.bind(this)}>de landelijke meet up in Pakhuis de Zwijger (17 februari)</span>/
-									<span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--off' : 'settings__pickstatus--on'} onClick={this.setMeetupMisschienHandler.bind(this)}>een lokale meet up</span>
+									<span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--off' : 'settings__pickstatus--on'} onClick={this.setMeetupLokaalHandler.bind(this)}>een lokale meet up</span>
 									</p>
 								
 								<p className={userData.profile.tegenlichtMeetup == 'amsterdam' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtLocatie == 'amsterdam' ? '' : 'Ik ga naar de lokale meet up in:'}</p>
@@ -527,7 +541,7 @@ class Tinderlicht extends React.Component{
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
-	    			<h1>Een match</h1>
+	    			<h1>een match</h1>
 	    			<Match profileUrl={this.state.profilesData[this.state.userData.tinderStats.currentPosition].profileUrl}
 	    						profileId={this.state.profilesData[this.state.userData.tinderStats.currentPosition].id} />
 	    			<div className="verderbutton" onClick={this.clickNext.bind(this)}>Verder</div>
@@ -542,7 +556,8 @@ class Tinderlicht extends React.Component{
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
-	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up</p>
+	    			<h1>Matches</h1>
+	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up <a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
 	    			<ul>
 	    			{this.state.mutualLikes.map((profileIds) => {
 	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
@@ -551,6 +566,9 @@ class Tinderlicht extends React.Component{
 	    		</div>
 	    	)
 	    } else if (this.state.view == "innersettings") {
+	    	var userId = this.state.userData.id;
+	    	// var mailMessage = "http://www.google.nl";
+	    	var mailMsg = "mailto:tegenlicht@vpro.nl?cc=e.van.zummeren@vpro.nl&subject=Tinderlicht account verwijderen: " + userId + "&body=Ik wil graag mijn Tinderlichtaccount verwijderen. Mijn gebruikers id is " + userId;
 	    	return (
 	    		<div className="settings">
 	    			<nav>
@@ -559,9 +577,11 @@ class Tinderlicht extends React.Component{
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
-	    			<p className="settings-text">Klik hier om je profiel opnieuw in te stellen</p>
-	    			<p className="settings-text">Wil je je account verwijderen? Mail tegenlicht@vpro.nl</p>
-	    			<p className="settings-text">Wil je een e-mail opt-out? Mail tegenlicht@vpro.nl</p>
+	    			<h1>instellingen</h1>
+	    			<p className="settings-text">Pas je profieltekst aan:</p>
+	    				<textarea className="settings__profileinput" rows="6" cols="60" type="text" placeholder="Gebruik maximaal 200 tekens om jezelf te omschrijven voor potentiële matches." value={this.state.userData.profile.profileText} onChange={this.handleProfileChange.bind(this)}></textarea>
+	    			<p className="settings-text">Klik <span onClick={this.stopSpamming.bind(this)}>hier</span> om geen e-mails meer te ontvangen.</p>
+	    			<p className="settings-text">Wil je je account verwijderen? Mail <a href={mailMsg}>tegenlicht@vpro.nl</a></p>
 	    		</div>
 	    	)
 	    } else if (this.state.view == 'tinderNoMatches'){
@@ -573,7 +593,7 @@ class Tinderlicht extends React.Component{
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
-						<h1>Geen matches</h1>
+						<h1>geen matches</h1>
 	    			<p className="settings-text">Je hebt iedereen in ons bestand beoordeeld! Wie weet melden zich snel weer nieuwe mensen aan, dus kom binnenkort nog eens terug. Wie weet vind je dan je ideale match! Je kunt natuurlijk ook gewoon naar een Tegenlicht Meet Up gaan en wie weet spreek je iemand na afloop tijdens de borrel. Proost!</p>
 	    		</div>
 	    	);

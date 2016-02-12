@@ -91,6 +91,10 @@ body {
   margin: auto;
 }
 
+a:hover, a:active {
+  color: white;
+}
+
 submit, button, button:active { border: none; outline: none;}
 
 .app-container {
