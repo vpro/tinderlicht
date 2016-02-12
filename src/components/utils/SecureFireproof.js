@@ -18,7 +18,7 @@ SecureFireproof.prototype = {
             jsonp: false,
             processData: false,
             type: 'GET',
-            url: this.backendServer+'/child/'+ childPath
+            url: this.backendServer+'/child/'+ encodeURIComponent( childPath )
         }).then( function ( childData ) {
 
             if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
@@ -30,6 +30,16 @@ SecureFireproof.prototype = {
         }, deferred.reject );
 
         return deferred.promise();
+    },
+
+    match: function ( childPath ) {
+        return $.ajax({
+            crossDomain: true,
+            jsonp: false,
+            processData: false,
+            type: 'POST',
+            url: this.backendServer+'/match/'+ encodeURIComponent( childPath )
+        }).promise();
     },
 
     update: function ( value ) {
