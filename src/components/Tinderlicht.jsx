@@ -39,7 +39,7 @@ class Tinderlicht extends React.Component{
 	componentWillMount(){
 		this.firebase = new Firebase('https://tinderlicht.firebaseio.com/');
 		var dataObj = {};
-		var dataArr = []
+		var dataArr = [];
 		
 		this.firebase.orderByChild("date").on("child_added", function(snapshot) {
 		  dataObj[snapshot.key()] = snapshot.val();
@@ -54,9 +54,12 @@ class Tinderlicht extends React.Component{
 	}
 
 	checkEndOfUsers(){
+	console.log('run checkEndOfUsers()')
 	console.log(this.state);
-		var totalProfiles = this.state.profilesData.length - 1;
+	var totalProfiles = this.state.profilesData.length - 1;
+	console.log(totalProfiles);
 		if(totalProfiles <= this.state.userData.tinderStats.currentPosition){
+			console.log(this.state.userData.tinderStats.currentPosition)
 			this.setView('tinderNoMatches');
 		} 
 	}
@@ -422,8 +425,12 @@ class Tinderlicht extends React.Component{
 							</div>
 						)
 					} else { 
+						var totalProfiles = this.state.profilesData.length - 1;
+						if(totalProfiles <= this.state.userData.tinderStats.currentPosition) {
+							this.setView('tinderNoMatches');
+						} else {
 							this.setView('tinder');
-							{/* Moet iets returnen */}
+						}
 							return (<p>Error</p>);
 					}		
     	} else if (this.state.view == 2) {
@@ -447,7 +454,7 @@ class Tinderlicht extends React.Component{
 						return (
 							<div className="settings">
 								<NavBar settingsmode={true}/>
-								<h1>geaardheid</h1>
+								<h1>Wie zoek je?</h1>
 								<p className="settings-text">Het helpt ook om te weten wat je geslacht is en waar je voorkeur naar uit gaat.</p>
 								<p className="settings-text">Wat is je geslacht? <span className={userData.gender === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMaleHandler.bind(this)}>man</span>/<span className={userData.gender === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setFemaleHandler.bind(this)}>vrouw</span></p>
 								<p className="settings-text">Wie zoek je? <span className={userData.genderPreference === 'male' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceMaleHandler.bind(this)}>man</span>/<span className={userData.genderPreference === 'female' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceFemaleHandler.bind(this)}>vrouw</span>/<span className={userData.genderPreference === 'bi' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setPreferenceBiHandler.bind(this)}>maakt niet uit</span></p>
@@ -489,8 +496,8 @@ class Tinderlicht extends React.Component{
 							<div className="settings">
 								<NavBar settingsmode={true}/>
 								<h1>Tegenlicht Meet Up</h1>
-								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupAmsterdamHandler.bind(this)}>de landelijke meet up in Pakhuis de Zwijger (17 februari)</span>/
-									<span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--off' : 'settings__pickstatus--on'} onClick={this.setMeetupLokaalHandler.bind(this)}>een lokale meet up</span>
+								<p className="settings-text">Ik ga naar <span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--on' : 'settings__pickstatus--off'} onClick={this.setMeetupAmsterdamHandler.bind(this)}>de landelijke Tegenlicht Meet Up in Pakhuis de Zwijger (17 februari)</span> / 
+									<span className={userData.profile.tegenlichtLocatie == 'amsterdam' ? 'settings__pickstatus--off' : 'settings__pickstatus--on'} onClick={this.setMeetupLokaalHandler.bind(this)}> een lokale Tegenlicht Meet Up</span>
 									</p>
 								
 								<p className={userData.profile.tegenlichtMeetup == 'amsterdam' ? 'settings-text settings-text--off' : 'settings-text settings-text--on'}>{userData.profile.tegenlichtLocatie == 'amsterdam' ? '' : 'Ik ga naar de lokale meet up in:'}</p>
@@ -564,7 +571,7 @@ class Tinderlicht extends React.Component{
 		    		</nav>
 	    				<br/>
 	    			<h1>matches</h1>
-	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up. <a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
+	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up.<br/><a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
 	    			<ul>
 	    			{this.state.mutualLikes.map((profileIds) => {
 	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
