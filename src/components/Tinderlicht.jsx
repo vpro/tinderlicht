@@ -63,12 +63,8 @@ class Tinderlicht extends React.Component{
 	}
 
 	checkEndOfUsers(){
-	console.log('run checkEndOfUsers()')
-	console.log(this.state);
 	var totalProfiles = this.state.profilesData.length - 1;
-	console.log(totalProfiles);
 		if(totalProfiles <= this.state.userData.tinderStats.currentPosition){
-			console.log(this.state.userData.tinderStats.currentPosition)
 			this.setView('tinderNoMatches');
 		} 
 	}
@@ -103,7 +99,6 @@ class Tinderlicht extends React.Component{
 			state.userData.tinderStats.dislikes.push(state.profilesData[curPos].id);
 			return state;
 		}, this.updateDB)
-		console.log('Click: Dislike');
 		this.determinePosition();
 	}
 
@@ -113,21 +108,17 @@ class Tinderlicht extends React.Component{
 			state.userData.tinderStats.likes.push(state.profilesData[curPos].id);
 			return state;
 		}, this.updateDB)
-		console.log('Click: Like');
 		this.seeIfMatch();
 	}
 
 	seeIfMatch() {
 		var thisPos = this.state.userData.tinderStats.currentPosition;
 		var thereIsAMatch = null;
-		console.log('Check: Is er een match?')
 
 		for(let i = 0; i < this.state.profilesData[thisPos].tinderStats.likes.length; i++){
 			if(this.state.userData.id === this.state.profilesData[thisPos].tinderStats.likes[i]){
 				thereIsAMatch = true;
-				console.log('Check: Ja, er is een match')
 			} else {
-				console.log('Check: Nee, er is geen match')
 			}
 		}
 
@@ -148,18 +139,17 @@ class Tinderlicht extends React.Component{
 	}
 
 	initialPosition(){
-		console.log('Initiele positie bepalen')
 		var thisPos = this.state.userData.tinderStats.currentPosition;
 
-		console.log('Initiele positie: Mijn voorkeur is', this.state.userData.genderPreference)
-		console.log('Initiele positie: De eerste hit is een', this.state.profilesData[thisPos].gender)
+		//console.log('Initiele positie: Mijn voorkeur is', this.state.userData.genderPreference)
+		//console.log('Initiele positie: De eerste hit is een', this.state.profilesData[thisPos].gender)
 
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
-			console.log('Initiele positie:  Dit was de juiste voorkeur, positie blijft bestaan')
+			//console.log('Initiele positie:  Dit was de juiste voorkeur, positie blijft bestaan')
 
 		} else {
 			this.setState(function(state){
-				console.log('Initiele positie: Niet de juiste voorkeur, eentje optellen')
+				//console.log('Initiele positie: Niet de juiste voorkeur, eentje optellen')
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
@@ -170,27 +160,23 @@ class Tinderlicht extends React.Component{
 		this.checkEndOfUsers();
 
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
-		console.log('Huidige positie', this.state.userData.tinderStats.currentPosition)
-		console.log('Determine position [DP] draait')
+		//console.log('Huidige positie', this.state.userData.tinderStats.currentPosition)
 
 		if(this.state.userData.genderPreference === this.state.profilesData[thisPos].gender){
-			console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
-			console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
-			console.log('DP: Dat klopt, een positie verder')
+			//console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
+			//console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else if(this.state.userData.genderPreference === 'bi') { 
-			console.log('DP: Ik krijg dit alleen te zien wanneer ik biseksueel ben')
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				return state;
 			}, this.updateDB)
 		} else {
-			console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
-			console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
-			console.log('DP: Klopt niet, plus een en herhaal functie')
+			//console.log('DP: Mijn voorkeur is', this.state.userData.genderPreference)
+			//console.log('DP: Dit geslacht is', this.state.profilesData[thisPos].gender)
 			this.setState(function(state){
 				state.userData.tinderStats.currentPosition++
 				this.determinePosition()
@@ -211,14 +197,12 @@ class Tinderlicht extends React.Component{
 
 		/* Hij loopt evenlang als de lengte van mijn eigen likes */
 		for (let i = 1; i < userData.tinderStats.likes.length; i++){
-			console.log('Loop een keer')
 			var currentProf = userData.tinderStats.likes[i];
 			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, userData.id) === true){
 				tempMutualLikes.push(currentProf);
-				console.log('er is een match')
-				console.log(tempMutualLikes);
+				//console.log(tempMutualLikes);
 			} else {
-				console.log('geen match');
+				//console.log('geen match');
 			}
 		}
 
@@ -226,7 +210,6 @@ class Tinderlicht extends React.Component{
 			state.mutualLikes = tempMutualLikes
 			return state;
 		})
-		console.log(this.state.mutualLikes);
 		this.showMutualLikes();
 
 	}
@@ -237,7 +220,6 @@ class Tinderlicht extends React.Component{
 
 	handleAgeChange(event){
 		var leeftijd = event.target.value.substring(0, 2);
-		console.log(leeftijd);
 		this.ageChanger(leeftijd);
 	}
 
@@ -304,7 +286,6 @@ class Tinderlicht extends React.Component{
 	nextSettingsState(){
 		if(this.state.view <= 5){
 			var newState = this.state.view + 1;
-			console.log(newState);
 			this.setView(this.state.view+1)
 		} else {
 			this.setState(function(state){
