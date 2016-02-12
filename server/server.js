@@ -35,11 +35,13 @@ fs.stat('../config.json', function ( err, stats ) {
 
         var childRouter = require('./routes/child');
         var configRouter = require('./routes/config');
+        var matchRouter = require('./routes/match');
         var updateRouter = require('./routes/update');
 
         app.use(cors());
         app.use( childRouter );
         app.use( configRouter );
+        app.use( matchRouter );
         app.use( updateRouter );
 
         firebaseConnection.authWithCustomToken( config.firebase.secret ).then( function () {
