@@ -9,6 +9,7 @@ var Mustache = require('mustache');
 var router = express.Router();
 
 var firebaseConnection = new Firebase( config.firebase.server );
+var MAIL_TMPL = fs.readFileSync( __dirname +'/../templates/mail.tmpl', 'utf8');
 
 var nodemailer = require('nodemailer');
 var sendmailTransport = require('nodemailer-sendmail-transport');
@@ -19,16 +20,6 @@ var mailTransporter = nodemailer.createTransport( sendmailTransport({
 // TODO: validate path
 var isValidPath = function ( path ) {
     return true;
-};
-
-var toQueryString = function ( obj ) {
-    var parts = [];
-    for ( var i in obj ) {
-        if ( obj.hasOwnProperty( i ) ) {
-            parts.push( encodeURIComponent( i ) + "=" + encodeURIComponent( obj[i] ) );
-        }
-    }
-    return parts.join( "&" );
 };
 
 var sendMailer = function ( name, adress, callback ) {
