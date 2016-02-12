@@ -55,7 +55,7 @@ var sendEmail = function ( name, adress ) {
 var sendMailer = function ( name, adress, callback ) {
 
     mailTransporter.sendMail({
-            from: 'VPRO Tegenlicht <postmaster@'+ mailDomain +'.mailgun.org>',
+            from: config.mail.from,
             to: name + ' <' + adress + '>',
             subject: 'Match via VPRO Tinderlicht!',
             text: Mustache.render( MAIL_TMPL, { name: name, break: '\n' } ),
