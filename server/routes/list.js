@@ -13,9 +13,7 @@ router.post('/list', function ( req, res ) {
 
         firebaseConnection.orderByChild('date').once('value', function ( snapshot ) {
 
-            var children = [];
             var data;
-            var child;
 
             if ( snapshot && snapshot.val() ) {
 

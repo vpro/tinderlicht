@@ -48,7 +48,7 @@ class Tinderlicht extends React.Component{
 
 				for ( var profile in profilesDataObj ) {
 					if ( profilesDataObj.hasOwnProperty( profile ) ) {
-						profilesData.push( profilesDataObj[ profile ] );
+						profilesData.unshift( profilesDataObj[ profile ] );
 					}
 				}
 
