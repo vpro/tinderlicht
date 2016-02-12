@@ -63,6 +63,7 @@ function login(provider) {
 		})
 		// Update Firebase with the current info
 		.then(this.updateDB.bind(this))
+		.then(this.checkEndOfUsers.bind(this))
 		// Finaly set the view
 		.then(this.setView.bind(this,1));
 }

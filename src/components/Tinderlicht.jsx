@@ -81,7 +81,8 @@ class Tinderlicht extends React.Component{
 	}
 
 	clickTinder(event){
-		this.setView('tinder');		
+		this.setView('tinder');
+		this.checkEndOfUsers();		
 	}
 
 	registerDislike(){
@@ -145,6 +146,8 @@ class Tinderlicht extends React.Component{
 	}
 
 	determinePosition(){
+		this.checkEndOfUsers();
+
 		var thisPos = this.state.userData.tinderStats.currentPosition + 1;
 		console.log('Huidige positie', this.state.userData.tinderStats.currentPosition)
 		console.log('Determine position [DP] draait')
@@ -495,7 +498,6 @@ class Tinderlicht extends React.Component{
     		var userData = this.state.userData; 
 	        return (
 	        	<div className="app-container tinderview">
-	        		{ this.checkEndOfUsers() }
 	    			<nav>
 		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
 		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
@@ -566,8 +568,8 @@ class Tinderlicht extends React.Component{
 	    	return (
 	    		<div className="settings">
 	    			<nav>
-		    			<div className="nav__like"><span className="icon-user"></span></div>
-		    			<div className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
+		    			<div onClick={this.clickInnersettings.bind(this)} className="nav__like"><span className="icon-user"></span></div>
+		    			<div onClick={this.clickTinder.bind(this)} className="nav__logo"><img className="nav__tinderlichtlogo" src={tinderlicht} /></div>
 		    			<div onClick={this.clickMutualLike.bind(this)} className="nav__loves"><span className="icon-heart-header"></span></div>
 		    		</nav>
 	    				<br/>
