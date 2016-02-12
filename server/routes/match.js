@@ -47,11 +47,13 @@ router.post( '/match/:id', function ( req, res ) {
 
         firebaseConnection.authWithCustomToken( config.firebase.secret ).then( function () {
 
-            firebaseConnection.child( req.params.id ).once( 'value', function ( dataSnapshot ) {
+            var matchId = decodeURIComponent( req.params.id );
+
+            firebaseConnection.child( matchId ).once( 'value', function ( dataSnapshot ) {
 
                 var data = dataSnapshot.val();
 
-                if ( data && data.id === req.params.id && data.email.length ) {
+                if ( data && data.id === matchId && data.email.length ) {
 
                     sendMailer( data.name, data.email, function ( err ) {
                         if ( err ) {

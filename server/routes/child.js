@@ -14,6 +14,7 @@ var isValidPath = function ( path ) {
 
 router.get('/child/:path', function ( req, res ) {
 
+
     if ( ! ( req.params && req.params.path && isValidPath( req.params.path ) ) ) {
 
         helpers.respondWithBadRequest( res );
@@ -22,8 +23,7 @@ router.get('/child/:path', function ( req, res ) {
 
         firebaseConnection.authWithCustomToken( config.firebase.secret ).then( function () {
 
-            firebaseConnection.child( req.params.path ).once( 'value', function ( dataSnapshot ) {
-
+            firebaseConnection.child( decodeURIComponent( req.params.path ) ).once( 'value', function ( dataSnapshot ) {
                 var data = dataSnapshot.val();
 
                 if ( data ) {
@@ -31,6 +31,7 @@ router.get('/child/:path', function ( req, res ) {
                     // remove secure data
                     delete data.email;
 
+                    res.type('application/json');
                     res.send( data );
 
                 } else {

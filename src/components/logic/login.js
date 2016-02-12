@@ -13,7 +13,6 @@ function login(provider) {
 	Fireproof.bless(Promise);
 	this.fireproof = new Fireproof(this.firebase);
 	this.setState = Promise.promisify(this.setState);
-	
 
 	// Start the login process
 	// http://stackoverflow.com/questions/27870370/authwithoauthpopup-doesnt-work-on-mobile
@@ -30,16 +29,16 @@ function login(provider) {
 			})
 		// Set the retrieved authData to the state
 		.then((authData)=>{
+
 			return this.setState((state)=>{
 				state.authData = authData;
 				return state;
 			});
 		})
 		// Get the userData from firebase
-		// TODO: use secureFireproof
-		.then((authData)=>{
+		.then(function (authData){
 			return this.secureFireproof.child( encodeURIComponent( this.state.authData.uid ) )
-		})
+		}.bind( this ))
 		// Set the retrieved userData to the state
 		.then((userData)=>{
 			return this.setState((state)=>{

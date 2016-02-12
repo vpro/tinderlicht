@@ -49,7 +49,6 @@ SecureFireproof.prototype = {
         var url = this.backendServer+'/child/'+ encodeURIComponent( childPath );
 
         $.ajax({
-            contentType: 'application/json',
             crossDomain: isCrossDomain( url ),
             dataType: 'json',
             jsonp: false,
@@ -57,7 +56,6 @@ SecureFireproof.prototype = {
             type: 'GET',
             url: url
         }).then( function ( childData ) {
-
             if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
                 deferred.resolve( childData );
             } else {
