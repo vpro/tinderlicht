@@ -65,5 +65,9 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
+    &:hover {
+			border: 2px solid #F50;
+			color: #F50;
+    };
 }
 
