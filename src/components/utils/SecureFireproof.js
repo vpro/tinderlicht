@@ -32,7 +32,7 @@ SecureFireproof.prototype = {
             url: url
         }).then( function ( childData ) {
 
-            if ( childData && ! ( JSON.stringify( childData ) === '{}' )) {
+            if ( childData && ! ( JSON.stringify( childData ) === '[]' )) {
                 deferred.resolve( childData );
             } else {
                 deferred.resolve();

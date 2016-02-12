@@ -2,6 +2,7 @@ var config = require( './../../config.json' );
 var express = require('express');
 var Firebase = require('firebase');
 var helpers = require('./../lib/helpers');
+var _ = require('lodash');
 var router = express.Router();
 
 var firebaseConnection = new Firebase( config.firebase.server );
@@ -14,6 +15,7 @@ router.post('/list', function ( req, res ) {
         firebaseConnection.orderByChild('date').once('value', function ( snapshot ) {
 
             var data;
+            var children = [];
 
             if ( snapshot && snapshot.val() ) {
 
@@ -25,14 +27,21 @@ router.post('/list', function ( req, res ) {
                     if ( data[ key ].hasOwnProperty('email') ) {
                         delete data[ key ].email;
                     }
+
+                    children.push( data[ key ] );
                 }
 
+                children = _.sortBy( children, function ( child ) {
+
+                    return child.date;
+                } );
+
                 res.type('application/json');
-                res.send( data );
+                res.send( children );
 
             } else {
                 res.type('application/json');
-                res.send( {} );
+                res.send( children );
             }
 
         }, function () {

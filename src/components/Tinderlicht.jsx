@@ -40,17 +40,15 @@ class Tinderlicht extends React.Component{
 
 	componentWillMount(){
 		this.secureFireproof = new SecureFireproof( TinderlichtConfig.backend.server );
-		this.secureFireproof.list().then( function( profilesDataObj ) {
+		this.secureFireproof.list().then( function( profilesData ) {
 
-			var profilesData = [];
+			var profilesDataObj = {};
 
-		    if ( profilesDataObj ) {
+		    if ( profilesData ) {
 
-				for ( var profile in profilesDataObj ) {
-					if ( profilesDataObj.hasOwnProperty( profile ) ) {
-						profilesData.unshift( profilesDataObj[ profile ] );
-					}
-				}
+				profilesData.forEach( function ( profile ) {
+					profilesDataObj[ profile.id ] = profile;
+				});
 
 				this.setState(function(state){
 					state.profilesDataObj = profilesDataObj;
