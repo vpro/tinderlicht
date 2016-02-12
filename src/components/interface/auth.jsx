@@ -9,6 +9,7 @@ class Auth extends React.Component{
 	} else {
 		var browserSupport = ""
 	}
+	console.log('nieuwe versie');
 	  return (
 	  	<div>
         <img className="auth__logointro" src={tinderlicht} />
