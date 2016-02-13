@@ -20,8 +20,10 @@
 }
 
 /* Tinder swipe */
-.profile-container {
-	margin-top: -20px; /* KIJKEN WAAROM? */
+
+
+.profileContainer {
+	display: relative;
 }
 
 .profile {
@@ -45,28 +47,24 @@
 }
 
 .profile__meetup {
-	position: absolute;
-	right: 20px;
 	font-family: SimplisticSans-Normal;
 	font-size: 14px;
 	margin-top: -29px;
 	text-align: right;
 	color: #000;
-  background: white;
-  padding: 5px;
   line-height: 13px;
 }
 
 .profile__name { 
 	font-family: SimplisticSans-Medium, Arial; 
 	font-size: 24px;
-	color: $text-color;
+	color: #000;
 	display: block;
 }
 
 .profile__age { 
 	font-family: SimplisticSans-Normal, Arial; 
-	color: lighten($text-color, 0%);
+	color: #000;
 }
 
 .profile__description { 
@@ -74,6 +72,8 @@
 	font-size: 15px;
 	color: lighten($text-color, 20%);
 	padding-bottom: 20px;
+	display: block;
+	padding-top: 10px;
 }
 
 .profile__buttons {
@@ -288,7 +288,7 @@ input {
   		height: 320px !important;
   	}
   	.profile__card {
-  		margin-top: 180px !important;
+  		margin-top: 280px !important;
   	}
 }
 @media (min-width: 568px) and (max-width: 769px) {
@@ -296,6 +296,6 @@ input {
   		height: 440px !important;
   	}
   	.profile__card {
-  		margin-top: 300px !important;
+  		margin-top: 280px !important;
   	}
 }
