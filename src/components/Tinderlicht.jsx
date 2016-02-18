@@ -392,6 +392,7 @@ class Tinderlicht extends React.Component{
     					<span className="auth-button twitter"> 
     						<div className="auth-sm" onClick={this.login.bind(this, 'twitter')}>Login met Twitter</div>
     					</span>
+    					<a className="privacypolicy" href="http://tinderlicht.vpro.nl/privacypolicy.html">Privacy Policy</a>
     				</div>
     			</div>
     		);
