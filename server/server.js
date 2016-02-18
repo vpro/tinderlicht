@@ -38,6 +38,7 @@ fs.stat('../config.json', function ( err, stats ) {
         var configRouter = require('./routes/config');
         var listRouter = require('./routes/list');
         var matchRouter = require('./routes/match');
+        var privacyRouter = require('./routes/privacyPolicy');
         var updateRouter = require('./routes/update');
 
         app.use( cors() );
@@ -45,6 +46,7 @@ fs.stat('../config.json', function ( err, stats ) {
         app.use( configRouter );
         app.use( listRouter );
         app.use( matchRouter );
+        app.use( privacyRouter );
         app.use( updateRouter );
 
         if ( process.env.NODE_ENV && process.env.NODE_ENV === 'production' ) {
