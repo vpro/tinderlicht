@@ -199,10 +199,13 @@ class Tinderlicht extends React.Component{
 			if(_.contains(this.state.profilesDataObj[currentProf].tinderStats.likes, userData.id) === true){
 				tempMutualLikes.push(currentProf);
 				//console.log(tempMutualLikes);
+				console.log('push', currentProf + ' (' + i);
 			} else {
-				//console.log('geen match');
+				console.log('draait niet')
 			}
 		}
+
+		var tempMutualLikes = []
 
 		this.setState(function(state){
 			state.mutualLikes = tempMutualLikes
