@@ -560,7 +560,6 @@ class Tinderlicht extends React.Component{
 		    		</nav>
 	    				<br/>
 	    			<h1>matches</h1>
-	    			<p className="settings-text">Ik ga samen met een match naar de landelijke Tegenlicht Meet Up.<br/><a href="mailto:charley@dezwijger.nl?subject=Ik kom samen met een match naar de Tegenlicht Meet Up&body=(Als je samen met een match aan romantisch tafeltje wil genieten van een gratis glas rode wijn dan kun je je via deze mail daarvoor aanmelden. Voor de eerste 10 koppels wordt een tafel gereserveerd. Vermeld in deze mail even je eigen naam en de naam van je match. Je ontvangt dan een mail met meer informatie.)"> Stuur e-mail</a></p>
 	    			<ul>
 	    			{this.state.mutualLikes.map((profileIds) => {
 	    				return <MutualLikes key={this.state.profilesDataObj[profileIds].id} singlePicture={this.state.profilesDataObj[profileIds].profilePhoto} singleName={this.state.profilesDataObj[profileIds].name} singleProfile={this.state.profilesDataObj[profileIds].profileUrl}/>
